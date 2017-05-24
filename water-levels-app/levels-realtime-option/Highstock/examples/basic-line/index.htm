@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+ 	<head><meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
+		
+		<title>Buckshot Creek at Plevna</title>
+
+		
+
+
+<div id="ChartContainer" style="height: 400px"></div> 
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<style type="text/css">
+${demo.css}
+		</style>
+		<script type="text/javascript">
+
+var seriesFull = [];
+
+function makeData(tsURL, tsName, n) {
+    //Ajax query for data in JSON format
+    $.getJSON(tsURL, function (data) {
+        var data2 = data[0].data; //pointer to KVP parent object
+        var data3 = []; //will store updated KVP for each item
+        
+        //Loop through date and param values and format for chart
+        for (var i = 1; i < data2.length; i++) {
+            //Get the date based on how requested in KiWIS, line below changes based on how you request the datestamp
+            data2[i][0] = parseFloat(data2[i][0]);
+            data2[i][1] = parseFloat(data2[i][1]); //Makes the param value a number
+            data3.push(data2[i]); //Push new KVP into data3
+        }
+        
+        //populate the series for the chart
+        
+        if (n==2) {
+        var singleSeries = {
+            _colorIndex: n,
+            _symbolIndex: seriesFull.length,
+            //Can also extract name directly from query
+            name: tsName,
+            data: data3,
+            type: 'column',
+	    yAxis: n,
+            tooltip: {
+                valueSuffix: ' mm'
+            }
+        };
+        
+        } else if (n==0) {
+        var singleSeries = {
+            _colorIndex: n,
+            _symbolIndex: seriesFull.length,
+            //Can also extract name directly from query, but lazy example
+            name: tsName,
+            data: data3,
+            type: 'spline',
+	    yAxis: n,
+            tooltip: {
+                valueSuffix: ' m'
+            }
+        };
+        } else {
+        var singleSeries = {
+            _colorIndex: n,
+            _symbolIndex: seriesFull.length,
+            //Can also extract name directly from query, but lazy example
+            name: tsName,
+            data: data3,
+            type: 'spline',
+	    yAxis: n,
+            tooltip: {
+                valueSuffix: ' cms'
+            }
+        };
+        }    
+                
+
+        
+        seriesFull.push(singleSeries);
+        
+        //Create and render the chart passing in the series
+       
+      var chart = new Highcharts.StockChart({
+        
+        chart: {renderTo: 'ChartContainer'},
+        legend: {enabled: true},
+        rangeSelector: {selected: 1},
+        title: {text: "Buckshot Creek Near Plevna"},
+        series: seriesFull,
+        xAxis: {ordinal: false},
+        
+        yAxis: [{ // Primary yAxis
+            labels: {
+                format: '{value} m',
+                style: {
+                    color: Highcharts.getOptions().colors[n]
+                }
+            },
+            title: {
+                text: 'Water Level (m)',
+                style: {
+                    color: Highcharts.getOptions().colors[n]
+                }
+            },
+            opposite: false
+
+        }, { // Secondary yAxis
+            gridLineWidth: 0,
+            title: {
+                text: 'Flow Rate (cms)',
+                style: {
+                    color: Highcharts.getOptions().colors[n]
+                }
+            },
+            labels: {
+                format: '{value} cms',
+                style: {
+                    color: Highcharts.getOptions().colors[n]
+                }
+            },
+            opposite: false
+
+        }, { // Tertiary yAxis
+            gridLineWidth: 0,
+            title: {
+                text: 'Precipitation (mm)',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            labels: {
+                format: '{value} mm',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            opposite: true
+        }],
+        
+        tooltip: {valueDecimals: 2,shared: true}
+    });     
+       
+       
+       
+       
+       
+    });
+}
+
+
+        makeData("http://waterdata.quinteconservation.ca/KiWIS/KiWIS?service=kisters&type=queryServices&request=getTimeseriesValues&datasource=0&format=json&ts_id=1391042&header=true&metadata=true&md_returnfields=station_name,parametertype_name&from=2005-01-01&dateformat=UNIX", "Water Level", 0);
+        
+	makeData("http://waterdata.quinteconservation.ca/KiWIS/KiWIS?service=kisters&type=queryServices&request=getTimeseriesValues&datasource=0&format=json&ts_id=32335042&header=true&metadata=true&md_returnfields=station_name,parametertype_name&from=2005-01-01&dateformat=UNIX", "Flow Rate (cms)", 1);     
+         
+  	makeData("http://waterdata.quinteconservation.ca/KiWIS/KiWIS?service=kisters&type=queryServices&request=getTimeseriesValues&datasource=0&format=json&ts_id=1437042&header=true&metadata=true&md_returnfields=station_name,parametertype_name&from=2005-01-01&dateformat=UNIX", "Precipitation (mm)", 2);     
+        
+
+
+		</script>
+	</head>
+	<body>
+<script src="../../js/highstock.js"></script>
+<script src="../../js/modules/exporting.js"></script>
+
+<div id="container" style="height: 400px; min-width: 310px"></div>
+	</body>
+</html>
