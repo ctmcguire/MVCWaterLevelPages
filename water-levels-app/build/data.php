@@ -309,7 +309,7 @@ if(num == 0){
                 var s = '<b>'+ this.x +'</b>';
                 
                 $.each(this.points, function(i, point) {
-                    s += '<br/>'+point.series.name+': '+point.y;
+                    s += '<br>'+point.series.name+': '+point.y;
                 });
                 
                 return s;
@@ -375,7 +375,7 @@ if(num == 0){
                 var s = '<b>'+ this.x +'</b>';
                 
                 $.each(this.points, function(i, point) {
-                    s += '<br/>'+point.series.name+': '+point.y;
+                    s += '<br>'+point.series.name+': '+point.y;
                 });
                 
                 return s;
@@ -445,7 +445,7 @@ if(num == 0){
                 var s = '<b>'+ this.x +'</b>';
                 
                 $.each(this.points, function(i, point) {
-                    s += '<br/>'+point.series.name+': '+point.y;
+                    s += '<br>'+point.series.name+': '+point.y;
                 });
                 
                 return s;
@@ -505,7 +505,7 @@ if(num == 0){
                 var s = '<b>'+ this.x +'</b>';
                 
                 $.each(this.points, function(i, point) {
-                    s += '<br/>'+point.series.name+': '+point.y;
+                    s += '<br>'+point.series.name+': '+point.y;
                 });
                 
                 return s;
@@ -556,7 +556,7 @@ if(num == 0){
                 var s = '<b>'+ this.x +'</b>';
                 
                 $.each(this.points, function(i, point) {
-                    s += '<br/>'+point.series.name+': '+point.y;
+                    s += '<br>'+point.series.name+': '+point.y;
                 });
                 
                 return s;
@@ -617,7 +617,7 @@ if(num == 0){
                 var s = '<b>'+ this.x +'</b>';
                 
                 $.each(this.points, function(i, point) {
-                    s += '<br/>'+point.series.name+': '+point.y;
+                    s += '<br>'+point.series.name+': '+point.y;
                 });
                 
                 return s;

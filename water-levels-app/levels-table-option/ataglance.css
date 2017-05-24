@@ -1,0 +1,33 @@
+table.water-levels
+{
+	font-size: 13px;
+	font-family: arial;
+	margin: auto;
+	margin-top: 40px;
+}
+
+tr.title th
+{
+	font-size: 18px;
+	color: #000099;
+	text-align: center;
+}
+tr:not(.title) th
+{
+	text-align: left;
+}
+
+col
+{
+	width: 200px;
+}
+#name-col
+{
+	width: 300px;
+}
+
+.tooltip
+{
+	display: inline;
+	border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}

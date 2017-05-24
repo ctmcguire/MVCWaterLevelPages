@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<title>MVC Watershed - At a Glance</title>
+		<link rel="stylesheet" type="text/css" href="ataglance.css">
 	</head>
 	<body>
 		<?php
@@ -17,32 +18,22 @@
 
 						echo '<tr>';//Start of the current row
 						echo '<td>
-							<font face="arial" size="2">
-								' . $row['gauge'] . '
-							</font>
+							' . $row['gauge'] . '
 						</td>
 						<td>
-							<font face="arial" size="2">
-								' . $row['date'] . '
-							</font>
+							' . $row['date'] . '
 						</td>
 						<td>
-							<font face="arial" size="2">
-								' . $row['datainfo'] . '
-							</font>
+							' . $row['datainfo'] . '
 						</td>
 						<td>
-							<font face="arial" size="2">
-								' . $row['historicalaverage'] . '
-							</font>
+							' . $row['historicalaverage'] . '
 						</td>';
 
 						/*If the data in question has a precipitation column, add its column to the table*/
 						if($hasPrecipitation) {
 							echo '<td>
-								<font face="arial" size="2">
-									' . $row['precipitation'] . '
-								</font>
+								' . $row['precipitation'] . '
 							</td>';
 						}
 						echo '</tr>';//End of the current row
@@ -59,70 +50,40 @@
 			mysql_connect("localhost","mvconc55_levels1","4z9!yA");
 			mysql_select_db("mvconc55_mvclevels");
 		?>
-		<br/>
-		<br/>
-		<table align="center" border=1 cellpadding=8> 
+		<table class="water-levels" border=1 cellpadding=8>
 			<tr>
-				<td colspan=5>
-					<center>
-						<img src="http://mvc.on.ca/water-levels-app/images/header2.jpg">
-					</center>
-				</td>
+				<th colspan=5>
+					<img src="http://mvc.on.ca/water-levels-app/images/header2.jpg">
+				</th>
 			</tr>
 			<!--tr>
 				<td colspan=5>
 					<a href="javascript:history.back();">
-						<font face="Arial" color="#000080">
-							<img border="0" src="back.jpg" width="66" height="28" alt="Back" title="Back">
-						</font>
+						<img border="0" src="back.jpg" width="66" height="28" alt="Back" title="Back">
 					</a>
 				</td>
 			</tr-->
-			<tr>
-				<td colspan=5 align="center">
-					<font face="arial" size="4" color="000099">
-						<b>
-							STREAM GAUGES
-						</b>
-					</font>
-				</td>
+			<tr class="title">
+				<th colspan=5>
+					STREAM GAUGES
+				</th>
 			</tr>
 			<tr>
-				<td>
-					<font face="arial" size="2">
-						<b>
-							GAUGE LOCATION
-						</b>
-					</font>
-				</td>
-				<td>
-					<font face="arial" size="2">
-						<b>
-							DATE
-						</b>
-					</font>
-				</td>
-				<td>
-					<font face="arial" size="2">
-						<b>
-							FLOW (cms)
-						</b>
-					</font>
-				</td>
-				<td>
-					<font face="arial" size="2">
-						<b>
-							HISTORICAL AVG. (cms)
-						</b>
-					</font>
-				</td>
-				<td>
-					<font face="arial" size="2">
-						<b>
-							PRECIPITATION (mm)
-						</b>
-					</font>
-				</td>
+				<th>
+					GAUGE LOCATION
+				</th>
+				<th>
+					DATE
+				</th>
+				<th>
+					FLOW (cms)
+				</th>
+				<th>
+					HISTORICAL AVG. (cms)
+				</th>
+				<th>
+					PRECIPITATION (mm)
+				</th>
 			</tr>
 			<?
 				populateRow('Myers Cave flow');// Myers Cave
@@ -138,57 +99,31 @@
 				populateRow('High Falls Flow');// High Falls Flow
 			?>
 			<tr>
-				<td colspan=5 align="center">
-					<b>
-						<br/>
-					</b>
-				</td>
+				<th colspan=5>
+					<br>
+				</th>
+			</tr>
+			<tr class="title">
+				<th colspan=5>
+					DAILY LAKE GAUGES
+				</th>
 			</tr>
 			<tr>
-				<td colspan=5 align="center">
-					<font face="arial" size="4" color="000099">
-						<b>
-							DAILY LAKE GAUGES
-						</b>
-					</font>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<font face="arial" size="2">
-						<b>
-							GAUGE LOCATION
-						</b>
-					</font>
-				</td>
-				<td>
-					<font face="arial" size="2">
-						<b>
-							DATE
-						</b>
-					</font>
-				</td>
-				<td>
-					<font face="arial" size="2">
-						<b>
-							LEVEL (MASL)
-						</b>
-					</font>
-				</td>
-				<td>
-					<font face="arial" size="2">
-						<b>
-							HISTORICAL AVG. (MASL)
-						</b>
-					</font>
-				</td>
-				<td>
-					<font face="arial" size="2">
-						<b>
-							PRECIPITATION (mm)
-						</b>
-					</font>
-				</td>
+				<th>
+					GAUGE LOCATION
+				</th>
+				<th>
+					DATE
+				</th>
+				<th>
+					LEVEL (<p class="tooltip" title="Meters Above Sea Level">MASL</p>)
+				</th>
+				<th>
+					HISTORICAL AVG. (<p class="tooltip" title="Meters Above Sea Level">MASL</p>)
+				</th>
+				<th>
+					PRECIPITATION (mm)
+				</th>
 			</tr>
 			<?
 				/* 
@@ -212,60 +147,31 @@
 				populateRow('High Falls');// High Falls
 			?>
 		</table>
-		<br/>
-		<br/>
-		<table align="center" border=1 cellpadding=8>
+		<table class="water-levels" border=1 cellpadding=8>
 			<colgroup>
-				<col width="300">
-				<col width="200">
-				<col width="200">
-				<col width="200">
+				<col id="name-col">
+				<col id="date-col">
+				<col id="data-col">
+				<col id="hist-col">
 			</colgroup>
-			<tr>
-				<td colspan=4 align="center">
-					<b>
-						<br/>
-					</b>
-				</td>
+			<tr class="title">
+				<th colspan=4>
+					WEEKLY LAKE GAUGES
+				</th>
 			</tr>
 			<tr>
-				<td colspan=4 align="center">
-					<font face="arial" size="4" color="000099">
-						<b>
-							WEEKLY LAKE GAUGES
-						</b>
-					</font>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<font face="arial" size="2">
-						<b>
-							GAUGE LOCATION
-						</b>
-					</font>
-				</td>
-				<td>
-					<font face="arial" size="2">
-						<b>
-							DATE
-						</b>
-					</font>
-				</td>
-				<td>
-					<font face="arial" size="2">
-						<b>
-							LEVEL (MASL)
-						</b>
-					</font>
-				</td>
-				<td>
-					<font face="arial" size="2">
-						<b>
-							HISTORICAL AVG. (MASL)
-						</b>
-					</font>
-				</td>
+				<th>
+					GAUGE LOCATION
+				</th>
+				<th>
+					DATE
+				</th>
+				<th>
+					LEVEL (<p class="tooltip" title="Meters Above Sea Level">MASL</p>)
+				</th>
+				<th>
+					HISTORICAL AVG. (<p class="tooltip" title="Meters Above Sea Level">MASL</p>)
+				</th>
 			</tr>
 
 		<?
