@@ -29,5 +29,6 @@ col
 .tooltip
 {
 	display: inline;
-	border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+	color: #00f;
+	border-bottom: 1px dotted #00f; /* If you want dots under the hoverable text */
 }
