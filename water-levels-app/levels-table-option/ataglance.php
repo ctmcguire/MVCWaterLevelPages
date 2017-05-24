@@ -1,1521 +1,302 @@
-<HTML>
-<HEAD>
- <TITLE>MVC Watershed - At a Glance</TITLE>
-</HEAD>
-<BODY>
-<?
-
- mysql_connect("localhost","mvconc55_levels1","4z9!yA");
- mysql_select_db("mvconc55_mvclevels");
-
-
-
- echo '<BR><BR><table ALIGN="center" BORDER=1 CELLPADDING=8> 
-      <TR><TD COLSPAN=5><CENTER><IMG SRC="http://mvc.on.ca/water-levels-app/images/header2.jpg"></CENTER></TD></TR>
-            <!--<TR><TD COLSPAN=5><a href="javascript:history.back();"><font face="Arial" color="#000080"><img border="0" src="back.jpg" width="66" height="28" ALT="Back" TITLE="Back"></font></a></TD></TR>-->
-      <TR><TD COLSPAN=5 ALIGN="center"><FONT FACE="arial" SIZE="4" COLOR="000099"><B>STREAM GAUGES</B></FONT></TD></TR>
-      <TR><TD><FONT FACE="arial" SIZE="2"><B>GAUGE LOCATION</B></FONT></TD><TD><FONT FACE="arial" SIZE="2"><B>DATE</B></FONT></TD><TD><FONT FACE="arial" SIZE="2"><B>FLOW (cms)</B></FONT></TD><TD><FONT FACE="arial" SIZE="2"><B>HISTORICAL AVG. (cms)</B></FONT></TD><TD><FONT FACE="arial" SIZE="2"><B>PRECIPITATION (mm)</B></FONT></TD></TR>
-            ';
-
-// Myers Cave
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Myers Cave flow' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
-} else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-//Buckshot
-
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Buckshot Creek flow' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-// Ferguson Falls
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Ferguson Falls flow' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-// Appleton
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Appleton flow' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-// Gordon Rapids
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Gordon Rapids flow' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-// Lanark stream
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Lanark Stream flow' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-// Mill of Kintail
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Mill of Kintail flow' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-// Kinburn
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Kinburn flow' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-// Bennett Lake outflow
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Bennett Lake outflow' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-// Dalhousie Lk outflow
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Dalhousie Lk outflow' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-// High Falls Flow
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='High Falls Flow' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-echo '  <TR><TD COLSPAN=5 ALIGN="center"><B><BR></B></TD></TR>
-<TR><TD COLSPAN=5 ALIGN="center"><FONT FACE="arial" SIZE="4" COLOR="000099"><B>DAILY LAKE GAUGES</B></FONT></B></FONT><BR>
-
-      <TR><TD><FONT FACE="arial" SIZE="2"><B>GAUGE LOCATION</B></FONT></TD><TD><FONT FACE="arial" SIZE="2"><B>DATE</B></FONT></TD><TD><FONT FACE="arial" SIZE="2"><B>LEVEL (MASL)</B></FONT></TD><TD><FONT FACE="arial" SIZE="2"><B>HISTORICAL AVG. (MASL)</B></FONT></TD><TD><FONT FACE="arial" SIZE="2"><B>PRECIPITATION (mm)</B></FONT></TD></TR>
-            ';
-
-
-
-
-
-// Shabomeka Lake
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Shabomeka Lake' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-// Mazinaw Lake
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Mazinaw Lake' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-// Kashwakamak Lake
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Kashwakamak Lake' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-// Farm Lake
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Farm Lake' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-// Mississagagon Lake
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Mississagagon Lake' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-// Big Gull Lake
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Big Gull Lake' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
- // Crotch Lake
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Crotch Lake' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
- // Palmerston Lake
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Palmerston Lake' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
- // Canonto Lake
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Canonto Lake' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
- // Sharbot Lake
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Sharbot Lake' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
- // Bennett Lake
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Bennett Lake' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
- // Dalhousie Lake
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Dalhousie Lake' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
- // Lanark
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Lanark' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
- // Mississippi Lake
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Mississippi Lake' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
- // C.P. Dam
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='C.P. Dam' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
- // High Falls
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='High Falls' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['precipitation'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-echo '  <BR><BR><table ALIGN="center" BORDER=1 CELLPADDING=8>  <col width="300"><col width="200"><col width="200"><col width="200">
-<TR><TD COLSPAN=4 ALIGN="center"><B><BR></B></TD></TR>
-<TR><TD COLSPAN=4 ALIGN="center"><FONT FACE="arial" SIZE="4" COLOR="000099"><B>WEEKLY LAKE GAUGES</B></FONT></TD></TR>
-      <TR><TD><FONT FACE="arial" SIZE="2"><B>GAUGE LOCATION</B></FONT></TD><TD><FONT FACE="arial" SIZE="2"><B>DATE</B></FONT></TD><TD><FONT FACE="arial" SIZE="2"><B>LEVEL (MASL)</B></FONT></TD><TD><FONT FACE="arial" SIZE="2"><B>HISTORICAL AVG. (MASL)</B></FONT></TD></TR>
-            ';
-
-
-
-
-
-
-
-
-
-
-// Shabomeka Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Shabomeka Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-
-
-// Mazinaw Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Mazinaw Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-
-// Little Marble Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Little Marble Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-
-
- // Mississagagon Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Mississagagon Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-
-// Kashwakamak Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Kashwakamak Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
-while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
-}
-
-} else {
-
-echo 'query didnt work';
-}
-
-    mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
- // Farm Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Farm Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-
-
- // Ardoch Bridge (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Ardoch Bridge (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
-  echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-
- // Malcolm Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Malcolm Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-
- // Pine Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Pine Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-
-// Big Gull Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Big Gull Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
-while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
-echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
-}
-
-} else {
-
-echo 'query didnt work';
-}
-
-    mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-
- // Buckshot Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Buckshot Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-
-
- // Crotch Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Crotch Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-//High Falls G.S. (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='High Falls G.S. (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
-while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
-echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
-}
-
-} else {
-
-echo 'query didnt work';
-}
-
-    mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-//Mosque Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Mosque Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
-while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
-echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
-}
-
-} else {
-
-echo 'query didnt work';
-}
-
-    mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-
-//Palmerston Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Palmerston Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
-while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
-echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
-}
-
-} else {
-
-echo 'query didnt work';
-}
-
-    mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-
-
-
- // Canonto Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Canonto Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-// Bennett Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Bennett Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
-while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
-echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
-}
-
-} else {
-
-echo 'query didnt work';
-}
-
-    mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-
-
- // Silver Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Silver Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-// Sharbot Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Sharbot Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
-while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
-echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
-}
-
-} else {
-
-echo 'query didnt work';
-}
-
-    mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-
-// Widow Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Widow Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
-while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
-echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
-}
-
-} else {
-
-echo 'query didnt work';
-}
-
-    mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-
-// Lanark Bridge (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Lanark Bridge (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
-while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
-echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
-}
-
-} else {
-
-echo 'query didnt work';
-}
-
-    mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-// Lanark Dam (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Lanark Dam (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
-while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
-echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
-}
-
-} else {
-
-echo 'query didnt work';
-}
-
-    mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-
-
- // Almonte Bridge (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Almonte Bridge (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-
-
-
-
-/* Removed 01.03.17
- // Clayton Lake (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='Clayton Lake (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
- while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
- echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
- }
-
- } else {
-
-echo 'query didnt work';
-}
-
-     mysql_free_result($result);
-// End gauge
-
-*/
-
-
-
-
-
-
-
-//C.P. Dam (weekly)
-$query = "SELECT gauge AS gauge, date as date, datainfo as datainfo, historicalaverage as historicalaverage, precipitation as precipitation FROM data WHERE gauge='C.P. Dam (weekly)' ORDER BY date DESC limit 1";
-$result = mysql_query($query);
-
-if ($result) {
-
-while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-
-IF($row['historicalaverage'] == NULL) { $row['historicalaverage'] = 'Data Not Available'; }
-IF($row['precipitation'] == NULL) { $row['precipitation'] = 'Data Not Available'; }
-
-echo '<TR><TD><FONT FACE="arial" SIZE="2">' . $row['gauge'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['date'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['datainfo'] .'</FONT></TD><TD><FONT FACE="arial" SIZE="2">'. $row['historicalaverage'] .'</FONT></TD></TR>';
-}
-
-} else {
-
-echo 'query didnt work';
-}
-
-    mysql_free_result($result);
-// End gauge
-
-
-
-
-
-
-echo '</TABLE>';
-
-
-
-
-
-?>
-</BODY>
-</HTML>
+<html>
+	<head>
+		<title>MVC Watershed - At a Glance</title>
+	</head>
+	<body>
+		<?php
+			function populateRow($gaugeName, $hasPrecipitation = true) {
+				$query = "SELECT gauge, date, datainfo, historicalaverage, precipitation FROM data WHERE gauge='" . $gaugeName . "' ORDER BY date DESC limit 1";
+				$result = mysql_query($query);
+
+				if ($result) {
+					while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
+						if($row['historicalaverage'] == NULL)
+							$row['historicalaverage'] = 'Data Not Available';
+						if($row['precipitation'] == NULL)
+							$row['precipitation'] = 'Data Not Available';
+
+						echo '<tr>';//Start of the current row
+						echo '<td>
+							<font face="arial" size="2">
+								' . $row['gauge'] . '
+							</font>
+						</td>
+						<td>
+							<font face="arial" size="2">
+								' . $row['date'] . '
+							</font>
+						</td>
+						<td>
+							<font face="arial" size="2">
+								' . $row['datainfo'] . '
+							</font>
+						</td>
+						<td>
+							<font face="arial" size="2">
+								' . $row['historicalaverage'] . '
+							</font>
+						</td>';
+
+						/*If the data in question has a precipitation column, add its column to the table*/
+						if($hasPrecipitation) {
+							echo '<td>
+								<font face="arial" size="2">
+									' . $row['precipitation'] . '
+								</font>
+							</td>';
+						}
+						echo '</tr>';//End of the current row
+					}
+				}
+				else {
+
+			echo 'query didnt work';
+			}
+
+				 mysql_free_result($result);
+			}
+
+			mysql_connect("localhost","mvconc55_levels1","4z9!yA");
+			mysql_select_db("mvconc55_mvclevels");
+		?>
+		<br/>
+		<br/>
+		<table align="center" border=1 cellpadding=8> 
+			<tr>
+				<td colspan=5>
+					<center>
+						<img src="http://mvc.on.ca/water-levels-app/images/header2.jpg">
+					</center>
+				</td>
+			</tr>
+			<!--tr>
+				<td colspan=5>
+					<a href="javascript:history.back();">
+						<font face="Arial" color="#000080">
+							<img border="0" src="back.jpg" width="66" height="28" alt="Back" title="Back">
+						</font>
+					</a>
+				</td>
+			</tr-->
+			<tr>
+				<td colspan=5 align="center">
+					<font face="arial" size="4" color="000099">
+						<b>
+							STREAM GAUGES
+						</b>
+					</font>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<font face="arial" size="2">
+						<b>
+							GAUGE LOCATION
+						</b>
+					</font>
+				</td>
+				<td>
+					<font face="arial" size="2">
+						<b>
+							DATE
+						</b>
+					</font>
+				</td>
+				<td>
+					<font face="arial" size="2">
+						<b>
+							FLOW (cms)
+						</b>
+					</font>
+				</td>
+				<td>
+					<font face="arial" size="2">
+						<b>
+							HISTORICAL AVG. (cms)
+						</b>
+					</font>
+				</td>
+				<td>
+					<font face="arial" size="2">
+						<b>
+							PRECIPITATION (mm)
+						</b>
+					</font>
+				</td>
+			</tr>
+			<?
+				populateRow('Myers Cave flow');// Myers Cave
+				populateRow('Buckshot Creek flow');//Buckshot
+				populateRow('Ferguson Falls flow');// Ferguson Falls
+				populateRow('Appleton flow');// Appleton
+				populateRow('Gordon Rapids flow');// Gordon Rapids
+				populateRow('Lanark Stream flow');// Lanark stream
+				populateRow('Mill of Kintail flow');// Mill of Kintail
+				populateRow('Kinburn flow');// Kinburn
+				populateRow('Bennett Lake outflow');// Bennett Lake outflow
+				populateRow('Dalhousie Lk outflow');// Dalhousie Lk outflow
+				populateRow('High Falls Flow');// High Falls Flow
+			?>
+			<tr>
+				<td colspan=5 align="center">
+					<b>
+						<br/>
+					</b>
+				</td>
+			</tr>
+			<tr>
+				<td colspan=5 align="center">
+					<font face="arial" size="4" color="000099">
+						<b>
+							DAILY LAKE GAUGES
+						</b>
+					</font>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<font face="arial" size="2">
+						<b>
+							GAUGE LOCATION
+						</b>
+					</font>
+				</td>
+				<td>
+					<font face="arial" size="2">
+						<b>
+							DATE
+						</b>
+					</font>
+				</td>
+				<td>
+					<font face="arial" size="2">
+						<b>
+							LEVEL (MASL)
+						</b>
+					</font>
+				</td>
+				<td>
+					<font face="arial" size="2">
+						<b>
+							HISTORICAL AVG. (MASL)
+						</b>
+					</font>
+				</td>
+				<td>
+					<font face="arial" size="2">
+						<b>
+							PRECIPITATION (mm)
+						</b>
+					</font>
+				</td>
+			</tr>
+			<?
+				/* 
+				 * DAILY LAKE GAUGES
+				 */
+				populateRow('Shabomeka Lake');// Shabomeka Lake
+				populateRow('Mazinaw Lake');// Mazinaw Lake
+				populateRow('Kashwakamak Lake');// Kashwakamak Lake
+				populateRow('Farm Lake');// Farm Lake
+				populateRow('Mississagagon Lake');// Mississagagon Lake
+				populateRow('Big Gull Lake');// Big Gull Lake
+				populateRow('Crotch Lake');//Crotch Lake
+				populateRow('Palmerston Lake');// Palmerston Lake
+				populateRow('Canonto Lake');// Canonto Lake
+				populateRow('Sharbot Lake');// Sharbot Lake
+				populateRow('Bennett Lake');// Bennett Lake
+				populateRow('Dalhousie Lake');// Dalhousie Lake
+				populateRow('Lanark');// Lanark
+				populateRow('Mississippi Lake');// Mississippi Lake
+				populateRow('C.P. Dam');// C.P. Dam
+				populateRow('High Falls');// High Falls
+			?>
+		</table>
+		<br/>
+		<br/>
+		<table align="center" border=1 cellpadding=8>
+			<colgroup>
+				<col width="300">
+				<col width="200">
+				<col width="200">
+				<col width="200">
+			</colgroup>
+			<tr>
+				<td colspan=4 align="center">
+					<b>
+						<br/>
+					</b>
+				</td>
+			</tr>
+			<tr>
+				<td colspan=4 align="center">
+					<font face="arial" size="4" color="000099">
+						<b>
+							WEEKLY LAKE GAUGES
+						</b>
+					</font>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<font face="arial" size="2">
+						<b>
+							GAUGE LOCATION
+						</b>
+					</font>
+				</td>
+				<td>
+					<font face="arial" size="2">
+						<b>
+							DATE
+						</b>
+					</font>
+				</td>
+				<td>
+					<font face="arial" size="2">
+						<b>
+							LEVEL (MASL)
+						</b>
+					</font>
+				</td>
+				<td>
+					<font face="arial" size="2">
+						<b>
+							HISTORICAL AVG. (MASL)
+						</b>
+					</font>
+				</td>
+			</tr>
+
+		<?
+			/* 
+			 * WEEKLY LAKE GAUGES
+			 */
+			populateRow('Shabomeka Lake (weekly)', false);// Shabomeka Lake (weekly)
+			populateRow('Mazinaw Lake (weekly)', false);// Mazinaw Lake (weekly)
+			populateRow('Little Marble Lake (weekly)', false);// Little Marble Lake (weekly)
+			populateRow('Mississagagon Lake (weekly)', false);// Mississagagon Lake (weekly)
+			populateRow('Kashwakamak Lake (weekly)', false);// Kashwakamak Lake (weekly)
+			populateRow('Farm Lake (weekly)', false);// Farm Lake (weekly)
+			populateRow('Ardoch Bridge (weekly)', false);// Ardoch Bridge (weekly)
+			populateRow('Malcolm Lake (weekly)', false);// Malcolm Lake (weekly)
+			populateRow('Pine Lake (weekly)', false);// Pine Lake (weekly)
+			populateRow('Big Gull Lake (weekly)', false);// Big Gull Lake (weekly)
+			populateRow('Buckshot Lake (weekly)', false);// Buckshot Lake (weekly)
+			populateRow('Crotch Lake (weekly)', false);// Crotch Lake (weekly)
+			populateRow('High Falls G.S. (weekly)', false);//High Falls G.S. (weekly)
+			populateRow('Mosque Lake (weekly)', false);//Mosque Lake (weekly)
+			populateRow('Palmerston Lake (weekly)', false);//Palmerston Lake (weekly)
+			populateRow('Canonto Lake (weekly)', false);// Canonto Lake (weekly)
+			populateRow('Bennett Lake (weekly)', false);// Bennett Lake (weekly)
+			populateRow('Silver Lake (weekly)', false);// Silver Lake (weekly)
+			populateRow('Sharbot Lake (weekly)', false);// Sharbot Lake (weekly)
+			populateRow('Widow Lake (weekly)', false);// Widow Lake (weekly)
+			populateRow('Lanark Bridge (weekly)', false);// Lanark Bridge (weekly)
+			populateRow('Lanark Dam (weekly)', false);// Lanark Dam (weekly)
+			populateRow('Almonte Bridge (weekly)', false);// Almonte Bridge (weekly)
+			populateRow('C.P. Dam (weekly)', false);//C.P. Dam (weekly)
+		?>
+		</table>
+	</body>
+</html>
