@@ -1,95 +1,174 @@
-<html>
-	<head>
-		<title>MVC Watershed - At a Glance</title>
-		<link rel="stylesheet" type="text/css" href="ataglance.css">
-	</head>
-	<body>
-		<?php include 'ataglance_php.php'; ?>
-		<table class="water-levels" border=1 cellpadding=8>
-			<tr>
-				<th colspan=5>
-					<img src="http://mvc.on.ca/water-levels-app/images/header2.jpg">
-				</th>
-			</tr>
-			<tr class="title">
-				<th colspan=5>
-					STREAM GAUGES
-				</th>
-			</tr>
-			<tr>
-				<th>
-					GAUGE LOCATION
-				</th>
-				<th>
-					DATE
-				</th>
-				<th>
-					FLOW (<p class="tooltip" title="Cubic Meters per Second">cms</p>)
-				</th>
-				<th>
-					HISTORICAL AVG. (<p class="tooltip" title="Cubic Meters per Second">cms</p>)
-				</th>
-				<th>
-					PRECIPITATION (mm)
-				</th>
-			</tr>
-			<?php $table->getFlowData(); ?>
-			<tr>
-				<th colspan=5>
-					<br>
-				</th>
-			</tr>
-			<tr class="title">
-				<th colspan=5>
-					DAILY LAKE GAUGES
-				</th>
-			</tr>
-			<tr>
-				<th>
-					GAUGE LOCATION
-				</th>
-				<th>
-					DATE
-				</th>
-				<th>
-					LEVEL (<p class="tooltip" title="Meters Above Sea Level">MASL</p>)
-				</th>
-				<th>
-					HISTORICAL AVG. (<p class="tooltip" title="Meters Above Sea Level">MASL</p>)
-				</th>
-				<th>
-					PRECIPITATION (mm)
-				</th>
-			</tr>
-			<?php $table->getDailyLakeData(); ?>
-		</table>
-		<table class="water-levels" border=1 cellpadding=8>
-			<colgroup>
-				<col id="name-col">
-				<col id="date-col">
-				<col id="data-col">
-				<col id="hist-col">
-			</colgroup>
-			<tr class="title">
-				<th colspan=4>
-					WEEKLY LAKE GAUGES
-				</th>
-			</tr>
-			<tr>
-				<th>
-					GAUGE LOCATION
-				</th>
-				<th>
-					DATE
-				</th>
-				<th>
-					LEVEL (<p class="tooltip" title="Meters Above Sea Level">MASL</p>)
-				</th>
-				<th>
-					HISTORICAL AVG. (<p class="tooltip" title="Meters Above Sea Level">MASL</p>)
-				</th>
-			</tr>
-			<?php $table->getWeeklyLakeData(); ?>
-		</table>
-	</body>
-</html>
+<?php
+	class HTMLReader
+	{
+		private $html;
+
+		function HTMLReader($file="")
+		{
+			$this->html = file_get_contents($file);
+		}
+
+		public function insert($placeholder, $data="")
+		{
+			$this->html = str_replace('<$'.$placeholder.'/>', $data, $this->html);
+		}
+		public function read()
+		{
+			return $this->html;
+		}
+	}
+
+	class TableLoader
+	{
+		private $flowGauges;//FLOW GAUGES
+		private $lakeGauges;//DAILY LAKE GAUGES
+		private $weekGauges;//WEEKLY LAKE GAUGES
+
+		function TableLoader() {
+			$this->flowGauges = array(
+				'Myers Cave flow',// Myers Cave
+				'Buckshot Creek flow',//Buckshot
+				'Ferguson Falls flow',// Ferguson Falls
+				'Appleton flow',// Appleton
+				'Gordon Rapids flow',// Gordon Rapids
+				'Lanark Stream flow',// Lanark stream
+				'Mill of Kintail flow',// Mill of Kintail
+				'Kinburn flow',// Kinburn
+				'Bennett Lake outflow',// Bennett Lake outflow
+				'Dalhousie Lk outflow',// Dalhousie Lk outflow
+				'High Falls Flow'// High Falls Flow
+			);
+			$this->lakeGauges = array(
+				'Shabomeka Lake',// Shabomeka Lake
+				'Mazinaw Lake',// Mazinaw Lake
+				'Kashwakamak Lake',// Kashwakamak Lake
+				'Farm Lake',// Farm Lake
+				'Mississagagon Lake',// Mississagagon Lake
+				'Big Gull Lake',// Big Gull Lake
+				'Crotch Lake',//Crotch Lake
+				'Palmerston Lake',// Palmerston Lake
+				'Canonto Lake',// Canonto Lake
+				'Sharbot Lake',// Sharbot Lake
+				'Bennett Lake',// Bennett Lake
+				'Dalhousie Lake',// Dalhousie Lake
+				'Lanark',// Lanark
+				'Mississippi Lake',// Mississippi Lake
+				'C.P. Dam',// C.P. Dam
+				'High Falls'// High Falls
+			);
+			$this->weekGauges = array(
+				'Shabomeka Lake (weekly)',// Shabomeka Lake (weekly)
+				'Mazinaw Lake (weekly)',// Mazinaw Lake (weekly)
+				'Little Marble Lake (weekly)',// Little Marble Lake (weekly)
+				'Mississagagon Lake (weekly)',// Mississagagon Lake (weekly)
+				'Kashwakamak Lake (weekly)',// Kashwakamak Lake (weekly)
+				'Farm Lake (weekly)',// Farm Lake (weekly)
+				'Ardoch Bridge (weekly)',// Ardoch Bridge (weekly)
+				'Malcolm Lake (weekly)',// Malcolm Lake (weekly)
+				'Pine Lake (weekly)',// Pine Lake (weekly)
+				'Big Gull Lake (weekly)',// Big Gull Lake (weekly)
+				'Buckshot Lake (weekly)',// Buckshot Lake (weekly)
+				'Crotch Lake (weekly)',// Crotch Lake (weekly)
+				'High Falls G.S. (weekly)',//High Falls G.S. (weekly)
+				'Mosque Lake (weekly)',//Mosque Lake (weekly)
+				'Palmerston Lake (weekly)',//Palmerston Lake (weekly)
+				'Canonto Lake (weekly)',// Canonto Lake (weekly)
+				'Bennett Lake (weekly)',// Bennett Lake (weekly)
+				'Silver Lake (weekly)',// Silver Lake (weekly)
+				'Sharbot Lake (weekly)',// Sharbot Lake (weekly)
+				'Widow Lake (weekly)',// Widow Lake (weekly)
+				'Lanark Bridge (weekly)',// Lanark Bridge (weekly)
+				'Lanark Dam (weekly)',// Lanark Dam (weekly)
+				'Almonte Bridge (weekly)',// Almonte Bridge (weekly)
+				'C.P. Dam (weekly)'//C.P. Dam (weekly)
+			);
+		}
+
+		public function getFlowData()
+		{
+			return $this->getData($this->flowGauges);
+		}
+		public function getDailyLakeData()
+		{
+			return $this->getData($this->lakeGauges);
+		}
+		public function getWeeklyLakeData()
+		{
+			return $this->getData($this->weekGauges, false);
+		}
+
+		private function getData($gauges=array(), $hasRain=true)
+		{
+			$outStr = '';
+			for($i = 0; $i < count($gauges); $i++)
+				$outStr = $outStr . $this->populateRow($gauges[$i], $hasRain);
+			return $outStr;
+		}
+
+		private function populateRow($gaugeName, $hasPrecipitation = true)
+		{
+			$query = "SELECT gauge, date, datainfo, historicalaverage, precipitation FROM data WHERE gauge='" . $gaugeName . "' ORDER BY date DESC limit 1";
+			$result = mysql_query($query);
+			$outStr = '';
+
+			if ($result) {
+				while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
+					if($row['historicalaverage'] == NULL)
+						$row['historicalaverage'] = 'Data Not Available';
+					if($row['precipitation'] == NULL)
+						$row['precipitation'] = 'Data Not Available';
+
+					$outStr = $outStr . '<tr>
+					<td>
+						' . $row['gauge'] . '
+					</td>
+					<td>
+						' . $row['date'] . '
+					</td>
+					<td>
+						' . $row['datainfo'] . '
+					</td>
+					<td>
+						' . $row['historicalaverage'] . '
+					</td>';
+
+					/*If the data in question has a precipitation column, add its column to the table*/
+					if($hasPrecipitation) {
+						$outStr = $outStr . '<td>
+							' . $row['precipitation'] . '
+						</td>';
+					}
+					$outStr = $outStr . '</tr>';//End of the current row
+				}
+			}
+			else {
+				$outStr = $outStr . 'query didnt work';
+			}
+			mysql_free_result($result);
+
+			return $outStr;
+		}
+
+	}
+
+	function loadTableData($dataName="flow")
+	{
+		//echo 'This function is being replaced with a php object; use that instead';//Uncomment if you want an error message for incorrect usage
+	}
+
+	mysql_connect("localhost","mvconc55_levels1","4z9!yA");
+	mysql_select_db("mvconc55_mvclevels");
+
+	$table = new TableLoader();//Create an instance of a TableLoader object, to be used by the ataglance.php file
+	$reader = new HTMLReader('ataglance.html');
+
+	$flow = $table->getFlowData();
+	$daily = $table->getDailyLakeData();
+	$weekly = $table->getWeeklyLakeData();
+
+	$reader->insert('flow-data', $flow);
+	$reader->insert('daily-data', $daily);
+	$reader->insert('weekly-data', $weekly);
+
+	echo $reader->read();
+?>
