@@ -1,0 +1,55 @@
+.header
+{
+	padding-bottom: 20px;
+}
+
+.header, .header img, .header h3
+{
+	display: block;
+	margin: auto;
+	text-align: center;
+	color: #000099;
+	font-family: arial
+}
+
+.water-levels
+{
+	font-size: 13px;
+	font-family: arial;
+	margin: auto;
+}
+h4
+{
+	font-size: initial;
+}
+
+tr
+{
+	vertical-align: top;
+}
+
+form>:not(.labelled-inputs)
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+select[name=gauge]
+{
+	margin-bottom: 15px;
+}
+
+.labelled-inputs
+{
+	padding-bottom: 173px;
+	font-weight: bold;
+}
+.labelled-inputs:not(input)
+{
+	text-align: left;
+}
+.labelled-inputs input[type=date]
+{
+	vertical-align: middle;
+}
