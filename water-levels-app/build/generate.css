@@ -28,6 +28,7 @@ tr
 	vertical-align: top;
 }
 
+/* Center everything without the labelled-inputs class */
 form>:not(.labelled-inputs)
 {
 	display: block;
@@ -35,19 +36,11 @@ form>:not(.labelled-inputs)
 	margin-right: auto;
 	text-align: center;
 }
-select[name=gauge]
-{
-	margin-bottom: 15px;
-}
 
 .labelled-inputs
 {
 	padding-bottom: 173px;
 	font-weight: bold;
-}
-.labelled-inputs:not(input)
-{
-	text-align: left;
 }
 .labelled-inputs input[type=date]
 {

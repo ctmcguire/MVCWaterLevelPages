@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<title>MVC Water Levels</title>
+		<!--Style Sheet for generate.html-->
 		<link rel="stylesheet" type="text/css" href="generate.css">
 	</head>
 	<body>
@@ -12,6 +13,7 @@
 				- Daily Result Lake Gauge Line Graph Option -
 			</h3>
 		</div>
+		<!--This probably doesn't need to be a table, but for now it works well enough-->
 		<table class="water-levels" border=1 cellpadding=10 cellspacing=0>
 			<tr>
 				<td>
@@ -20,10 +22,13 @@
 							Select Lake Gauge
 						</h4>
 						<br>
+						<!--Dropdown for all of the gauges (there are a lot of them)-->
 						<select name="gauge">
+							<!--default option to be displayed initially (can't be reselected)-->
 							<option selected disabled>
 								Select...
 							</option>
+							<!--Group the stream gauges together-->
 							<optgroup label="Stream Gauges">
 								<option value="Myers Cave flow">
 									Myers Cave
@@ -59,6 +64,7 @@
 									High Falls Flow
 								</option>
 							</optgroup>
+							<!--Group all the daily lake gauges together-->
 							<optgroup label="Daily Lake Gauges">
 								<option value="Shabomeka Lake">
 									Shabomeka Lake
@@ -112,6 +118,7 @@
 									High Falls
 								</option>
 							</optgroup>
+							<!--Group all the weekly lake gauges together-->
 							<optgroup label="Weekly Lake Gauges">
 								<option value="Shabomeka Lake (weekly)">
 									Shabomeka Lake
@@ -187,8 +194,11 @@
 								</option>
 							</optgroup>
 						</select>
+						<br>
+						<!--The labelled inputs are aligned to the left-->
 						<div class="labelled-inputs">
 							<p>
+								<!--<$start-date/> will be replaced with the date 2 weeks ago by generate.php-->
 								Start Date: <input type="date" name="startdate" size="25" value='<$start-date/>'/>
 							</p>
 							<p>
@@ -199,17 +209,19 @@
 							<br>
 							<input type="radio" name="type" value="graph"> Graph
 						</div>
-						<input type="submit" class="center" name="submit">
+						<input type="submit" name="submit">
 					</form>
 					<form>
-						<input type="button" class="center" value="Back" onClick="history.go(-1);return true;">
+						<!--Back button to go back; may merge these 2 forms into one in the future-->
+						<input type="button" value="Back" onClick="history.go(-1);return true;">
 					</form>
 				</td>
 				<td>
-					<img src="../images/gauge-map.jpg"/>
+					<img src="../images/gauge-map.jpg"/><!--Map of all the gauges (note: map is out of date and will be updated in the near future-->
 				</td>
 			</tr>
 		</table>
+		<!--Load the corresponding JavaScript file-->
 		<script src="generate.js"></script>
 	</body>
 </html>
