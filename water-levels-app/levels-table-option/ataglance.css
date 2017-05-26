@@ -30,5 +30,5 @@ col
 {
 	display: inline;
 	color: #00f;
-	border-bottom: 1px dotted #00f; /* If you want dots under the hoverable text */
+	border-bottom: 1px dotted #00f;
 }

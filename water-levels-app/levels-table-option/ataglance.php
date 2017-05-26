@@ -131,12 +131,6 @@
 
 			return $outStr;
 		}
-
-	}
-
-	function loadTableData($dataName="flow")
-	{
-		//echo 'This function is being replaced with a php object; use that instead';//Uncomment if you want an error message for incorrect usage
 	}
 
 	mysql_connect("localhost","mvconc55_levels1","4z9!yA");
