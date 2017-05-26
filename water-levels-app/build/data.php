@@ -1,644 +1,226 @@
 <?php
+	include 'HTMLReader.php';
+	$reader = new HTMLReader('data.html');
 
-//connect to server
-$con = mysql_connect("localhost","mvconc55_levels1","4z9!yA");
+	$lakeFlowGauges = array();
+	$lakeFlowGauges['Bennett Lake outflow'] = true;
+	$lakeFlowGauges['Dalhousie Lk outflow'] = true;
 
-//check connection
-if (!$con) {
-  die('Could not connect: ' . mysql_error());
-}
-//select database
-mysql_select_db("mvconc55_mvclevels");
+	$lakeSpclGauges = array();
+	$lakeSpclGauges['Farm Lake'] = true;
+	$lakeSpclGauges['C.P. Dam'] = true;
+	$lakeSpclGauges['Carp River at Maple Grove'] = true;
+	$lakeSpclGauges['High Falls'] = true;
 
-//set the values to be called in sql query, taken from the form on the previous page 
- $gauge = $_POST['gauge'];
- $startdate = $_POST['startdate'];
- $enddate = $_POST['enddate'];
- $type = $_POST['type'];
- $F = 0; // tag to set the version of chart created 
+	$manualGauges = array();
+	$manualGauges['High Falls Flow'] = true;
 
-if($type == "table"){
+	$lakeGauges = array();
+	$lakeGauges['Shabomeka Lake'] = true;
+	$lakeGauges['Sharbot Lake'] = true;
+	$lakeGauges['Bennett Lake'] = true;
+	$lakeGauges['Dalhousie Lake'] = true;
+	$lakeGauges['Palmerston Lake'] = true;
+	$lakeGauges['Crotch Lake'] = true;
 
+	$flowGauges = array();
+	$flowGauges['Myers Cave flow'] = true;
+	$flowGauges['Buckshot Creek flow'] = true;
+	$flowGauges['Ferguson Falls flow'] = true;
+	$flowGauges['Appleton flow'] = true;
+	$flowGauges['Gordon Rapids flow'] = true;
+	$flowGauges['Lanark Stream flow'] = true;
+	$flowGauges['Mill of Kintail flow'] = true;
+	$flowGauges['Kinburn flow'] = true;
 
+	/**
+	 * 
+	**/
+	function createTable($query, $hasFlow=false, $hasRain=false, $hasHist=true)
+	{
+		$outStr = '';
 
-	 $query = mysql_query("SELECT * FROM data WHERE gauge='$gauge' AND `date` >= '$startdate' AND `date` <= '$enddate' ORDER BY date");
+		$outStr = $outStr . '<br>
+			<br>
+			<table align="center" cellspacing="0" cellpadding="5" width=600 border=1 cellpadding=5>
+				<tr>
+					<td colspan=6>
+						<center>
+							<img src="../images/header2.jpg"/>
+						</center>
+					</td>
+				</tr>
+				<tr>
+					<td colspan=6>
+						<a href="javascript:history.back();">
+							<font face="Arial" color="#000080">
+								<img border="0" src="back.jpg" width="66" height="28" alt="Back" title="Back"/>
+							</font>
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						Gauge
+					</th>
+					<th>
+						Date
+					</th>
+					<th>
+						Time
+					</th>';
 
- /*
-  echo '<BR><BR><table align="center" cellspacing="0" cellpadding="5" WIDTH=600 BORDER=1 CELLPADDING=5>
-    <TR><TD COLSPAN=6><CENTER><IMG SRC="../images/header2.jpg"></CENTER></TD></TR>
-    <TR><TD COLSPAN=6><a href="javascript:history.back();"><font face="Arial" color="#000080"><img border="0" src="back.jpg" width="66" height="28" ALT="Back" TITLE="Back"></font></a></TD></TR>
-	<tr><td><b>Gauge</b></td><td><b>Date</b></td><td><b>Time</b></td><td><b>Gauge Reading</b></td><td><b>Historical Avg.</b></td><td><b>Precipitation (mm)</b></td></tr>';
-	
- while($row = mysql_fetch_array($query))
- {
-             $datainfo = $row['datainfo'];
-            $gauge = $row['gauge'];
-            $date = $row['date'];
-            $time = $row['time'];
-            $historical = $row['historicalaverage'];
-            		IF($historical == NULL) { $historical = 'Data Not Available'; }
-            $precipitation = $row['precipitation'];
-			IF($precipitation == NULL) { $precipitation = 'Data Not Available'; }
-             echo '<tr><td>' . $gauge . '</td><td>' . $date . '</td><td>' . $time . '</td><td>' . $datainfo . '</td><td>' . $historical . '</td><td>' . $precipitation . '</td></tr>';
- 
+		if($hasFlow)
+			$outStr = $outStr . '<th>Flow (cms)</th>';
+		else
+			$outStr = $outStr . '<th>Water Level (MASL)</th>';
 
+		if($hasHist)
+		{
+			if($hasFlow)
+				$outStr = $outStr . '<th>Historical Avg. (cms)</th>';
+			else
+				$outStr = $outStr . '<th>Historical Avg. (MASL)</th>';
+		}
+		if($hasRain)
+			$outStr = $outStr . '<th>Precipitation (mm)</th>';
 
-            }
-echo '</table>'; */
+		$outStr = $outStr . '</tr>';
 
+		while($row = mysql_fetch_array($query))
+		{
+			$datainfo = $row['datainfo'];
+			$gauge = $row['gauge'];
+			$date = $row['date'];
+			$time = $row['time'];
+			$hist = $row['historicalaverage'];//historical average
+			$rain = $row['precipitation'];//precipitation
 
+			/* 
+			 * If historical average or precipitation are null,
+			 * replace the null values with "Data Not Available"
+			 */
+			if($hist === null)
+				$hist = "Data Not Available";
+			if($rain === null)
+				$rain = "";
 
+			$outStr = $outStr . '<tr>';//Start of the row
+			$outStr = $outStr . '<td>' . $gauge . '</td>';
+			$outStr = $outStr . '<td>' . $date . '</td>';
+			$outStr = $outStr . '<td>' . $time . '</td>';
+			$outStr = $outStr . '<td>' . $datainfo . '</td>';
 
+			/* 
+			 * Don't add data for precipitation/historical 
+			 * average columns where said columns do not exist
+			 */
+			if($hasHist)
+				$outStr = $outStr . '<td>' . $hist . '</td>';
+			if($hasRain)
+				$outStr = $outStr . '<td>' . $rain . '</td>';
 
+			$outStr = $outStr . '</tr>';//End of the row
+		}
 
+		$outStr = $outStr . '</table>';
 
-
-
-if( $gauge== "Bennett Lake outflow" || $gauge== "Dalhousie Lk outflow"){
-	
-	  echo '<BR><BR><table align="center" cellspacing="0" cellpadding="5" WIDTH=600 BORDER=1 CELLPADDING=5>
-    <TR><TD COLSPAN=6><CENTER><IMG SRC="../images/header2.jpg"></CENTER></TD></TR>
-    <TR><TD COLSPAN=6><a href="javascript:history.back();"><font face="Arial" color="#000080"><img border="0" src="back.jpg" width="66" height="28" ALT="Back" TITLE="Back"></font></a></TD></TR>
-	<tr><td><b>Gauge</b></td><td><b>Date</b></td><td><b>Time</b></td><td><b>Flow (cms)</b></td><td><b>Precipitation (mm)</b></td></tr>';
-	
- while($row = mysql_fetch_array($query))
- {
-             $datainfo = $row['datainfo'];
-            $gauge = $row['gauge'];
-            $date = $row['date'];
-            $time = $row['time'];
-            $precipitation = $row['precipitation'];
-			IF($precipitation == NULL) { $precipitation = 'Data Not Available'; }
-             echo '<tr><td>' . $gauge . '</td><td>' . $date . '</td><td>' . $time . '</td><td>' . $datainfo . '</td><td>' . $precipitation . '</td></tr>';
- 
-
-
-            }
-	
-	
-}elseif($gauge== "Farm Lake" || $gauge== "C.P. Dam"|| $gauge=="Carp River at Maple Grove"|| $gauge=="High Falls"){
-	
-	 echo '<BR><BR><table align="center" cellspacing="0" cellpadding="5" WIDTH=600 BORDER=1 CELLPADDING=5>
-    <TR><TD COLSPAN=6><CENTER><IMG SRC="../images/header2.jpg"></CENTER></TD></TR>
-    <TR><TD COLSPAN=6><a href="javascript:history.back();"><font face="Arial" color="#000080"><img border="0" src="back.jpg" width="66" height="28" ALT="Back" TITLE="Back"></font></a></TD></TR>
-	<tr><td><b>Gauge</b></td><td><b>Date</b></td><td><b>Time</b></td><td><b>Water Level (MASL)</b></td></tr>';
-	
- while($row = mysql_fetch_array($query))
- {
-             $datainfo = $row['datainfo'];
-            $gauge = $row['gauge'];
-            $date = $row['date'];
-            $time = $row['time'];
-             echo '<tr><td>' . $gauge . '</td><td>' . $date . '</td><td>' . $time . '</td><td>' . $datainfo . '</td></tr>';
-            }
-	
-
-
-
-}elseif($gauge== "High Falls Flow"){
-	
-	  echo '<BR><BR><table align="center" cellspacing="0" cellpadding="5" WIDTH=600 BORDER=1 CELLPADDING=5>
-    <TR><TD COLSPAN=6><CENTER><IMG SRC="../images/header2.jpg"></CENTER></TD></TR>
-    <TR><TD COLSPAN=6><a href="javascript:history.back();"><font face="Arial" color="#000080"><img border="0" src="back.jpg" width="66" height="28" ALT="Back" TITLE="Back"></font></a></TD></TR>
-	<tr><td><b>Gauge</b></td><td><b>Date</b></td><td><b>Time</b></td><td><b>Flow (cms)</b></td></tr>';
-	
- while($row = mysql_fetch_array($query))
- {
-             $datainfo = $row['datainfo'];
-            $gauge = $row['gauge'];
-            $date = $row['date'];
-            $time = $row['time'];
-             echo '<tr><td>' . $gauge . '</td><td>' . $date . '</td><td>' . $time . '</td><td>' . $datainfo . '</td></tr>';
-            }
-	
-}elseif($gauge== "Shabomeka Lake" || $gauge== "Sharbot Lake" || $gauge== "Bennett Lake"|| $gauge== "Dalhousie Lake" || $gauge== "Palmerston Lake"|| $gauge== "Crotch Lake"){
-  echo '<BR><BR><table align="center" cellspacing="0" cellpadding="5" WIDTH=600 BORDER=1 CELLPADDING=5>
-    <TR><TD COLSPAN=6><CENTER><IMG SRC="../images/header2.jpg"></CENTER></TD></TR>
-    <TR><TD COLSPAN=6><a href="javascript:history.back();"><font face="Arial" color="#000080"><img border="0" src="back.jpg" width="66" height="28" ALT="Back" TITLE="Back"></font></a></TD></TR>
-	<tr><td><b>Gauge</b></td><td><b>Date</b></td><td><b>Time</b></td><td><b>Water Level (MASL)</b></td><td><b>Historical Avg. (MASL)</b></td><td><b>Precipitation (mm)</b></td></tr>';
-	
- while($row = mysql_fetch_array($query))
- {
-             $datainfo = $row['datainfo'];
-            $gauge = $row['gauge'];
-            $date = $row['date'];
-            $time = $row['time'];
-            $historical = $row['historicalaverage'];
-            		IF($historical == NULL) { $historical = 'Data Not Available'; }
-            $precipitation = $row['precipitation'];
-			IF($precipitation == NULL) { $precipitation = 'Data Not Available'; }
-             echo '<tr><td>' . $gauge . '</td><td>' . $date . '</td><td>' . $time . '</td><td>' . $datainfo . '</td><td>' . $historical . '</td><td>' . $precipitation . '</td></tr>';
-            }	
-	
-}elseif($gauge== "Myers Cave flow" || $gauge== "Buckshot Creek flow" 
-|| $gauge== "Ferguson Falls flow" || $gauge== "Appleton flow" || $gauge== "Gordon Rapids flow"
-|| $gauge== "Lanark Stream flow" || $gauge== "Mill of Kintail flow" || $gauge== "Kinburn flow"){
-	  
-	  echo '<BR><BR><table align="center" cellspacing="0" cellpadding="5" WIDTH=600 BORDER=1 CELLPADDING=5>
-    <TR><TD COLSPAN=6><CENTER><IMG SRC="../images/header2.jpg"></CENTER></TD></TR>
-    <TR><TD COLSPAN=6><a href="javascript:history.back();"><font face="Arial" color="#000080"><img border="0" src="back.jpg" width="66" height="28" ALT="Back" TITLE="Back"></font></a></TD></TR>
-	<tr><td><b>Gauge</b></td><td><b>Date</b></td><td><b>Time</b></td><td><b>Flow (cms)</b></td><td><b>Historical Avg. (cms)</b></td><td><b>Precipitation (mm)</b></td></tr>';
-	
- while($row = mysql_fetch_array($query))
- {
-             $datainfo = $row['datainfo'];
-            $gauge = $row['gauge'];
-            $date = $row['date'];
-            $time = $row['time'];
-            $historical = $row['historicalaverage'];
-            		IF($historical == NULL) { $historical = 'Data Not Available'; }
-            $precipitation = $row['precipitation'];
-			IF($precipitation == NULL) { $precipitation = 'Data Not Available'; }
-             echo '<tr><td>' . $gauge . '</td><td>' . $date . '</td><td>' . $time . '</td><td>' . $datainfo . '</td><td>' . $historical . '</td><td>' . $precipitation . '</td></tr>';
-            }
-	
-// where all the graph for all the weekly gauge levels are set since none of them include precipitation 
-}else{
-	
-	  echo '<BR><BR><table align="center" cellspacing="0" cellpadding="5" WIDTH=600 BORDER=1 CELLPADDING=5>
-    <TR><TD COLSPAN=6><CENTER><IMG SRC="../images/header2.jpg"></CENTER></TD></TR>
-    <TR><TD COLSPAN=6><a href="javascript:history.back();"><font face="Arial" color="#000080"><img border="0" src="back.jpg" width="66" height="28" ALT="Back" TITLE="Back"></font></a></TD></TR>
-	<tr><td><b>Gauge</b></td><td><b>Date</b></td><td><b>Time</b></td><td><b>Water Level (MASL)</b></td><td><b>Historical Avg. (MASL)</b></td></tr>';
-	
- while($row = mysql_fetch_array($query))
- {
-             $datainfo = $row['datainfo'];
-            $gauge = $row['gauge'];
-            $date = $row['date'];
-            $time = $row['time'];
-            $historical = $row['historicalaverage'];
-            		IF($historical == NULL) { $historical = 'Data Not Available'; }
-             echo '<tr><td>' . $gauge . '</td><td>' . $date . '</td><td>' . $time . '</td><td>' . $datainfo . '</td><td>' . $historical . '</td></tr>';
- 
-
-
-            }
-
-
-}
-
-
-echo '</table>';
-
-
-
-	
-}elseif($type == "graph"){
-	 //sql query called 
-$sth = mysql_query("SELECT * FROM data WHERE gauge='$gauge' AND date(date) >= '$startdate' AND date(date) <= '$enddate' ORDER BY date");
-
-if( $gauge== "Bennett Lake outflow" || $gauge== "Dalhousie Lk outflow"){
-	$F = 5; 
-	//loop query and set arrays of data 
-	while($r = mysql_fetch_array($sth)) {
-		$row[] = $r['date'];
-		$row1[] = $r['datainfo'];
-		$row2[] = $r['precipitation'];
+		return $outStr;
 	}
-	//group data together into one array 
-	$graph_data = array('date'=>$row, 'waterlevel'=>$row1,'precipitation'=> $row2);
-	
-}elseif($gauge== "Farm Lake" || $gauge== "C.P. Dam"|| $gauge=="Carp River at Maple Grove"|| $gauge=="High Falls"){
-	$F = 4; 
-	//loop query and set arrays of data 
-	while($r = mysql_fetch_array($sth)) {
-		$row[] = $r['date'];
-		$row1[] = $r['datainfo'];
-	}
-	//group data together into one array 
-	$graph_data = array('date'=>$row, 'waterlevel'=>$row1);
 
+	/**
+	 * 
+	**/
+	function createGraph($query, $hasRain=false, $hasHist=true)
+	{
+		while($row = mysql_fetch_array($query))
+		{
+			$date_data[] = $row['date'];
+			$info_data[] = $row['datainfo'];
+			$rain_data[] = $row['precipitation'];
+			$hist_data[] = $row['historicalaverage'];
+		}
 
-}elseif($gauge== "High Falls Flow"){
-	$F = 3; 
-	//loop query and set arrays of data 
-	while($r = mysql_fetch_array($sth)) {
-		$row[] = $r['date'];
-		$row1[] = $r['datainfo'];
-	}
-	//group data together into one array 
-	$graph_data = array('date'=>$row, 'waterlevel'=>$row1);
-	
-}elseif($gauge== "Shabomeka Lake" || $gauge== "Sharbot Lake" || $gauge== "Bennett Lake"|| $gauge== "Dalhousie Lake" || $gauge== "Palmerston Lake"|| $gauge== "Crotch Lake"){
-	$F = 2; 
-	//loop query and set arrays of data 
-	while($r = mysql_fetch_array($sth)) {
-		$row[] = $r['date'];
-		$row1[] = $r['datainfo'];
-		$row2[] = $r['precipitation'];
-		$row3[] = $r['historicalaverage'];
-	}
-	
-	$graph_data = array('date'=>$row, 'waterlevel'=>$row1, 'precipitation'=>$row2, 'historicalaverage'=>$row3);
-	
-}elseif($gauge== "Myers Cave flow" || $gauge== "Buckshot Creek flow" 
-|| $gauge== "Ferguson Falls flow" || $gauge== "Appleton flow" || $gauge== "Gordon Rapids flow"
-|| $gauge== "Lanark Stream flow" || $gauge== "Mill of Kintail flow" || $gauge== "Kinburn flow"){
-	$F = 1; 
-	//loop query and set arrays of data 
-	while($r = mysql_fetch_array($sth)) {
-		$row[] = $r['date'];
-		$row1[] = $r['datainfo'];
-		$row2[] = $r['precipitation'];
-		$row3[] = $r['historicalaverage'];
-	}
-	
-	$graph_data = array('date'=>$row, 'waterlevel'=>$row1, 'precipitation'=>$row2, 'historicalaverage'=>$row3);
-	
-	// where all the graph for all the weekly gauge levels are set since none of them include precipitation 
-}else{
-	$F = 0;
-	//loop query and set arrays of data with no precipitation
-	while($r = mysql_fetch_array($sth)) {
-		$row[] = $r['date'];
-		$row1[] = $r['datainfo'];
-		$row2[] =  $r['historicalaverage'];
-	}
-	//convert array into json format 
-	$graph_data = array('date'=>$row, 'waterlevel'=>$row1, 'historicalaverage'=>$row2);
-}
+		$graph_data = array('date'=>$date_data, 'waterlevel'=>$info_data);
 
-$result = json_encode($graph_data, JSON_NUMERIC_CHECK);
-//close connection to database 
-}
+		if($hasRain)
+			$graph_data['precipitation'] = $rain_data;
+		if($hasHist)
+			$graph_data['historicalaverage'] = $hist_data;
 
-mysql_close($con);
+		return json_encode($graph_data, JSON_NUMERIC_CHECK);
+	}
+
+	//connect to server
+	$con = mysql_connect("localhost","mvconc55_levels1","4z9!yA");
+
+	//check connection
+	if (!$con) {
+		die('Could not connect: ' . mysql_error());
+	}
+	//select database
+	mysql_select_db("mvconc55_mvclevels");
+
+	//set the values to be called in sql query, taken from the form on the previous page 
+	$gauge = $_POST['gauge'];
+	$startdate = $_POST['startdate'];
+	$enddate = $_POST['enddate'];
+	$type = $_POST['type'];
+	$F = 0; // tag to set the version of chart created
+	$table = '';
+	$result = 'null';
+
+	$query = mysql_query("SELECT * FROM data WHERE gauge='$gauge' AND `date` >= '$startdate' AND `date` <= '$enddate' ORDER BY date");
+
+	if($type == "table")
+	{
+		if($lakeFlowGauges[$gauge])
+			$table = createTable($query, true, true, false);
+		elseif($lakeSpclGauges[$gauge])
+			$table = createTable($query, false, false, false);
+		elseif($manualGauges[$gauge])
+			$table = createTable($query, true, false, false);
+		elseif($lakeGauges[$gauge])
+			$table = createTable($query, false, true);
+		elseif($flowGauges[$gauge])
+			$table = createTable($query, true, true);
+		// where all the graph for all the weekly gauge levels are set since none of them include precipitation 
+		else
+			$table = createTable($query);
+
+		
+	}
+	elseif($type == "graph")
+	{
+		if($lakeFlowGauges[$gauge])
+			$F = 110;//5;
+		elseif($lakeSpclGauges[$gauge])
+			$F = 000;//4;
+		elseif($manualGauges[$gauge])
+			$F = 100;//3;
+		elseif($lakeGauges[$gauge])
+			$F = 011;//2;
+		elseif($flowGauges[$gauge])
+			$F = 111;//1;
+		// where all the graph for all the weekly gauge levels are set since none of them include precipitation 
+		else
+			$F = 001;//0;
+
+		if($lakeFlowGauges[$gauge])
+			$result = createGraph($query, true, false);
+		elseif($lakeSpclGauges[$gauge] || $manualGauges[$gauge])
+			$result = createGraph($query, false, false);
+		elseif($lakeGauges[$gauge] || $flowGauges[$gauge])
+			$result = createGraph($query, true);
+		else
+			$result = createGraph($query);
+	}
+
+	$reader->insert('table', $table);
+	$reader->insert('result', $result);
+	$reader->insert('F', $F);
+	$reader->insert('gauge', $gauge);
+	echo $reader->read();
+
+	mysql_close($con);//close connection to database
 ?>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="//code.highcharts.com/highcharts.js"></script>
-
-<div id="chart"></div>
-
-<script>
-
-var data = <?php echo $result; ?>;
-var num = <?php echo $F; ?>;
-
-
-$(document).ready(function() {
-if(num == 0){
-	var options = {
-		chart: {
-			renderTo: 'chart',
-		},
-		credits: {
-			enabled: false
-		},
-		title: {
-			//set to the name of the gauge 			
-			text: '<?php echo $gauge; ?>',
-			x: -20
-		},
-		xAxis: {
-			categories: [{
-				
-			}]
-		},
-                yAxis:[{
-			labels:{
-				format: '{value} m',
-			},
-			title:{
-				text: 'Water Level (MASL)',
-			}
-		}],
-		// tooltip set to display value when hovering over a point in the chart 		
-		tooltip: {
-               formatter: function() {
-                var s = '<b>'+ this.x +'</b>';
-                
-                $.each(this.points, function(i, point) {
-                    s += '<br>'+point.series.name+': '+point.y;
-                });
-                
-                return s;
-            },
-            shared: true
-        },
-		//series is set down below 
-		series: [{},{}]
-	};
-
-			
-			options.xAxis.categories = data.date; //fill xAxis with the ranged date 
-			options.series[0].name = 'Water Level (MASL)'; //initialize the series names and data 
-			options.series[0].data = data.waterlevel;
-            options.series[0].type = 'spline';
-            options.series[0].step = true;
-			options.series[1].name = 'Historical Average (MASL)';
-			options.series[1].data = data.historicalaverage;
-			options.series[1].type = 'spline';
-            options.series[1].step = true;
-			
-			var chart = new Highcharts.Chart(options); //create the chart 			
-
-}else if(num == 1){
-	var options = {
-		chart: {
-			renderTo: 'chart',
-		},
-		credits: {
-			enabled: false
-		},
-		title: {
-			//set to the name of the gauge 			
-			text: '<?php echo $gauge; ?>',
-			x: -20
-		},
-		xAxis: {
-			categories: [{
-				
-			}]
-		},
-                yAxis:[{
-			labels:{
-				format: '{value} cms',
-			},
-			title:{
-				text: 'Flow (cms)',
-			}
-		},{ // secondary yAxis
-                        opposite: true,
-			title:{
-				text: 'Precipitation (mm)',
-			},
-			labels:{
-				format: '{value} mm'
-			},
-			
-		
-		}],
-		// tooltip set to display value when hovering over a point in the chart 		
-		tooltip: {
-               formatter: function() {
-                var s = '<b>'+ this.x +'</b>';
-                
-                $.each(this.points, function(i, point) {
-                    s += '<br>'+point.series.name+': '+point.y;
-                });
-                
-                return s;
-            },
-            shared: true
-        },
-		//series is set down below 
-		series: [{},{},{}]
-	};
-
-			
-			options.xAxis.categories = data.date; //fill xAxis with the ranged date 
-			options.series[0].name = 'Flow (cms)'; //initialize the series names and data 
-			options.series[0].data = data.waterlevel;
-            options.series[0].type = 'spline';
-            options.series[0].step = true;
-			options.series[1].name = 'Historical Average (cms)';
-			options.series[1].data = data.historicalaverage;
-			options.series[1].type = 'spline';
-            options.series[1].step = true;
-			options.series[2].name = 'Precipitation (mm)';
-			options.series[2].data = data.precipitation;
-			options.series[2].type = 'column';  // set the precipitation series to be columns 
-            options.series[2].yAxis = 1; //set the precipitation column as a different yAxis 
-			
-			var chart = new Highcharts.Chart(options); //create the chart 	
-	
-}else if(num == 2){
-	var options = {
-		chart: {
-			renderTo: 'chart',
-		},
-		credits: {
-			enabled: false
-		},
-		title: {
-			//set to the name of the gauge 			
-			text: '<?php echo $gauge; ?>',
-			x: -20
-		},
-		xAxis: {
-			categories: [{
-				
-			}]
-		},
-                yAxis:[{
-			labels:{
-				format: '{value} m',
-			},
-			title:{
-				text: 'Water Level (MASL)',
-			}
-		},{ // secondary yAxis
-                        opposite: true,
-			title:{
-				text: 'Precipitation (mm)',
-			},
-			labels:{
-				format: '{value} mm'
-			},
-			
-		
-		}],
-		// tooltip set to display value when hovering over a point in the chart 		
-		tooltip: {
-               formatter: function() {
-                var s = '<b>'+ this.x +'</b>';
-                
-                $.each(this.points, function(i, point) {
-                    s += '<br>'+point.series.name+': '+point.y;
-                });
-                
-                return s;
-            },
-            shared: true
-        },
-		//series is set down below 
-		series: [{},{},{}]
-	};
-
-			
-			options.xAxis.categories = data.date; //fill xAxis with the ranged date 
-			options.series[0].name = 'Water Level (MASL)'; //initialize the series names and data 
-			options.series[0].data = data.waterlevel;
-            options.series[0].type = 'spline';
-            options.series[0].step = true;
-			options.series[1].name = 'Historical Average (MASL)';
-			options.series[1].data = data.historicalaverage;
-			options.series[1].type = 'spline';
-            options.series[1].step = true;
-			options.series[2].name = 'Precipitation (mm)';
-			options.series[2].data = data.precipitation;
-			options.series[2].type = 'column';  // set the precipitation series to be columns 
-            options.series[2].yAxis = 1; //set the precipitation column as a different yAxis 
-			
-			var chart = new Highcharts.Chart(options); //create the chart 					
-
-}else if(num == 3){
-	var options = {
-		chart: {
-			renderTo: 'chart',
-		},
-		credits: {
-			enabled: false
-		},
-		title: {
-			//set to the name of the gauge 			
-			text: '<?php echo $gauge; ?>',
-			x: -20
-		},
-		xAxis: {
-			categories: [{
-				
-			}]
-		},
-                yAxis:[{
-			labels:{
-				format: '{value} cms',
-			},
-			title:{
-				text: 'Flow (cms)',
-			}
-		}],
-		// tooltip set to display value when hovering over a point in the chart 		
-		tooltip: {
-               formatter: function() {
-                var s = '<b>'+ this.x +'</b>';
-                
-                $.each(this.points, function(i, point) {
-                    s += '<br>'+point.series.name+': '+point.y;
-                });
-                
-                return s;
-            },
-            shared: true
-        },
-		//series is set down below 
-		series: [{}]
-	};
-
-			
-			options.xAxis.categories = data.date; //fill xAxis with the ranged date 
-			options.series[0].name = 'Flow (cms)'; //initialize the series names and data 
-			options.series[0].data = data.waterlevel;
-            options.series[0].type = 'spline';
-			
-			var chart = new Highcharts.Chart(options); //create the chart 	
-	
-}else if(num == 4){
-	var options = {
-		chart: {
-			renderTo: 'chart',
-		},
-		credits: {
-			enabled: false
-		},
-		title: {
-			//set to the name of the gauge 			
-			text: '<?php echo $gauge; ?>',
-			x: -20
-		},
-		xAxis: {
-			categories: [{
-				
-			}]
-		},
-                yAxis:[{
-			labels:{
-				format: '{value} m',
-			},
-			title:{
-				text: 'Water Level (MASL)',
-			}
-		}],
-		// tooltip set to display value when hovering over a point in the chart 		
-		tooltip: {
-               formatter: function() {
-                var s = '<b>'+ this.x +'</b>';
-                
-                $.each(this.points, function(i, point) {
-                    s += '<br>'+point.series.name+': '+point.y;
-                });
-                
-                return s;
-            },
-            shared: true
-        },
-		//series is set down below 
-		series: [{}]
-	};
-
-			
-			options.xAxis.categories = data.date; //fill xAxis with the ranged date 
-			options.series[0].name = 'Water Level (MASL)'; //initialize the series names and data 
-			options.series[0].data = data.waterlevel;
-            options.series[0].type = 'spline';
-			
-			var chart = new Highcharts.Chart(options); //create the chart 	
-			
-}else if(num == 5){
-		var options = {
-		chart: {
-			renderTo: 'chart',
-		},
-		credits: {
-			enabled: false
-		},
-		title: {
-			//set to the name of the gauge 			
-			text: '<?php echo $gauge; ?>',
-			x: -20
-		},
-		xAxis: {
-			categories: [{
-				
-			}]
-		},
-                yAxis:[{
-			labels:{
-				format: '{value} cms',
-			},
-			title:{
-				text: 'Flow (cms)',
-			}
-		},{ // secondary yAxis
-                        opposite: true,
-			title:{
-				text: 'Precipitation (mm)',
-			},
-			labels:{
-				format: '{value} mm'
-			},
-			
-		
-		}],
-		// tooltip set to display value when hovering over a point in the chart 		
-		tooltip: {
-               formatter: function() {
-                var s = '<b>'+ this.x +'</b>';
-                
-                $.each(this.points, function(i, point) {
-                    s += '<br>'+point.series.name+': '+point.y;
-                });
-                
-                return s;
-            },
-            shared: true
-        },
-		//series is set down below 
-		series: [{},{}]
-	};
-
-			
-			options.xAxis.categories = data.date; //fill xAxis with the ranged date 
-			options.series[0].name = 'Flow (cms)'; //initialize the series names and data 
-			options.series[0].data = data.waterlevel;
-            options.series[0].type = 'spline';
-			options.series[1].name = 'Precipitation (mm)';
-			options.series[1].data = data.precipitation;
-			options.series[1].type = 'column';  // set the precipitation series to be columns 
-            options.series[1].yAxis = 1;
-			
-			var chart = new Highcharts.Chart(options); //create the chart 	
-}
-});
-</script>
