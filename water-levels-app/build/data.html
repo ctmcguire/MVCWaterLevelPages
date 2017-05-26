@@ -3,15 +3,17 @@
 		<title>MVC Water Levels</title>
 	</head>
 	<body>
-		<$table/>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script src="//code.highcharts.com/highcharts.js"></script>
+		<$table/><!--Placeholder tag that will be replaced with a table (or nothing if a graph is requested instead) by data.php-->
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="//code.highcharts.com/highcharts.js"></script>
 		<div id="chart"></div>
+		<!--JavaScript variables used by data.js that need to get values from data.php-->
 		<script>
-			var data = <$result/>;
-			var num = <$F/>;
-			var gauge = '<$gauge/>';
+			var data = <$result/>;//Placeholder tag that will be replaced with a JavaScript object (or null if a table is requested instead) by data.php
+			var num = <$F/>;//Placeholder tag that will be replaced with the value of $F by data.php
+			var gauge = '<$gauge/>';//Placeholder tag that will be replaced with the gauge name by data.php
 		</script>
-		<script src="data.js"></script>
+		<!--Load the corresponding JavaScript file-->
+		<script type="text/javascript" src="data.js"></script>
 	</body>
 </html>
