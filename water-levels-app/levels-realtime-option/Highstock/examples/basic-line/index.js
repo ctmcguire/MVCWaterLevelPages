@@ -1,15 +1,31 @@
-var seriesFull = [];
+var seriesFull = [];//This array stores all of the series displayed by the chart
 var numData = 3;//Used for the loading message
 
+/**
+ * This function takes a KiWIS id, a data series name, and an integer; loads the KiWIS data; and 
+ * then constructs a Highchart using said data.
+ * 
+ * @param tsURL - The ts_id of the data to retrieve; formally the entire KiWIS URL to retrieve from 
+ *             (should maybe be renamed?).
+ * @param tsName - The name of the data series used to create a highchart.
+ * @param n - A number value used to determine which data series is being added (should maybe use 
+ *         tsName for this instead?)
+ * 
+ * @returns - void
+ * 
+ * Example usage:
+ * 					makeData('1391042', 'Water Level', 0);
+ * The above example gets the water level data for the gauge at Buckshot Creek (near plevna)
+**/
 function makeData(tsURL, tsName, n) {
-	//These 2 variables are used to form the KiWIS URL to get data from
+	//These 2 variables are combined with tsURL to form the KiWIS URL from which data is retrieved
 	var prefix = "http://waterdata.quinteconservation.ca/KiWIS/KiWIS?service=kisters&type=queryServices&request=getTimeseriesValues&datasource=0&format=json&ts_id=";
 	var suffix = "&header=true&metadata=true&md_returnfields=station_name,parametertype_name&from=2005-01-01&dateformat=UNIX";
 
 	//Ajax query for data in JSON format
 	$.getJSON(prefix + tsURL + suffix, function (data) {
 
-		numData--;//Decrement the numData value each time the data is parsed
+		numData--;//Decrement the numData value each time the data is parsed; will be at zero once the final data series executes this line
 
 		var data2 = data[0].data; //pointer to KVP parent object
 		var data3 = []; //will store updated KVP for each item
@@ -22,28 +38,27 @@ function makeData(tsURL, tsName, n) {
 			data3.push(data2[i]); //Push new KVP into data3
 		}
 
-		//populate the series for the chart
-
+		//populate the series for the chart (type and tooltip default to their values for flow rate)
 		var singleSeries = {
 			_colorIndex: n,
 			_symbolIndex: seriesFull.length,
 			name: tsName,//Can also extract name directly from query
 			data: data3,
-			type: 'spline',
+			type: 'spline',//Both flow rate and water level use line charts
 			yAxis: n,
 			tooltip: {
-				valueSuffix: ' cms'
+				valueSuffix: ' cms'//flow rate is measured in cubic meters per second (which should really be m^3/s, but I guess that confuses people?)
 			}
 		};
 
 		if(n == 2) {
-			singleSeries.type = 'column'
-			singleSeries.tooltip.valueSuffix = ' mm'
+			singleSeries.type = 'column';//Precipitation uses a bar chart, instead of a line chart
+			singleSeries.tooltip.valueSuffix = ' mm';//Precipitation is measured in millimeters
 		}
 		if(n == 0)
-			singleSeries.tooltip.valueSuffix = ' m'
+			singleSeries.tooltip.valueSuffix = ' m';//
 
-		seriesFull.push(singleSeries);
+		seriesFull.push(singleSeries);//Add the current series to the array of serieses
 
 		//Create and render the chart passing in the series
 		var chart = new Highcharts.StockChart({
@@ -58,7 +73,7 @@ function makeData(tsURL, tsName, n) {
 					labels: {
 						format: '{value} m',
 						style: {
-							color: Highcharts.getOptions().colors[0]
+							color: Highcharts.getOptions().colors[0]//Personally I think this colour is too bright for an axis label; makes it hard to read
 						}
 					},
 					title: {
@@ -90,7 +105,7 @@ function makeData(tsURL, tsName, n) {
 					title: {
 						text: 'Precipitation (mm)',
 						style: {
-							color: Highcharts.getOptions().colors[2]
+							color: Highcharts.getOptions().colors[2]//I also think this one is too bright; perhaps a darker shade of green would work better?
 						}
 					},
 					labels: {

@@ -2,12 +2,8 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
-
-		<!--
-			/water-levels-app/levels-realtime-option/Highstock/examples/basic-line/index.htm
-		-->
 		<title>Buckshot Creek at Plevna</title>
-		
+		<!--Loading JavaScript files:-->
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://mvc.on.ca/water-levels-app/levels-realtime-option/Highstock/js/highstock.js"></script>
 		<script type="text/javascript" src="http://mvc.on.ca/water-levels-app/levels-realtime-option/Highstock/js/modules/exporting.js"></script>
@@ -21,10 +17,15 @@
 			</h1>
 		</div>
 		<script>
+			/*
+			 * Load the water level, flow rate, and precipitation data into the chart
+			 */
 			makeData('1391042', 'Water Level', 0);
 			makeData('32335042', 'Flow Rate (cms)', 1);
 			makeData('1437042', 'Precipitation (mm)', 2);
 		</script>
-		<div id="container" style="height: 400px; min-width: 310px"></div>
+		<div id="container" style="height: 400px; min-width: 310px">
+			<!--I'm not sure what this div is for; since it is empty, possibly for spacing purposes?-->
+		</div>
 	</body>
 </html>
