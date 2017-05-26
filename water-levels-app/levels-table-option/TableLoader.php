@@ -1,10 +1,23 @@
 <?php
+	/**
+	 * This class is used to load the table row data for ataglance.php
+	**/
 	class TableLoader
 	{
 		private $flowGauges;//FLOW GAUGES
 		private $lakeGauges;//DAILY LAKE GAUGES
 		private $weekGauges;//WEEKLY LAKE GAUGES
 
+		/**
+		 * The TableLoader constructor initializes the arrays that are used by TableLoader objects
+		 * 
+		 * @returns - constructors do not return
+		 * 
+		 * Example usage:
+		 * 					$tableLoader = new TableLoader();
+		 * The above example constructs a new TableLoader object and stores it in the $tableLoader variable 
+		 * (this variable name will be reused in later examples).
+		**/
 		function TableLoader() {
 			$this->flowGauges = array(
 				'Myers Cave flow',// Myers Cave
@@ -65,19 +78,61 @@
 			);
 		}
 
+		/**
+		 * This function returns string containing a sequence of html rows; one row for each flow gauge.
+		 * 
+		 * @returns - html rows for each flow gauge
+		 * 
+		 * Example usage:
+		 * 					$rows = $tableLoader->getFlowData();
+		 * The above example gets the html rows for the flow gauges and stores them in the $rows variable.
+		**/
 		public function getFlowData()
 		{
 			return $this->getData($this->flowGauges);
 		}
+		/**
+		 * This function returns string containing a sequence of html rows; one row for each daily lake gauge.
+		 * 
+		 * @returns - html rows for each daily lake gauge
+		 * 
+		 * Example usage:
+		 * 					$rows = $tableLoader->getDailyLakeData();
+		 * The above example gets the html rows for the daily lake gauges and stores them in the $rows 
+		 * variable.
+		**/
 		public function getDailyLakeData()
 		{
 			return $this->getData($this->lakeGauges);
 		}
+		/**
+		 * This function returns string containing a sequence of html rows; one row for each weekly lake gauge.
+		 * 
+		 * @returns - html rows for each weekly lake gauge
+		 * 
+		 * Example usage:
+		 * 					$rows = $tableLoader->getWeeklyLakeData();
+		 * The above example gets the html rows for the weekly lake gauges and stores them in the $rows 
+		 * variable.
+		**/
 		public function getWeeklyLakeData()
 		{
 			return $this->getData($this->weekGauges, false);
 		}
 
+		/**
+		 * This function takes an array of gauge names and a boolean value, and returns one html row for each
+		 *  gauge in the array.
+		 * 
+		 * @param $gauges - array of gauge names; defaults to an empty array
+		 * @param $hasRain - boolean value representing whether the gauges in the array measure 
+		 *                precipitation; defaults to true
+		 * 
+		 * @returns - one html row for each gauge in the array (as a single string)
+		 * 
+		 * Example usage:
+		 * 					Private functions cannot be used outside of this class
+		**/
 		private function getData($gauges=array(), $hasRain=true)
 		{
 			$outStr = '';
@@ -86,7 +141,20 @@
 			return $outStr;
 		}
 
-		private function populateRow($gaugeName, $hasPrecipitation = true)
+		/**
+		 * This function takes a gauge name and a boolean value, and returns the gauge's most recent data as 
+		 * a string containing an html row.
+		 * 
+		 * @param $gaugeName - Name of the gauge to get data for
+		 * @param $hasRain - boolean value representing whether the gauge measures precipitation; defaults to
+		 *                 true
+		 * 
+		 * @returns - html row for the gauge's most recent data (as a string)
+		 * 
+		 * Example usage:
+		 * 					Private functions cannot be used outside of this class
+		**/
+		private function populateRow($gaugeName, $hasRain = true)
 		{
 			$query = "SELECT gauge, date, datainfo, historicalaverage, precipitation FROM data WHERE gauge='" . $gaugeName . "' ORDER BY date DESC limit 1";
 			$result = mysql_query($query);
@@ -114,7 +182,7 @@
 					</td>';
 
 					/*If the data in question has a precipitation column, add its column to the table*/
-					if($hasPrecipitation) {
+					if($hasRain) {
 						$outStr = $outStr . '<td>
 							' . $row['precipitation'] . '
 						</td>';
