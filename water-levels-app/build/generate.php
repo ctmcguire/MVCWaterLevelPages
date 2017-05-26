@@ -5,4 +5,5 @@
 
 	$startDate = date("Y-m-d",strtotime('-2 week'));
 	$reader->insert('start-date', $startDate);
+	echo $reader->read();
 ?>
