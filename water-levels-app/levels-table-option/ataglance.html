@@ -32,10 +32,10 @@
 					PRECIPITATION (mm)
 				</th>
 			</tr>
-			<$flow-data/>
+			<$flow-data/><!--Placeholder tag that will be replaced with the flow gauge rows by ataglance.php-->
 			<tr>
 				<th colspan=5>
-					<br>
+					<br><!--Adds some space between the flow gauges and daily lake gauges (should maybe have its own table?)-->
 				</th>
 			</tr>
 			<tr class="title">
@@ -60,8 +60,9 @@
 					PRECIPITATION (mm)
 				</th>
 			</tr>
-			<$daily-data/>
+			<$daily-data/><!--Placeholder tag that will be replaced with the daily lake gauge rows by ataglance.php-->
 		</table>
+		<!--The weekly gauges only have 4 columns, so they get their own table-->
 		<table class="water-levels" border=1 cellpadding=8>
 			<colgroup>
 				<col id="name-col">
@@ -88,7 +89,7 @@
 					HISTORICAL AVG. (<p class="tooltip" title="Meters Above Sea Level">MASL</p>)
 				</th>
 			</tr>
-			<$weekly-data/>
+			<$weekly-data/><!--Placeholder tag that will be replaced with the weekly lake gauge rows by ataglance.php-->
 		</table>
 	</body>
 </html>
