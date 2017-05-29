@@ -1,6 +1,69 @@
 var seriesFull = [];//This array stores all of the series displayed by the chart
-var seriesOrder = [];
 var numData = 0;//Used for the loading message
+var chart = null;
+
+function makeChart() {
+	chart = new Highcharts.StockChart({
+		chart: {renderTo: 'ChartContainer'},
+		legend: {enabled: true},
+		rangeSelector: {selected: 1},
+		title: {text: "Buckshot Creek Near Plevna"},
+		series: seriesFull,
+		xAxis: {ordinal: false},
+		yAxis: [
+			{ // Primary yAxis
+				labels: {
+					format: '{value} m',
+					style: {
+						color: Highcharts.getOptions().colors[0]//Personally I think this colour is too bright for an axis label; makes it hard to read
+					}
+				},
+				title: {
+					text: 'Water Level (m)',
+					style: {
+						color: Highcharts.getOptions().colors[0]
+					}
+				},
+				opposite: false
+			},
+			{ // Secondary yAxis
+				gridLineWidth: 0,
+				title: {
+					text: 'Flow Rate (cms)',
+					style: {
+						color: Highcharts.getOptions().colors[1]
+					}
+				},
+				labels: {
+					format: '{value} cms',
+					style: {
+						color: Highcharts.getOptions().colors[1]
+					}
+				},
+				opposite: false
+			},
+			{ // Tertiary yAxis
+				gridLineWidth: 0,
+				title: {
+					text: 'Precipitation (mm)',
+					style: {
+						color: Highcharts.getOptions().colors[2]//I also think this one is too bright; perhaps a darker shade of green would work better?
+					}
+				},
+				labels: {
+					format: '{value} mm',
+					style: {
+						color: Highcharts.getOptions().colors[2]
+					}
+				},
+				opposite: true
+			}
+		],
+		tooltip: {valueDecimals: 2,shared: true}
+	});
+
+	chart.showLoading();
+}
 
 /**
  * This function takes a KiWIS id, a data series name, and an integer; loads the KiWIS data; and 
@@ -22,6 +85,12 @@ function makeData(tsURL, tsName, n) {
 	const FROM = 1994;
 	const TO = 2017;
 
+	if(chart === null)
+		makeChart();
+	if(chart === null) {
+		console.log('A landslide has occurred!  A landslide has occurred!');
+	}
+
 	//These 2 variables are combined with tsURL to form the KiWIS URL from which data is retrieved
 	var prefix = "http://waterdata.quinteconservation.ca/KiWIS/KiWIS?service=kisters&type=queryServices&request=getTimeseriesValues&datasource=0&format=json&ts_id=";
 	var suffix = "&header=true&metadata=true&md_returnfields=station_name,parametertype_name&dateformat=UNIX";
@@ -30,7 +99,8 @@ function makeData(tsURL, tsName, n) {
 
 	function makeDataByYear(url, j) {
 		var year = '&from=' + j + '-01-01&to=' + j + '-12-31';
-		$.getJSON(url + year, function(data) {
+		numData++;//Keep track of how many times makeDataByYear is called in order to properly show/hide 'loading...' text
+		$.getJSON(url+year, function(data) {
 
 			numData--;//Decrement the numData value each time the data is parsed; will be at zero once the final data series executes this line
 
@@ -51,9 +121,10 @@ function makeData(tsURL, tsName, n) {
 			yearlyData[j] = data3;
 			for(i = FROM; i <= TO; i++) {
 				if(yearlyData[i] == null)
-					continue;
+					return;
 				finalData = finalData.concat(yearlyData[i]);
 			}
+			//finalData = data3;
 
 			//populate the series for the chart (type and tooltip default to their values for flow rate)
 			var singleSeries = {
@@ -75,80 +146,12 @@ function makeData(tsURL, tsName, n) {
 			if(n === 0)
 				singleSeries.tooltip.valueSuffix = ' m';//Water levels are measured in meters
 
-			for(i = 0; i < seriesOrder.length; i++) {
-				if(seriesOrder[i] !== n)
-					continue;
-				seriesFull[i] = singleSeries;
-				dothething = false;
-				break;
-			}
-
-			if(dothething){
-				seriesFull.push(singleSeries);//Add the current series to the array of serieses
-				seriesOrder.push(n);
-			}
+			seriesFull.push(singleSeries);//Add the current series to the array of serieses
 
 			//Create and render the chart passing in the series
-			var chart = new Highcharts.StockChart({
-				chart: {renderTo: 'ChartContainer'},
-				legend: {enabled: true},
-				rangeSelector: {selected: 1},
-				title: {text: "Buckshot Creek Near Plevna"},
-				series: seriesFull,
-				xAxis: {ordinal: false},
-				yAxis: [
-					{ // Primary yAxis
-						labels: {
-							format: '{value} m',
-							style: {
-								color: Highcharts.getOptions().colors[0]//Personally I think this colour is too bright for an axis label; makes it hard to read
-							}
-						},
-						title: {
-							text: 'Water Level (m)',
-							style: {
-								color: Highcharts.getOptions().colors[0]
-							}
-						},
-						opposite: false
-					},
-					{ // Secondary yAxis
-						gridLineWidth: 0,
-						title: {
-							text: 'Flow Rate (cms)',
-							style: {
-								color: Highcharts.getOptions().colors[1]
-							}
-						},
-						labels: {
-							format: '{value} cms',
-							style: {
-								color: Highcharts.getOptions().colors[1]
-							}
-						},
-						opposite: false
-					},
-					{ // Tertiary yAxis
-						gridLineWidth: 0,
-						title: {
-							text: 'Precipitation (mm)',
-							style: {
-								color: Highcharts.getOptions().colors[2]//I also think this one is too bright; perhaps a darker shade of green would work better?
-							}
-						},
-						labels: {
-							format: '{value} mm',
-							style: {
-								color: Highcharts.getOptions().colors[2]
-							}
-						},
-						opposite: true
-					}
-				],
-				tooltip: {valueDecimals: 2,shared: true}
-			});
 
-			chart.showLoading();//Whichever data is loaded first displays the loading text (the others do it too, but the first one is the one that matters)
+			chart.addSeries(singleSeries);
+			//chart.showLoading();//Whichever data is loaded first displays the loading text (the others do it too, but the first one is the one that matters)
 
 			if(numData === 0)
 				chart.hideLoading();//Whichever data is loaded last hides the loading text
@@ -157,8 +160,7 @@ function makeData(tsURL, tsName, n) {
 	}
 
 	//Ajax query for data in JSON format
-	for(var i = TO; FROM <= i; i--) {
-		numData++;//Keep track of how many times makeDataByYear is called in order to properly show/hide 'loading...' text
+	for(var i = FROM; i <= TO; i++) {
 		makeDataByYear(prefix + tsURL + suffix, i);
 	}
 }
