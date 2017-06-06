@@ -1,12 +1,16 @@
 <html>
 	<head>
 		<title>MVC Water Levels</title>
-	</head>
-	<body>
-		<$table/><!--Placeholder tag that will be replaced with a table (or nothing if a graph is requested instead) by data.php-->
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript" src="//code.highcharts.com/highcharts.js"></script>
+		<$wp-themes/>
+	</head>
+	<body>
+		<$site-header/>
+		<$table/><!--Placeholder tag that will be replaced with a table (or nothing if a graph is requested instead) by data.php-->
+		
 		<div id="chart"></div>
+		<br/>
 		<!--JavaScript variables used by data.js that need to get values from data.php-->
 		<script>
 			var data = <$result/>;//Placeholder tag that will be replaced with a JavaScript object (or null if a table is requested instead) by data.php
@@ -15,5 +19,9 @@
 		</script>
 		<!--Load the corresponding JavaScript file-->
 		<script type="text/javascript" src="data.js"></script>
+		<form>
+			<input type="button" value="Back" onClick="history.go(-1);return true;"/>
+		</form>
+		<$site-footer/>
 	</body>
 </html>

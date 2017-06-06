@@ -1,5 +1,6 @@
 <?php
 	include 'HTMLReader.php';
+	include 'headerfooter.php';
 	$reader = new HTMLReader('data.html');
 
 	/* 
@@ -78,25 +79,7 @@
 	{
 		$outStr = '';
 
-		$outStr = $outStr . '<br>
-			<br>
-			<table align="center" cellspacing="0" cellpadding="5" width=600 border=1 cellpadding=5>
-				<tr>
-					<td colspan=6>
-						<center>
-							<img src="../images/header2.jpg"/>
-						</center>
-					</td>
-				</tr>
-				<tr>
-					<td colspan=6>
-						<a href="javascript:history.back();">
-							<font face="Arial" color="#000080">
-								<img border="0" src="back.jpg" width="66" height="28" alt="Back" title="Back"/>
-							</font>
-						</a>
-					</td>
-				</tr>
+		$outStr = $outStr . '<table align="center" cellspacing="0" cellpadding="5" width=600 border=1 cellpadding=5>
 				<tr>
 					<th>
 						Gauge
@@ -284,6 +267,8 @@
 	$reader->insert('result', $result);//Replace the <$result/> placeholder with the value of $result
 	$reader->insert('F', $F);//Replace the <$F/> placeholder with the value of $F
 	$reader->insert('gauge', $gauge);//Replace the <$gauge/> placeholder with the value of $gauge
+
+	addHeaderFooter($reader);
 	echo $reader->read();//display the html file on the web page
 
 	mysql_close($con);//close connection to database

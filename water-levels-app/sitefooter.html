@@ -6,27 +6,43 @@
 		</div>
 	</div>
 </div>
-<div class="footer-wrapper">
-	<div class="footer-wrapper-gimmick"></div>
-	<!-- Get Footer Widget -->
-	<div class="container mt0">
-		<div id="footerDeveloped">
-			<a id="footer-co" href="http://www.conservation-ontario.ca/" target="_blank">
-				MVCA is a member of Conservation Ontario
-			</a>
-			<a id="contact" href="http://mvc.on.ca/about/contact/" target="_blank">
-				Contact
-			</a>
-			<a id="footer-accessibility" href="http://mvc.on.ca/accessibility-3/" target="_blank">
-				Accessibility
-			</a>
-			<a id="footer-MFIPPA" href="http://mvc.on.ca/wp-content/uploads/2014/11/FeesMFIPChart.pdf" target="_blank">
-				MFIPPA Requests
-			</a>
-			<a id="footer-site map" href="http://mvc.on.ca/sitemap/" target="_blank">
-				Sitemap
-			</a>
+<div id="dummy-footer">
+	<div id="footer" class="footer-wrapper">
+		<div class="footer-wrapper-gimmick"></div>
+		<!-- Get Footer Widget -->
+		<div class="container mt0">
+			<div id="footerDeveloped">
+				<a id="footer-co" href="http://www.conservation-ontario.ca/" target="_blank">
+					MVCA is a member of Conservation Ontario
+				</a>
+				<a id="contact" href="http://mvc.on.ca/about/contact/" target="_blank">
+					Contact
+				</a>
+				<a id="footer-accessibility" href="http://mvc.on.ca/accessibility-3/" target="_blank">
+					Accessibility
+				</a>
+				<a id="footer-MFIPPA" href="http://mvc.on.ca/wp-content/uploads/2014/11/FeesMFIPChart.pdf" target="_blank">
+					MFIPPA Requests
+				</a>
+				<a id="footer-site map" href="http://mvc.on.ca/sitemap/" target="_blank">
+					Sitemap
+				</a>
+			</div>
 		</div>
+		<p></p><!-- footer-wrapper -->
 	</div>
-	<p></p><!-- footer-wrapper -->
 </div>
+<script>
+	function footerPos() {
+		var client = document.body.clientHeight;
+		var scroll = document.body.scrollHeight;
+		var classes = document.getElementById('footer').className;
+
+		if(client < scroll && 0 <= classes.indexOf(' bottom'))
+			document.getElementById('footer').className = classes.substr(0, classes.indexOf(' bottom'));
+		if(scroll <= client && classes.indexOf(' bottom') < 0)
+			document.getElementById('footer').className += " bottom"
+	}
+	document.body.onresize = function(event) {footerPos()};
+	footerPos();
+</script>

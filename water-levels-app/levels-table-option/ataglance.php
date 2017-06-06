@@ -1,6 +1,7 @@
 <?php
 	include 'HTMLReader.php';//include the HTMLReader class
 	include 'TableLoader.php';//include the TableLoader class
+	include 'headerfooter.php';
 
 	mysql_connect("localhost","mvconc55_levels1","4z9!yA");
 	mysql_select_db("mvconc55_mvclevels");
@@ -21,5 +22,7 @@
 	$reader->insert('flow-data', $flow);
 	$reader->insert('daily-data', $daily);
 	$reader->insert('weekly-data', $weekly);
+
+	addHeaderFooter($reader);
 	echo $reader->read();//display the html file
 ?>

@@ -1,18 +1,15 @@
 <html>
 	<head>
 		<title>MVC Watershed - At a Glance</title>
+		<$wp-themes/>
 		<link rel="stylesheet" type="text/css" href="ataglance.css">
 	</head>
 	<body>
+		<$site-header/>
 		<table class="water-levels" border=1 cellpadding=8>
-			<tr>
-				<th colspan=5>
-					<img src="http://mvc.on.ca/water-levels-app/images/header2.jpg">
-				</th>
-			</tr>
 			<tr class="title">
 				<th colspan=5>
-					STREAM GAUGES
+					FLOW GAUGES
 				</th>
 			</tr>
 			<tr>
@@ -91,5 +88,6 @@
 			</tr>
 			<$weekly-data/><!--Placeholder tag that will be replaced with the weekly lake gauge rows by ataglance.php-->
 		</table>
+		<$site-footer/>
 	</body>
 </html>
