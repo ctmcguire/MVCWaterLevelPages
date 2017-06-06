@@ -28,6 +28,20 @@ tr
 	vertical-align: top;
 }
 
+td
+{
+	vertical-align: top;
+}
+td img
+{
+	display: initial;
+}
+
+table, tr
+{
+	width: initial;
+}
+
 /* Center everything without the labelled-inputs class */
 form>:not(.labelled-inputs)
 {
@@ -45,4 +59,14 @@ form>:not(.labelled-inputs)
 .labelled-inputs input[type=date]
 {
 	vertical-align: middle;
+}
+
+.italic
+{
+	font-style: italic;
+}
+
+.bold
+{
+	font-weight: bold;
 }
