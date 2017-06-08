@@ -11,13 +11,13 @@
 	$themes->insert('shortcode', "/include/otw_components/otw_shortcode/css/");
 	$themes->insert('google-font', "http://fonts.googleapis.com/css?family=Droid+Sans%3Asubset%3Dlatin%3An%2Ci%2Cb%2Cbi%7CDroid+Serif%3Asubset%3Dlatin%3An%2Ci%2Cb%2Cbi%7C&amp;ver=4.7.5");
 
-	$header->insert('page-name', 'Water Levels & Flows');
-
-	function addHeaderFooter($reader)
+	function addHeaderFooter($reader, $name="Water Levels & Flows")
 	{
 		global $header;
 		global $footer;
 		global $themes;
+
+		$header->insert('page-name', $name);
 
 		$reader->insert('wp-themes', $themes->read());
 		$reader->insert('site-header', $header->read());
