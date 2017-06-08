@@ -32,9 +32,10 @@ td
 {
 	vertical-align: top;
 }
-td img
+img#watershed
 {
 	display: initial;
+	width: 100%;
 }
 
 table, tr
@@ -42,21 +43,16 @@ table, tr
 	width: initial;
 }
 
-/* Center everything without the labelled-inputs class */
-form>:not(.labelled-inputs)
+.date-inputs
 {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
+	text-align: right;
 }
 
-.labelled-inputs
+.date-inputs,label
 {
-	padding-bottom: 173px;
 	font-weight: bold;
 }
-.labelled-inputs input[type=date]
+.date-inputs input
 {
 	vertical-align: middle;
 }
