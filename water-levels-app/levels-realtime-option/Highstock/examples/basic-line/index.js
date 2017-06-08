@@ -1,3 +1,6 @@
+if(window.Boost)
+	console.log('Houston, we have boost.js');
+
 var seriesFull = [];//This array stores all of the series displayed by the chart
 var numData = 0;//Used for the loading message
 var chart = null;
@@ -67,6 +70,9 @@ function makeChart() {
 			renderTo: 'ChartContainer',
 			marginLeft: 300,//In order to prevent the y-axis labels from resizing the chart; the more space the better (using 300 for the test page because it works)
 			marginRight: 300
+		},
+		boost: {
+			useGPUTranslations: true
 		},
 		legend: {enabled: true},
 		rangeSelector: {
