@@ -23,6 +23,6 @@
 	$reader->insert('daily-data', $daily);
 	$reader->insert('weekly-data', $weekly);
 
-	addHeaderFooter($reader);
+	addHeaderFooter($reader, "Most Recent Watershed Summary");
 	echo $reader->read();//display the html file
 ?>

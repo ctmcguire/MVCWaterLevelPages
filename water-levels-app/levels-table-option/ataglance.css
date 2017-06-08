@@ -1,4 +1,4 @@
-table.water-levels
+table.water-levels:not(:first-of-type)
 {
 	font-size: 13px;
 	font-family: arial;

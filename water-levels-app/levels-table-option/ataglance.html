@@ -2,7 +2,7 @@
 	<head>
 		<title>MVC Watershed - At a Glance</title>
 		<$wp-themes/>
-		<link rel="stylesheet" type="text/css" href="ataglance.css">
+		<link rel="stylesheet" type="text/css" href="ataglance.css"/>
 	</head>
 	<body>
 		<$site-header/>
@@ -30,11 +30,8 @@
 				</th>
 			</tr>
 			<$flow-data/><!--Placeholder tag that will be replaced with the flow gauge rows by ataglance.php-->
-			<tr>
-				<th colspan=5>
-					<br><!--Adds some space between the flow gauges and daily lake gauges (should maybe have its own table?)-->
-				</th>
-			</tr>
+		</table>
+		<table class="water-levels" border=1 cellpadding=8>
 			<tr class="title">
 				<th colspan=5>
 					DAILY LAKE GAUGES
@@ -62,10 +59,10 @@
 		<!--The weekly gauges only have 4 columns, so they get their own table-->
 		<table class="water-levels" border=1 cellpadding=8>
 			<colgroup>
-				<col id="name-col">
-				<col id="date-col">
-				<col id="data-col">
-				<col id="hist-col">
+				<col id="name-col"/>
+				<col id="date-col"/>
+				<col id="data-col"/>
+				<col id="hist-col"/>
 			</colgroup>
 			<tr class="title">
 				<th colspan=4>
