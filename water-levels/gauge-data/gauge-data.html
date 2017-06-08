@@ -6,7 +6,7 @@
 		<$wp-themes/>
 	</head>
 	<body>
-		<$site-header/>
+		<$wp-header/>
 		<$table/><!--Placeholder tag that will be replaced with a table (or nothing if a graph is requested instead) by data.php-->
 		
 		<div id="chart"></div>
@@ -18,10 +18,10 @@
 			var gauge = '<$gauge/>';//Placeholder tag that will be replaced with the gauge name by data.php
 		</script>
 		<!--Load the corresponding JavaScript file-->
-		<script type="text/javascript" src="data.js"></script>
+		<script type="text/javascript" src="gauge-data.js"></script>
 		<form>
 			<input type="button" value="Back" onClick="history.go(-1);return true;"/>
 		</form>
-		<$site-footer/>
+		<$wp-footer/>
 	</body>
 </html>

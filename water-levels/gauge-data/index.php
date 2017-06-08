@@ -1,7 +1,7 @@
 <?php
-	include 'HTMLReader.php';
-	include 'headerfooter.php';
-	$reader = new HTMLReader('data.html');
+	include '../classes/HTMLReader.php';
+	include '../header-footer/header-footer.php';
+	$reader = new HTMLReader('gauge-data.html');
 
 	/* 
 	 * The lake outflow gauges; measures flow and precipitation

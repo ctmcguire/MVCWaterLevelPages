@@ -14,6 +14,7 @@
 		 * 
 		 * @param $file - The name of the file to be opened, including
 		 *             the file extention.
+		 * @param $home - boolean value that idicates that the file starts from www.mvc.on.ca/water-levels, and not the current directory
 		 * 
 		 * @returns - constructors do not return
 		 * 
@@ -22,9 +23,11 @@
 		 * and stores it in the $htmlReader variable (This variable
 		 * name will be reused in later examples)
 		**/
-		function HTMLReader($file)
+		function HTMLReader($file, $home=false)
 		{
-			$this->html = file_get_contents($file);
+			if($home)
+				$file = "https://www.mvc.on.ca/water-levels/" + $file;
+			$this->html = file_get_contents($file, $home);
 		}
 
 		/**

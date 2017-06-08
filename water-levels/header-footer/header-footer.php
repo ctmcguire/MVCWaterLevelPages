@@ -1,10 +1,10 @@
 <?php
 	if(!class_exists('HTMLReader'))
-		include 'HTMLReader.php';
+		include 'https://www.mvc.on.ca/water-levels/classes/HTMLReader.php';
 
-	$themes = new HTMLReader('wp_themes.html');
-	$header = new HTMLReader('siteheader.html');//Get the html file for the page header
-	$footer = new HTMLReader('sitefooter.html');
+	$themes = new HTMLReader('/home/mvconc55/public_html/water-levels/header-footer/wp-themes.html');
+	$header = new HTMLReader('/home/mvconc55/public_html/water-levels/header-footer/wp-header.html', true);
+	$footer = new HTMLReader('/home/mvconc55/public_html/water-levels/header-footer/wp-footer.html', true);
 
 	$themes->insert('greenearth', "http://mvc.on.ca/wp-content/themes/greenearth-v1-06/");
 	$themes->insert('plugins', "http://mvc.on.ca/wp-content/plugins/");
@@ -20,7 +20,7 @@
 		$header->insert('page-name', $name);
 
 		$reader->insert('wp-themes', $themes->read());
-		$reader->insert('site-header', $header->read());
-		$reader->insert('site-footer', $footer->read());
+		$reader->insert('wp-header', $header->read());
+		$reader->insert('wp-footer', $footer->read());
 	}
 ?>

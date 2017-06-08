@@ -1,8 +1,8 @@
 <?php
-	include 'HTMLReader.php';//Include the HTMLReader class
-	include 'headerfooter.php';
+	include 'classes/HTMLReader.php';//Include the HTMLReader class
+	include 'header-footer/header-footer.php';
 
-	$reader = new HTMLReader('generate.html');//Get the html file corresponding to this php file
+	$reader = new HTMLReader('water-levels.html');//Get the html file corresponding to this php file
 	$startDate = date("Y-m-d",strtotime('-2 week'));//Get the date value of 2 weeks ago
 	$reader->insert('start-date', $startDate);//Replace all instances of the <$start-date/> placeholder with the value stored in $startDate
 

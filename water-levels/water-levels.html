@@ -3,10 +3,10 @@
 		<title>MVC Water Levels</title>
 		
 		<$wp-themes/><!-- Wordpress Style Sheets -->
-		<link rel="stylesheet" type="text/css" href="generate.css"/><!-- Style Sheet for generate.html -->
+		<link rel="stylesheet" type="text/css" href="water-levels.css"/><!-- Style Sheet for generate.html -->
 	</head>
 	<body>
-		<$site-header/>
+		<$wp-header/>
 		<h2>
 			Check out lake and stream levels updated daily
 		</h2>
@@ -29,7 +29,7 @@
 		<p></p>
 		<p></p>
 		<center>
-			<a class="gdl-button" target="_blank" href="http://mvc.on.ca/water-levels-app/test-environment/ataglance.php">
+			<a class="gdl-button" target="_blank" href="./daily-summary/">
 				<span class="gdl-button">
 					View Most Recent Watershed Summary
 				</span>
@@ -37,7 +37,7 @@
 		</center>
 		<p></p>
 		<p></p>
-		<img id="watershed" src="../images/gauge-map.jpg"/><!--Map of all the gauges (note: map is out of date and will be updated in the near future-->
+		<img id="watershed" src="./images/gauge-map.jpg"/><!--Map of all the gauges (note: map is out of date and will be updated in the near future-->
 		<br/>
 		<br/>
 		<table class="water-levels" border=1 cellpadding=10 cellspacing=0>
@@ -48,7 +48,7 @@
 					</h2>
 					<p></p>
 					<p></p>
-					<form id="form1" name="form1" method="post" action="data.php" onsubmit="return validateForm()">
+					<form id="form1" name="form1" method="post" action="./gauge-data/" onsubmit="return validateForm()">
 						<!--Dropdown for all of the gauges (there are a lot of them)-->
 						<select name="gauge">
 							<!--default option to be displayed initially (can't be reselected)-->
@@ -330,8 +330,8 @@
 		<p></p>
 		<hr>
 		-->
-		<$site-footer/>
+		<$wp-footer/>
 		<!--Load the corresponding JavaScript file-->
-		<script src="generate.js"></script>
+		<script src="water-levels.js"></script>
 	</body>
 </html>
