@@ -7,8 +7,8 @@
 	 * The lake outflow gauges; measures flow and precipitation
 	 */
 	$lakeFlowGauges = array();
-	$lakeFlowGauges['Bennett Lake outflow'] = true;
-	$lakeFlowGauges['Dalhousie Lk outflow'] = true;
+	$lakeFlowGauges['Bennett Lake Outflow'] = true;
+	$lakeFlowGauges['Dalhousie Lake Outflow'] = true;
 
 	/* 
 	 * The lake gauges (plus the one Carp River gauge) that only measure water levels
@@ -40,14 +40,14 @@
 	 * The normal flow gauges; measures flow, precipitation, and has historical averages
 	 */
 	$flowGauges = array();
-	$flowGauges['Myers Cave flow'] = true;
-	$flowGauges['Buckshot Creek flow'] = true;
-	$flowGauges['Ferguson Falls flow'] = true;
-	$flowGauges['Appleton flow'] = true;
-	$flowGauges['Gordon Rapids flow'] = true;
-	$flowGauges['Lanark Stream flow'] = true;
-	$flowGauges['Mill of Kintail flow'] = true;
-	$flowGauges['Kinburn flow'] = true;
+	$flowGauges['Myers Cave Flow'] = true;
+	$flowGauges['Buckshot Creek Flow'] = true;
+	$flowGauges['Ferguson Falls Flow'] = true;
+	$flowGauges['Appleton Flow'] = true;
+	$flowGauges['Gordon Rapids Flow'] = true;
+	$flowGauges['Lanark Stream Flow'] = true;
+	$flowGauges['Mill of Kintail Flow'] = true;
+	$flowGauges['Kinburn Flow'] = true;
 
 	/* 
 	 * There is no array for the weekly lake gauges, since it isn't necessary, but they measure water 
@@ -82,9 +82,6 @@
 		$outStr = $outStr . '<table align="center" cellspacing="0" cellpadding="5" width=600 border=1 cellpadding=5>
 				<tr>
 					<th>
-						Gauge
-					</th>
-					<th>
 						Date
 					</th>
 					<th>
@@ -111,7 +108,6 @@
 		while($row = mysql_fetch_array($query))
 		{
 			$datainfo = $row['datainfo'];
-			$gauge = $row['gauge'];
 			$date = $row['date'];
 			$time = $row['time'];
 			$hist = $row['historicalaverage'];//historical average
@@ -127,7 +123,6 @@
 				$rain = "Data Not Available";
 
 			$outStr = $outStr . '<tr>';
-			$outStr = $outStr . '<td>' . $gauge . '</td>';
 			$outStr = $outStr . '<td>' . $date . '</td>';
 			$outStr = $outStr . '<td>' . $time . '</td>';
 			$outStr = $outStr . '<td>' . $datainfo . '</td>';//Add the data all gauges measure
@@ -268,7 +263,7 @@
 	$reader->insert('F', $F);//Replace the <$F/> placeholder with the value of $F
 	$reader->insert('gauge', $gauge);//Replace the <$gauge/> placeholder with the value of $gauge
 
-	addHeaderFooter($reader);
+	addHeaderFooter($reader, $gauge);
 	echo $reader->read();//display the html file on the web page
 
 	mysql_close($con);//close connection to database
