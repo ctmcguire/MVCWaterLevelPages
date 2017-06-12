@@ -16,6 +16,10 @@ tr:not(.title) th
 {
 	text-align: left;
 }
+th p
+{
+	margin-bottom: 0;
+}
 
 col
 {
@@ -28,7 +32,46 @@ col
 
 .tooltip
 {
-	display: inline;
+	position: relative;
+	display: inline-block;
 	color: #00f;
 	border-bottom: 1px dotted #00f;
+}
+
+.tooltip-text
+{
+width: 120px;
+	background-color: #555;
+	color: #fff;
+	text-align: center;
+	padding: 5px 0;
+	border-radius: 6px;
+
+	/* Position the tooltip text */
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -60px;
+
+	/* Fade in tooltip */
+	transition: opacity 1s;
+}
+
+.tooltip-text:after
+{
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:not(.show) .tooltip-text
+{
+	visibility: hidden;
+	opacity: 0;
 }

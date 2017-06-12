@@ -3,7 +3,8 @@
 		<title>MVC Watershed - At a Glance</title>
 		<$wp-themes/>
 		<link rel="stylesheet" type="text/css" href="daily-summary.css"/>
-		<script></script>
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="daily-summary.js"></script>
 	</head>
 	<body>
 		<$wp-header/>
@@ -21,10 +22,10 @@
 					DATE
 				</th>
 				<th>
-					FLOW (<p class="tooltip" title="Cubic Meters per Second">cms</p>)
+					FLOW (<p class="tooltip" title="Cubic Meters per Second">cms<span class="tooltip-text">Cubic Meters per Second</span></p>)
 				</th>
 				<th>
-					HISTORICAL AVG. (<p class="tooltip" title="Cubic Meters per Second">cms</p>)
+					HISTORICAL AVG. (<p class="tooltip" title="Cubic Meters per Second">cms<span class="tooltip-text">Cubic Meters per Second</span></p>)
 				</th>
 				<th>
 					PRECIPITATION (mm)
@@ -46,10 +47,10 @@
 					DATE
 				</th>
 				<th>
-					LEVEL (<p class="tooltip" title="Meters Above Sea Level">MASL</p>)
+					LEVEL (<p class="tooltip" title="Meters Above Sea Level">MASL<span class="tooltip-text">Meters Above Sea Level</span></p>)
 				</th>
 				<th>
-					HISTORICAL AVG. (<p class="tooltip" title="Meters Above Sea Level">MASL</p>)
+					HISTORICAL AVG. (<p class="tooltip" title="Meters Above Sea Level">MASL<span class="tooltip-text">Meters Above Sea Level</span></p>)
 				</th>
 				<th>
 					PRECIPITATION (mm)
@@ -78,14 +79,15 @@
 					DATE
 				</th>
 				<th>
-					LEVEL (<p class="tooltip" title="Meters Above Sea Level">MASL</p>)
+					LEVEL (<p class="tooltip" title="Meters Above Sea Level">MASL<span class="tooltip-text">Meters Above Sea Level</span></p>)
 				</th>
 				<th>
-					HISTORICAL AVG. (<p class="tooltip" title="Meters Above Sea Level">MASL</p>)
+					HISTORICAL AVG. (<p class="tooltip" title="Meters Above Sea Level">MASL<span class="tooltip-text">Meters Above Sea Level</span></p>)
 				</th>
 			</tr>
 			<$weekly-data/><!--Placeholder tag that will be replaced with the weekly lake gauge rows by ataglance.php-->
 		</table>
 		<$wp-footer/>
+		<script>setupHandlers()</script>
 	</body>
 </html>
