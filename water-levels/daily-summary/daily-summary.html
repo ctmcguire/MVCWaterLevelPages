@@ -8,85 +8,90 @@
 	</head>
 	<body>
 		<$wp-header/>
-		<table class="water-levels" border=1 cellpadding=8>
-			<tr class="title">
-				<th colspan=5>
-					FLOW GAUGES
-				</th>
-			</tr>
-			<tr>
-				<th>
-					GAUGE LOCATION
-				</th>
-				<th>
-					DATE
-				</th>
-				<th>
-					FLOW (<p class="tooltip" title="Cubic Meters per Second">cms<span class="tooltip-text">Cubic Meters per Second</span></p>)
-				</th>
-				<th>
-					HISTORICAL AVG. (<p class="tooltip" title="Cubic Meters per Second">cms<span class="tooltip-text">Cubic Meters per Second</span></p>)
-				</th>
-				<th>
-					PRECIPITATION (mm)
-				</th>
-			</tr>
-			<$flow-data/><!--Placeholder tag that will be replaced with the flow gauge rows by ataglance.php-->
-		</table>
-		<table class="water-levels" border=1 cellpadding=8>
-			<tr class="title">
-				<th colspan=5>
-					DAILY LAKE GAUGES
-				</th>
-			</tr>
-			<tr>
-				<th>
-					GAUGE LOCATION
-				</th>
-				<th>
-					DATE
-				</th>
-				<th>
-					LEVEL (<p class="tooltip" title="Meters Above Sea Level">MASL<span class="tooltip-text">Meters Above Sea Level</span></p>)
-				</th>
-				<th>
-					HISTORICAL AVG. (<p class="tooltip" title="Meters Above Sea Level">MASL<span class="tooltip-text">Meters Above Sea Level</span></p>)
-				</th>
-				<th>
-					PRECIPITATION (mm)
-				</th>
-			</tr>
-			<$daily-data/><!--Placeholder tag that will be replaced with the daily lake gauge rows by ataglance.php-->
-		</table>
-		<!--The weekly gauges only have 4 columns, so they get their own table-->
-		<table class="water-levels" border=1 cellpadding=8>
-			<colgroup>
-				<col id="name-col"/>
-				<col id="date-col"/>
-				<col id="data-col"/>
-				<col id="hist-col"/>
-			</colgroup>
-			<tr class="title">
-				<th colspan=4>
-					WEEKLY LAKE GAUGES
-				</th>
-			</tr>
-			<tr>
-				<th>
-					GAUGE LOCATION
-				</th>
-				<th>
-					DATE
-				</th>
-				<th>
-					LEVEL (<p class="tooltip" title="Meters Above Sea Level">MASL<span class="tooltip-text">Meters Above Sea Level</span></p>)
-				</th>
-				<th>
-					HISTORICAL AVG. (<p class="tooltip" title="Meters Above Sea Level">MASL<span class="tooltip-text">Meters Above Sea Level</span></p>)
-				</th>
-			</tr>
-			<$weekly-data/><!--Placeholder tag that will be replaced with the weekly lake gauge rows by ataglance.php-->
-		</table>
+		<$wp-content>
+			<table class="water-levels" border=1 cellpadding=8>
+				<tr class="title">
+					<th colspan=5>
+						FLOW GAUGES
+					</th>
+				</tr>
+				<tr>
+					<th>
+						GAUGE LOCATION
+					</th>
+					<th>
+						DATE
+					</th>
+					<th>
+						FLOW (<p class="tooltip" title="Cubic Meters per Second">cms<span class="tooltip-text">Cubic Meters per Second</span></p>)
+					</th>
+					<th>
+						HISTORICAL AVG. (<p class="tooltip" title="Cubic Meters per Second">cms<span class="tooltip-text">Cubic Meters per Second</span></p>)
+					</th>
+					<th>
+						PRECIPITATION (mm)
+					</th>
+				</tr>
+				<$flow-data/><!--Placeholder tag that will be replaced with the flow gauge rows by ataglance.php-->
+			</table>
+			<table class="water-levels" border=1 cellpadding=8>
+				<tr class="title">
+					<th colspan=5>
+						DAILY LAKE GAUGES
+					</th>
+				</tr>
+				<tr>
+					<th>
+						GAUGE LOCATION
+					</th>
+					<th>
+						DATE
+					</th>
+					<th>
+						LEVEL (<p class="tooltip" title="Meters Above Sea Level">MASL<span class="tooltip-text">Meters Above Sea Level</span></p>)
+					</th>
+					<th>
+						HISTORICAL AVG. (<p class="tooltip" title="Meters Above Sea Level">MASL<span class="tooltip-text">Meters Above Sea Level</span></p>)
+					</th>
+					<th>
+						PRECIPITATION (mm)
+					</th>
+				</tr>
+				<$daily-data/><!--Placeholder tag that will be replaced with the daily lake gauge rows by ataglance.php-->
+			</table>
+			<!--The weekly gauges only have 4 columns, so they get their own table-->
+			<table class="water-levels" border=1 cellpadding=8>
+				<colgroup>
+					<col id="name-col"/>
+					<col id="date-col"/>
+					<col id="data-col"/>
+					<col id="hist-col"/>
+				</colgroup>
+				<tr class="title">
+					<th colspan=4>
+						WEEKLY LAKE GAUGES
+					</th>
+				</tr>
+				<tr>
+					<th>
+						GAUGE LOCATION
+					</th>
+					<th>
+						DATE
+					</th>
+					<th>
+						LEVEL (<p class="tooltip" title="Meters Above Sea Level">MASL<span class="tooltip-text">Meters Above Sea Level</span></p>)
+					</th>
+					<th>
+						HISTORICAL AVG. (<p class="tooltip" title="Meters Above Sea Level">MASL<span class="tooltip-text">Meters Above Sea Level</span></p>)
+					</th>
+				</tr>
+				<$weekly-data/><!--Placeholder tag that will be replaced with the weekly lake gauge rows by ataglance.php-->
+			</table>
+			<form>
+				<input type="button" value="Back" onClick="history.go(-1);return true;"/>
+			</form>
+		</$wp-content>
 		<$wp-footer/>
 		<script>setupHandlers()</script>
 	</body>

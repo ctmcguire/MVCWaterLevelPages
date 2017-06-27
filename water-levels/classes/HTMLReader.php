@@ -23,11 +23,11 @@
 		 * and stores it in the $htmlReader variable (This variable
 		 * name will be reused in later examples)
 		**/
-		function HTMLReader($file, $home=false)
+		function HTMLReader($file)
 		{
 			if($home)
 				$file = "https://www.mvc.on.ca/water-levels/" + $file;
-			$this->html = file_get_contents($file, $home);
+			$this->html = file_get_contents($file);
 		}
 
 		/**
@@ -52,7 +52,12 @@
 		{
 			$this->html = str_replace('<$'.$placeholder.'/>', $data, $this->html);
 		}
-		
+
+		public function insertTag($tag)
+		{
+			$this->html = $tag->insertHTML($this->html);
+		}
+
 		/**
 		 * This function returns the contents of the file, with any
 		 * modifications made using the insert function.

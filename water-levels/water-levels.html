@@ -7,329 +7,327 @@
 	</head>
 	<body>
 		<$wp-header/>
-		<h2>
-			Check out lake and stream levels updated daily
-		</h2>
-		<p>
-			The MVCA monitors 41 water level and Flow gauges in the Mississippi Valley Watershed. 
-			Please use the links below to view gauge readings from individual locations. 
-			Gauge readings are updated both daily and weekly and can be viewed over time in both table format or line graph layout. 
-		</p>
-		<p>
-			As of January 1, 2017, the MVCA is no longer monitoring levels or operating the <span class="bold">Clayton Lake dam</span>. 
-			&nbsp;For information regarding water levels on Clayton Lake or flows on the Indian River, please contact the Ministry 
-			of Natural Resources and Forestry, Kemptville office at&nbsp;613-258-8204.
-		</p>
-		<p>
-			<strong>
-				Please take note that all data is provisional. 
-				See Disclaimer.
-			</strong>
-		</p>
-		<p></p>
-		<p></p>
-		<center>
-			<a class="gdl-button" target="_blank" href="./daily-summary/">
-				<span class="gdl-button">
-					View Most Recent Watershed Summary
-				</span>
-			</a>
-		</center>
-		<p></p>
-		<p></p>
-		<img id="watershed" src="./images/gauge-map.jpg"/><!--Map of all the gauges (note: map is out of date and will be updated in the near future-->
-		<br/>
-		<br/>
-		<table class="water-levels" border=1 cellpadding=10 cellspacing=0>
-			<tr>
-				<td>
-					<h2>
-						View Station Data
-					</h2>
-					<p></p>
-					<p></p>
-					<form id="form1" name="form1" method="post" action="./gauge-data/" onsubmit="return validateForm()">
-						<!--Dropdown for all of the gauges (there are a lot of them)-->
-						<select name="gauge">
-							<!--default option to be displayed initially (can't be reselected)-->
-							<option selected disabled>
-								Select...
-							</option>
-							<!--Group the stream gauges together-->
-							<optgroup label="Stream Gauges">
-								<option value="Myers Cave Flow">
-									Myers Cave
-								</option>
-								<option value="Buckshot Creek Flow">
-									Buckshot Creek
-								</option>
-								<option value="Ferguson Falls Flow">
-									Ferguson Falls
-								</option>
-								<option value="Appleton Flow">
-									Appleton
-								</option>
-								<option value="Gordon Rapids Flow">
-									Gordon Rapids
-								</option>
-								<option value="Lanark Stream Flow">
-									Lanark
-								</option>
-								<option value="Mill of Kintail Flow">
-									Mill of Kintail
-								</option>
-								<option value="Kinburn Flow">
-									Kinburn
-								</option>
-								<option value="Bennett Lake Outflow">
-									Bennett Lake Outflow
-								</option>
-								<option value="Dalhousie Lake Outflow">
-									Dalhousie Lake Outflow
-								</option>
-								<option value="High Falls Flow">
-									High Falls Flow
-								</option>
-							</optgroup>
-							<!--Group all the daily lake gauges together-->
-							<optgroup label="Daily Lake Gauges">
-								<option value="Shabomeka Lake">
-									Shabomeka Lake
-								</option>
-								<option value="Mazinaw Lake">
-									Mazinaw Lake
-								</option>
-								<option value="Kashwakamak Lake">
-									Kashwakamak Lake
-								</option>
-								<option value="Farm Lake">
-									Farm Lake
-								</option>
-								<option value="Mississagagon Lake">
-									Mississagagon Lake
-								</option>
-								<option value="Big Gull Lake">
-									Big Gull Lake
-								</option>
-								<option value="Crotch Lake">
-									Crotch Lake
-								</option>
-								<option value="Palmerston Lake">
-									Palmerston Lake
-								</option>
-								<option value="Canonto Lake">
-									Canonto Lake
-								</option>
-								<option value="Sharbot Lake">
-									Sharbot Lake
-								</option>
-								<option value="Bennett Lake">
-									Bennett Lake
-								</option>
-								<option value="Dalhousie Lake">
-									Dalhousie Lake
-								</option>
-								<option value="Lanark">
-									Lanark
-								</option>
-								<option value="Mississippi Lake">
-									Mississippi Lake
-								</option>
-								<option value="C.P. Dam">
-									C.P. Dam
-								</option>
-								<option value="Carp River at Maple Grove">
-									Carp River at Maple Grove
-								</option>
-								<option value="High Falls">
-									High Falls
-								</option>
-							</optgroup>
-							<!--Group all the weekly lake gauges together-->
-							<optgroup label="Weekly Lake Gauges">
-								<option value="Shabomeka Lake (weekly)">
-									Shabomeka Lake
-								</option>
-								<option value="Mazinaw Lake (weekly)">
-									Mazinaw Lake
-								</option>
-								<option value="Little Marble Lake (weekly)">
-									Little Marble Lake
-								</option>
-								<option value="Mississagagon Lake (weekly)">
-									Mississagagon Lake
-								</option>
-								<option value="Kashwakamak Lake (weekly)">
-									Kashwakamak Lake
-								</option>
-								<option value="Farm Lake (weekly)">
-									Farm Lake
-								</option>
-								<option value="Ardoch Bridge (weekly)">
-									Ardoch Bridge
-								</option>
-								<option value="Buckshot Lake (weekly)">
-									Buckshot Lake
-								</option>
-								<option value="Malcolm Lake (weekly)">
-									Malcolm Lake
-								</option>
-								<option value="Pine Lake (weekly)">
-									Pine Lake Lake
-								</option>
-								<option value="Big Gull Lake (weekly)">
-									Big Gull Lake
-								</option>
-								<option value="Crotch Lake (weekly)">
-									Crotch Lake
-								</option>
-								<option value="High Falls G.S. (weekly)">
-									High Falls G.S.
-								</option>
-								<option value="Mosque Lake (weekly)">
-									Mosque Lake
-								</option>
-								<option value="Palmerston Lake (weekly)">
-									Palmerston Lake
-								</option>
-								<option value="Canonto Lake (weekly)">
-									Canonto Lake
-								</option>
-								<option value="Bennett Lake">
-									Bennett Lake
-								</option>
-								<option value="Dalhousie Lake">
-									Dalhousie Lake
-								</option>
-								<option value="Silver Lake (weekly)">
-									Silver Lake
-								</option>
-								<option value="Widow Lake (weekly)">
-									Widow Lake
-								</option>
-								<option value="Lanark Dam (weekly)">
-									Lanark Dam
-								</option>
-								<option value="C.P. Dam">
-									C.P Dam
-								</option>
-								<option value="Almonte Bridge (weekly)">
-									Almonte Bridge
-								</option>
-								<option value="Clayton Lake (weekly)">
-									Clayton Lake (Ended Dec. 2016)
-								</option>
-							</optgroup>
-						</select>
-						<!--The labelled inputs are aligned to the left-->
-						<div class="date-inputs">
-							<p>
-								<!--<$start-date/> will be replaced with the date 2 weeks ago by generate.php-->
-								Start Date: <input type="date" name="startdate" size="25" value='<$start-date/>'/>
-							</p>
-							<p>
-								End Date: <input type="date" id="enddate" name="enddate" size="25"/>
-							</p>
-						</div>
-							<label for="table-type">
-								<input id="table-type" type="radio" name="type" value="table" checked=""/>
-								Table
-							</label>
-							<!--br/-->
-							<label for="chart-type">
-								<input id="chart-type" type="radio" name="type" value="graph"/>
-								Graph
-							</label>
-						
-						<br/>
-						<p>
-							Level recorded in:
-							<br/>
-							<span class="unit">
-								Meters Above Sea Level (MASL)
-							</span>
-						</p>
-						<p>
-							Flow recorded in:
-							<br/>
-							<span class="unit">
-								cubic meters per second (cms)
-							</span>
-						</p>
-						<p>
-							Precipitation recorded in:
-							<br/>
-							<span class="unit">
-								millimeters (mm)
-							</span>
-						</p>
-						<br/>
-						<input type="submit" name="submit"/>
-					</form>
-				</td>
-				<td>
-		<h2>
-			Provisional data
-		</h2>
-		<div>
+		<$wp-content>
+			<h2>
+				Check out lake and stream levels updated daily
+			</h2>
 			<p>
-				<em>
-					The data contained within this database has not been formally reviewed or edited and may be subject to change.
-				</em>
+				The MVCA monitors 41 water level and Flow gauges in the Mississippi Valley Watershed. 
+				Please use the links below to view gauge readings from individual locations. 
+				Gauge readings are updated both daily and weekly and can be viewed over time in both table format or line graph layout. 
 			</p>
 			<p>
-				<em>
-					Publication or reproduction of the data contained within this website either wholly or in part without the 
-					expressed written consent of the Mississippi Valley Conservation is prohibited.
-				</em>
+				As of January 1, 2017, the MVCA is no longer monitoring levels or operating the <span class="bold">Clayton Lake dam</span>. 
+				&nbsp;For information regarding water levels on Clayton Lake or flows on the Indian River, please contact the Ministry 
+				of Natural Resources and Forestry, Kemptville office at&nbsp;613-258-8204.
 			</p>
 			<p>
-				<em>
-					Anyone using the data contained within this website is cautioned to carefully consider the provisional nature of 
-					this information and should not use it for making decisions that concern personal or public safety or the conduct 
-					of business that involves substantial monetary or operational consequences.
-				</em>
+				<strong>
+					Please take note that all data is provisional. 
+					See Disclaimer.
+				</strong>
 			</p>
-			<p>
-				<em>
-					Mississippi Valley Conservation and its employees, while providing this information in good faith, accepts no 
-					responsibility for any loss, damage, injury, or loss in value to any person, property, service or otherwise, 
-					resulting from its use.
-				</em>
-			</p>
-			<p>
-				For the official HYDAT record of stream flows please contact:
-			</p>
-			<p>
-				Environment Canada
-				<br/>
-				Water Survey of Canada –&nbsp;Data Control and Client Services
-			</p>
-			<p>
-				EC.RHC-ON-WSC-ON.EC@CANADA.CA
-				<br/>
-				(905) 319-6940
-			</p>
-			<p>
-				867 Lakeshore Road
-				<br/>
-				Burlington, ON
-				<br/>
-				L7S 1A1
-			</p>
-			<p>
-				<a href="https://wateroffice.ec.gc.ca/index_e.html" target="_blank">
-					https://wateroffice.ec.gc.ca/index_e.html
+			<p></p>
+			<p></p>
+			<center>
+				<a class="gdl-button" target="_blank" href="./daily-summary/">
+					<span class="gdl-button">
+						View Most Recent Watershed Summary
+					</span>
 				</a>
-			</p>
-		</div>
-				</td>
-			</tr>
-		</table><!--
-		&nbsp;
-		<p></p>
-		<hr>
-		-->
+			</center>
+			<p></p>
+			<p></p>
+			<img id="watershed" src="./images/gauge-map.jpg"/><!--Map of all the gauges (note: map is out of date and will be updated in the near future-->
+			<br/>
+			<br/>
+			<table class="water-levels" border=1 cellpadding=10 cellspacing=0>
+				<tr>
+					<td>
+						<h2>
+							View Station Data
+						</h2>
+						<p></p>
+						<p></p>
+						<form id="form1" name="form1" method="post" action="./gauge-data/" onsubmit="return validateForm()">
+							<!--Dropdown for all of the gauges (there are a lot of them)-->
+							<select name="gauge">
+								<!--default option to be displayed initially (can't be reselected)-->
+								<option selected disabled>
+									Select...
+								</option>
+								<!--Group the stream gauges together-->
+								<optgroup label="Stream Gauges">
+									<option value="Myers Cave Flow">
+										Myers Cave
+									</option>
+									<option value="Buckshot Creek Flow">
+										Buckshot Creek
+									</option>
+									<option value="Ferguson Falls Flow">
+										Ferguson Falls
+									</option>
+									<option value="Appleton Flow">
+										Appleton
+									</option>
+									<option value="Gordon Rapids Flow">
+										Gordon Rapids
+									</option>
+									<option value="Lanark Stream Flow">
+										Lanark
+									</option>
+									<option value="Mill of Kintail Flow">
+										Mill of Kintail
+									</option>
+									<option value="Kinburn Flow">
+										Kinburn
+									</option>
+									<option value="Bennett Lake Outflow">
+										Bennett Lake Outflow
+									</option>
+									<option value="Dalhousie Lake Outflow">
+										Dalhousie Lake Outflow
+									</option>
+									<option value="High Falls Flow">
+										High Falls Flow
+									</option>
+								</optgroup>
+								<!--Group all the daily lake gauges together-->
+								<optgroup label="Daily Lake Gauges">
+									<option value="Shabomeka Lake">
+										Shabomeka Lake
+									</option>
+									<option value="Mazinaw Lake">
+										Mazinaw Lake
+									</option>
+									<option value="Kashwakamak Lake">
+										Kashwakamak Lake
+									</option>
+									<option value="Farm Lake">
+										Farm Lake
+									</option>
+									<option value="Mississagagon Lake">
+										Mississagagon Lake
+									</option>
+									<option value="Big Gull Lake">
+										Big Gull Lake
+									</option>
+									<option value="Crotch Lake">
+										Crotch Lake
+									</option>
+									<option value="Palmerston Lake">
+										Palmerston Lake
+									</option>
+									<option value="Canonto Lake">
+										Canonto Lake
+									</option>
+									<option value="Sharbot Lake">
+										Sharbot Lake
+									</option>
+									<option value="Bennett Lake">
+										Bennett Lake
+									</option>
+									<option value="Dalhousie Lake">
+										Dalhousie Lake
+									</option>
+									<option value="Lanark">
+										Lanark
+									</option>
+									<option value="Mississippi Lake">
+										Mississippi Lake
+									</option>
+									<option value="C.P. Dam">
+										C.P. Dam
+									</option>
+									<option value="Carp River at Maple Grove">
+										Carp River at Maple Grove
+									</option>
+									<option value="High Falls">
+										High Falls
+									</option>
+								</optgroup>
+								<!--Group all the weekly lake gauges together-->
+								<optgroup label="Weekly Lake Gauges">
+									<option value="Shabomeka Lake (weekly)">
+										Shabomeka Lake
+									</option>
+									<option value="Mazinaw Lake (weekly)">
+										Mazinaw Lake
+									</option>
+									<option value="Little Marble Lake (weekly)">
+										Little Marble Lake
+									</option>
+									<option value="Mississagagon Lake (weekly)">
+										Mississagagon Lake
+									</option>
+									<option value="Kashwakamak Lake (weekly)">
+										Kashwakamak Lake
+									</option>
+									<option value="Farm Lake (weekly)">
+										Farm Lake
+									</option>
+									<option value="Ardoch Bridge (weekly)">
+										Ardoch Bridge
+									</option>
+									<option value="Buckshot Lake (weekly)">
+										Buckshot Lake
+									</option>
+									<option value="Malcolm Lake (weekly)">
+										Malcolm Lake
+									</option>
+									<option value="Pine Lake (weekly)">
+										Pine Lake Lake
+									</option>
+									<option value="Big Gull Lake (weekly)">
+										Big Gull Lake
+									</option>
+									<option value="Crotch Lake (weekly)">
+										Crotch Lake
+									</option>
+									<option value="High Falls G.S. (weekly)">
+										High Falls G.S.
+									</option>
+									<option value="Mosque Lake (weekly)">
+										Mosque Lake
+									</option>
+									<option value="Palmerston Lake (weekly)">
+										Palmerston Lake
+									</option>
+									<option value="Canonto Lake (weekly)">
+										Canonto Lake
+									</option>
+									<option value="Bennett Lake">
+										Bennett Lake
+									</option>
+									<option value="Dalhousie Lake">
+										Dalhousie Lake
+									</option>
+									<option value="Silver Lake (weekly)">
+										Silver Lake
+									</option>
+									<option value="Widow Lake (weekly)">
+										Widow Lake
+									</option>
+									<option value="Lanark Dam (weekly)">
+										Lanark Dam
+									</option>
+									<option value="C.P. Dam">
+										C.P Dam
+									</option>
+									<option value="Almonte Bridge (weekly)">
+										Almonte Bridge
+									</option>
+									<option value="Clayton Lake (weekly)">
+										Clayton Lake (Ended Dec. 2016)
+									</option>
+								</optgroup>
+							</select>
+							<!--The labelled inputs are aligned to the left-->
+							<div class="date-inputs">
+								<p>
+									<!--<$start-date/> will be replaced with the date 2 weeks ago by generate.php-->
+									Start Date: <input type="date" name="startdate" size="25" value='<$start-date/>'/>
+								</p>
+								<p>
+									End Date: <input type="date" id="enddate" name="enddate" size="25"/>
+								</p>
+							</div>
+								<label for="table-type">
+									<input id="table-type" type="radio" name="type" value="table" checked=""/>
+									Table
+								</label>
+								<!--br/-->
+								<label for="chart-type">
+									<input id="chart-type" type="radio" name="type" value="graph"/>
+									Graph
+								</label>
+							
+							<br/>
+							<p>
+								Level recorded in:
+								<br/>
+								<span class="unit">
+									Meters Above Sea Level (MASL)
+								</span>
+							</p>
+							<p>
+								Flow recorded in:
+								<br/>
+								<span class="unit">
+									cubic meters per second (cms)
+								</span>
+							</p>
+							<p>
+								Precipitation recorded in:
+								<br/>
+								<span class="unit">
+									millimeters (mm)
+								</span>
+							</p>
+							<br/>
+							<input type="submit" name="submit"/>
+						</form>
+					</td>
+					<td>
+			<h2>
+				Provisional data
+			</h2>
+			<div>
+				<p>
+					<em>
+						The data contained within this database has not been formally reviewed or edited and may be subject to change.
+					</em>
+				</p>
+				<p>
+					<em>
+						Publication or reproduction of the data contained within this website either wholly or in part without the 
+						expressed written consent of the Mississippi Valley Conservation is prohibited.
+					</em>
+				</p>
+				<p>
+					<em>
+						Anyone using the data contained within this website is cautioned to carefully consider the provisional nature of 
+						this information and should not use it for making decisions that concern personal or public safety or the conduct 
+						of business that involves substantial monetary or operational consequences.
+					</em>
+				</p>
+				<p>
+					<em>
+						Mississippi Valley Conservation and its employees, while providing this information in good faith, accepts no 
+						responsibility for any loss, damage, injury, or loss in value to any person, property, service or otherwise, 
+						resulting from its use.
+					</em>
+				</p>
+				<p>
+					For the official HYDAT record of stream flows please contact:
+				</p>
+				<p>
+					Environment Canada
+					<br/>
+					Water Survey of Canada –&nbsp;Data Control and Client Services
+				</p>
+				<p>
+					EC.RHC-ON-WSC-ON.EC@CANADA.CA
+					<br/>
+					(905) 319-6940
+				</p>
+				<p>
+					867 Lakeshore Road
+					<br/>
+					Burlington, ON
+					<br/>
+					L7S 1A1
+				</p>
+				<p>
+					<a href="https://wateroffice.ec.gc.ca/index_e.html" target="_blank">
+						https://wateroffice.ec.gc.ca/index_e.html
+					</a>
+				</p>
+			</div>
+					</td>
+				</tr>
+			</table>
+		</$wp-content>
 		<$wp-footer/>
 		<!--Load the corresponding JavaScript file-->
 		<script src="water-levels.js"></script>

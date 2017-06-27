@@ -7,21 +7,23 @@
 	</head>
 	<body>
 		<$wp-header/>
-		<$table/><!--Placeholder tag that will be replaced with a table (or nothing if a graph is requested instead) by data.php-->
-		
-		<div id="chart"></div>
-		<br/>
-		<!--JavaScript variables used by data.js that need to get values from data.php-->
-		<script>
-			var data = <$result/>;//Placeholder tag that will be replaced with a JavaScript object (or null if a table is requested instead) by data.php
-			var num = <$F/>;//Placeholder tag that will be replaced with the value of $F by data.php
-			var gauge = '<$gauge/>';//Placeholder tag that will be replaced with the gauge name by data.php
-		</script>
-		<!--Load the corresponding JavaScript file-->
-		<script type="text/javascript" src="gauge-data.js"></script>
-		<form>
-			<input type="button" value="Back" onClick="history.go(-1);return true;"/>
-		</form>
+		<$wp-content>
+			<$table/><!--Placeholder tag that will be replaced with a table (or nothing if a graph is requested instead) by data.php-->
+			
+			<div id="chart"></div>
+			<br/>
+			<!--JavaScript variables used by data.js that need to get values from data.php-->
+			<script>
+				var data = <$result/>;//Placeholder tag that will be replaced with a JavaScript object (or null if a table is requested instead) by data.php
+				var num = <$F/>;//Placeholder tag that will be replaced with the value of $F by data.php
+				var gauge = '<$gauge/>';//Placeholder tag that will be replaced with the gauge name by data.php
+			</script>
+			<!--Load the corresponding JavaScript file-->
+			<script type="text/javascript" src="gauge-data.js"></script>
+			<form>
+				<input type="button" value="Back" onClick="history.go(-1);return true;"/>
+			</form>
+		</$wp-content>
 		<$wp-footer/>
 	</body>
 </html>
