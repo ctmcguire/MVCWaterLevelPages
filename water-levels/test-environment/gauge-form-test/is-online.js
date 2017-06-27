@@ -1,0 +1,3 @@
+offline = function() {
+	return false;
+}

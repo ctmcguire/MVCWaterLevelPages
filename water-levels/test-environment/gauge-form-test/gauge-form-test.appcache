@@ -1,0 +1,33 @@
+CACHE MANIFEST
+#|* LAST UPDATED: 27/06/2017 09:36:00 *|#
+
+
+#Set files to cache when offline:
+
+CACHE:
+#css files
+https://www.mvc.on.ca/water-levels/header-footer/header-footer.css
+
+#html files
+gauge-form-test.html
+
+#javascript files
+gauge-form-test.js
+https://www.mvc.on.ca/water-levels/header-footer/wp-header.html
+https://www.mvc.on.ca/water-levels/header-footer/wp-footer.html
+https://www.mvc.on.ca/water-levels/header-footer/wp-themes.html
+
+#php files
+https://www.mvc.on.ca/water-levels/classes/HTMLReader.php
+https://www.mvc.on.ca/water-levels/header-footer/header-footer.php
+
+#index
+index.php
+
+#Set to cause webpage to use server where possible
+SETTINGS:
+prefer-online
+
+#Set to allow any file to load from the Network
+NETWORK:
+*
