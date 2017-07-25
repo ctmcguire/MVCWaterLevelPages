@@ -22,11 +22,13 @@
 		<script>
 			var strt = "1990-01-01"
 			/*
-			 * Load the water level, flow rate, and precipitation data into the chart
+			 * Load the flow rate, and precipitation data into the chart
 			 */
-			//makeDataOld('13790042', ' Flow Rate (cms) ', 0, strt);
-			makeData('13790042', 'Flow Rate (cms)', 1);
-			//makeData('1437042', 'Precipitation (mm)', 2, strt, "2017-06-12");
+			makeData('13790042', 'Flow Rate (cms)', 0);
+			makeData('38692042', 'Historical Flow Rate Average (cms)', 0);
+			makeData('38684042', 'Historical Flow Rate Minimum (cms)', 0);
+			makeData('38688042', 'Historical Flow Rate Maximum (cms)', 0);
+			//makeData('1437042', 'Precipitation (mm)', 2);
 		</script>
 		<div id="container" style="height: 400px; min-width: 310px">
 			<!--I'm not sure what this div is for; since it is empty, possibly for spacing purposes?-->

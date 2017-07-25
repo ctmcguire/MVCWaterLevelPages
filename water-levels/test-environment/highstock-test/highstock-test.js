@@ -19,13 +19,37 @@ function getTSID(url, start=new Date(first), end=new Date(today)) {
 	const year62 = new Date("2032-01-01");
 
 	var ts_id = {
-		"13790042": {
-			hourly: '38291042',
-			daily: '3449042',
-			weekly: '5959042',
-			monthly: '1916042',
-			yearly: '38293042',
-			full: '13790042'
+		'13790042': {
+			full: "13790042",
+			hourly: "38291042",
+			daily: "3449042",
+			weekly: "5959042",
+			monthly: "38683042",
+			yearly: "38293042",
+		},
+		'38692042': {
+			full: "38692042",
+			hourly: "38692042",
+			daily: "38693042",
+			weekly: "38694042",
+			monthly: "38695042",
+			yearly: "38696042",
+		},
+		'38684042': {
+			full: "38684042",
+			hourly: "38684042",
+			daily: "38684042",
+			weekly: "38685042",
+			monthly: "38686042",
+			yearly: "38687042",
+		},
+		'38688042': {
+			full: "38688042",
+			hourly: "38688042",
+			daily: "38688042",
+			weekly: "38689042",
+			monthly: "38690042",
+			yearly: "38691042",
 		}
 	}
 
@@ -44,7 +68,7 @@ function getTSID(url, start=new Date(first), end=new Date(today)) {
 		return ts_id[url].daily;
 	if(0 <= diff - day_02)
 		return ts_id[url].hourly;
-	return ts_id[url].full;
+	return url;
 }
 
 function makeChart() {
@@ -52,7 +76,8 @@ function makeChart() {
 		chart: {
 			renderTo: 'ChartContainer',
 			marginLeft: 300,//In order to prevent the y-axis labels from resizing the chart; the more space the better (using 300 for the test page because it works)
-			marginRight: 300
+			marginRight: 300,
+			height: 800,
 		},
 		navigator: {
 			adaptToUpdatedData: false,
@@ -67,7 +92,7 @@ function makeChart() {
 		rangeSelector: {
 			selected: 1
 		},
-		title: {text: "Buckshot Creek Near Plevna"},
+		title: {text: "Mississippi River at Appleton"},
 		series: [],
 		xAxis: {
 			events: {
@@ -78,13 +103,13 @@ function makeChart() {
 		yAxis: [
 			{ // Primary yAxis
 				labels: {
-					format: '{value} m',
+					format: '{value} cms',
 					style: {
 						color: Highcharts.getOptions().colors[0]//Personally I think this colour is too bright for an axis label; makes it hard to read
 					}
 				},
 				title: {
-					text: ' Flow Rate (cms) ',
+					text: 'Flow Rate (cms)',
 					style: {
 						color: Highcharts.getOptions().colors[0]
 					}
@@ -94,7 +119,7 @@ function makeChart() {
 			{ // Secondary yAxis
 				gridLineWidth: 0,
 				title: {
-					text: '*Flow Rate (cms)*',
+					text: 'Historical Flow Rate (cms)',
 					style: {
 						color: Highcharts.getOptions().colors[1]
 					}
@@ -156,8 +181,9 @@ function makeSeries(res, tsName='Looks like SOMEone forgot to label this series!
 
 	//populate the series for the chart (type and tooltip default to their values for flow rate)
 	var singleSeries = {
-		_colorIndex: n,
-		_symbolIndex: n,
+		//_colorIndex: n,
+		//_symbolIndex: n,
+		connectNulls: true,
 		name: tsName,//Can also extract name directly from query
 		data: data,
 		type: 'spline',//Both flow rate and water level use line charts
@@ -193,7 +219,9 @@ function makeSeries(res, tsName='Looks like SOMEone forgot to label this series!
  * 					makeData('1391042', 'Water Level', 0);
  * The above example gets the water level data for the gauge at Buckshot Creek (near plevna)
 **/
-function makeData(url, tsName, n, start=first, end=today) {
+function makeData(url, tsName, n, axis=n, start=first, end=today) {
+
+	console.log(axis);
 
 	if(chart === null)
 		makeChart();//Make the chart if it doesn't already exist
@@ -267,4 +295,7 @@ function selectRange(e) {
 		return temp.substr(0, temp.indexOf('T'));
 	}
 	updateData('13790042', 'Flow Rate (cms)', toYMD(e.min), toYMD(e.max))
+	updateData('38692042', 'Historical Flow Rate Average (cms)', toYMD(e.min), toYMD(e.max))
+	updateData('38684042', 'Historical Flow Rate Minimum (cms)', toYMD(e.min), toYMD(e.max))
+	updateData('38688042', 'Historical Flow Rate Maximum (cms)', toYMD(e.min), toYMD(e.max))
 }
