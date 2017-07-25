@@ -1,0 +1,28 @@
+body
+{
+	margin: 0px;
+}
+.embed-container
+{
+	position: relative;
+	padding-bottom: 68%;
+	height: 0;
+	max-width: 100%;
+}
+.embed-container iframe,
+.embed-container object,
+.embed-container iframe
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 1280px;
+	height: 883px;
+}
+small
+{
+	position: absolute;
+	z-index: 40;
+	bottom: 0;
+	margin-bottom: -15px;
+}
