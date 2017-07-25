@@ -1,4 +1,5 @@
 <?php
+	include '../db.php';
 	include '../classes/HTMLReader.php';
 	include '../header-footer/header-footer.php';
 	$reader = new HTMLReader('gauge-data.html');
@@ -186,14 +187,14 @@
 	}
 
 	//connect to server
-	$con = mysql_connect("localhost","mvconc55_levels1","4z9!yA");
+	$con = mysql_connect("localhost",$uN,$pW);
 
 	//check connection
 	if (!$con) {
 		die('Could not connect: ' . mysql_error());
 	}
 	//select database
-	mysql_select_db("mvconc55_mvclevels");
+	mysql_select_db($db);
 
 	//set the values to be called in sql query, taken from the form on the previous page 
 	$gauge = $_POST['gauge'];

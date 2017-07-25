@@ -1,10 +1,11 @@
 <?php
+	include '../db.php';
 	include '../classes/HTMLReader.php';//include the HTMLReader class
 	include '../classes/TableLoader.php';//include the TableLoader class
 	include '../header-footer/header-footer.php';
 
-	mysql_connect("localhost","mvconc55_levels1","4z9!yA");
-	mysql_select_db("mvconc55_mvclevels");
+	mysql_connect("localhost",$uN,$pW);
+	mysql_select_db($db);
 
 	$table = new TableLoader();//Create an instance of a TableLoader object
 	$reader = new HTMLReader('daily-summary.html');//Create an instance of an HTMLReader object, using the ataglance.html file
