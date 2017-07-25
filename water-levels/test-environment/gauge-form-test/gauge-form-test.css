@@ -1,0 +1,14 @@
+.gauge-form
+{
+	text-align: center;
+}
+.gauge-form select,
+.gauge-form input
+{
+	display: initial;
+}
+
+.red-text
+{
+	color: #FF0000;
+}

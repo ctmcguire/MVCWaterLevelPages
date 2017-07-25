@@ -1,12 +1,19 @@
 CACHE MANIFEST
-#|* LAST UPDATED: 27/06/2017 09:36:00 *|#
+#|* LAST UPDATED: 28/06/2017 09:33:00 *|#
 
 
 #Set files to cache when offline:
 
 CACHE:
-#css files
-https://www.mvc.on.ca/water-levels/header-footer/header-footer.css
+#css & font files
+https://fonts.googleapis.com/css?family=Droid+Sans%3Asubset%3Dlatin%3An%2Ci%2Cb%2Cbi%7CDroid+Serif%3Asubset%3Dlatin%3An%2Ci%2Cb%2Cbi%7C&amp;ver=4.7.5
+https://mvc.on.ca/wp-content/themes/greenearth-v1-06/style.css
+https://mvc.on.ca/wp-content/themes/greenearth-v1-06/stylesheet/skeleton.css
+https://mvc.on.ca/wp-content/themes/greenearth-v1-06/stylesheet/layout.css
+#https://mvc.on.ca/wp-content/themes/greenearth-v1-06/style-custom.php?ver=4.7.5
+https://mvc.on.ca/wp-content/themes/greenearth-v1-06/style-custom.php?ver=4.7.5
+https://mvc.on.ca/water-levels/header-footer/header-footer.css
+gauge-form-test.css
 
 #html files
 gauge-form-test.html
