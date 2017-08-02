@@ -1,6 +1,7 @@
 body
 {
-	margin: 0px;
+	margin: 0;
+	overflow: hidden;
 }
 .embed-container
 {
@@ -16,8 +17,8 @@ body
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 1280px;
 	height: 883px;
+	width: 1280px;
 }
 small
 {
@@ -25,4 +26,92 @@ small
 	z-index: 40;
 	bottom: 0;
 	margin-bottom: -15px;
+}
+#map-legend
+{
+	position: absolute;
+	width: 1280px;
+	height:175px;
+
+	transition: top 0.1s;
+	top: 864px;
+}
+#map-legend.up
+{
+	top: 674px;
+}
+
+#legend-img
+{
+	/*display: none;*/
+	width: 1280px;
+}
+
+.legend-window
+{
+	width: 1280px;
+	height: 190px;
+	position:relative;
+	background-color: #000;
+	background-color: rgba(0,0,0,0.6);
+	transition: top 0.1s;
+}
+.legend-window.legend-img
+{
+	background-image: url("../images/Water Gauges.jpg");
+	background-size: 100% 100%;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+.show-legend
+{
+	padding: 2px;
+	width: 872px;
+	height: 15px;
+	background-color: #ccc;
+	background-color: rgba(0,0,0,0.2);
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: pointer;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+
+	color: #fff;
+	font-size: 15px;
+	font-weight: bold;
+
+	transition: top 0.1s;
+	position: relative;
+	left: 204px;
+	text-align: center;
+	margin: 0;
+}
+
+#map-legend.up .show-legend:hover
+{
+	background-color: #000;
+}
+
+.show-legend:hover,
+#map-legend.up .show-legend
+{
+	background-color: #000;
+	background-color: rgba(0,0,0,0.6);
+}
+
+.down-arrow,
+.up-arrow
+{
+	margin: 0;
+}
+
+#map-legend.down .down-arrow,
+#map-legend.up .up-arrow
+{
+	display: none;
 }

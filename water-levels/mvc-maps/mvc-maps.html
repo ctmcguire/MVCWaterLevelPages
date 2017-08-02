@@ -1,11 +1,23 @@
 <html>
 	<head>
 		<title>MVC Water Levels</title>
-		<link rel="stylesheet" type="text/css"href="mvc-maps.css"/>
+		<link rel="stylesheet" type="text/css" href="mvc-maps.css"/>
+		<script src="mvc-maps.js"></script>
 	</head>
 	<body>
 		<div class="embed-container">
-			<iframe frameborder="0" title="MVCA Water Gauges" src="//camaps.maps.arcgis.com/apps/webappviewer/index.html?id=84c46f47d337412eb5256bce0edff129"></iframe>
+			<iframe frameborder="0" title="MVCA Water Gauges" src="http://camaps.maps.arcgis.com/apps/webappviewer/index.html?id=84c46f47d337412eb5256bce0edff129"></iframe>
+			<div id="map-legend" class="down">
+				<div class="show-legend" onclick='toggleLegend()'>
+					<p class="up-arrow">
+						&#8593; LEGEND &#8593;
+					</p>
+					<p class="down-arrow">
+						&#8595; LEGEND &#8595;
+					</p>
+				</div>
+				<div class="legend-window legend-img"></div>
+			</div>
 		</div>
 	</body>
 </html>
