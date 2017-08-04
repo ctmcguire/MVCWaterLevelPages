@@ -1,6 +1,15 @@
 function toggleLegend() {
-	var prev = document.getElementById('map-legend').className
-	document.getElementById('map-legend').className = (prev === 'down'? "up" : "down");
+	var prev = document.getElementById('map-legend').className.split(' ')
+	var isDown = false;
+	var i;
+	if(prev.indexOf('down') < 0) {
+		if(prev.indexOf('up') < 0)
+			prev.push('up');
+		prev[prev.indexOf('up')] = 'down';
+	}
+	else
+		prev[prev.indexOf('down')] = 'up';
+	document.getElementById('map-legend').className = prev.join(' ');
 }
 
 function drawLegend() {

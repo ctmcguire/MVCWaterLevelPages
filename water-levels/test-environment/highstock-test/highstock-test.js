@@ -181,7 +181,7 @@ function loadFromKiWIS(url, start, end, format, func, err=function(){}) {
 		return loadFromKiWIS(url, end, start, format, func, err);
 
 	//These 2 variables are combined with url to form the KiWIS URL from which data is retrieved
-	var prefix = "http://waterdata.quinteconservation.ca/KiWIS/KiWIS?service=kisters&type=queryServices&request=getTimeseriesValues&datasource=0&format=" + format + "&ts_id=";
+	var prefix = "//waterdata.quinteconservation.ca/KiWIS/KiWIS?service=kisters&type=queryServices&request=getTimeseriesValues&datasource=0&format=" + format + "&ts_id=";
 	var suffix = "&header=true&metadata=true&md_returnfields=station_name,parametertype_name&dateformat=UNIX&from=" + start + "&to=" + end;
 
 	numData++;//Keep track of how many times makeDataByYear is called in order to properly show/hide 'loading...' text
@@ -211,33 +211,27 @@ function loadFromSql(tsId, tsName, start, end, format) {
 	return function(err, func) {
 		var url = "sql-data/?ts_id=" + tsId + "&col=" + tsName + "&from=" + start + "&to=" + end;
 
+		numData++;
 		$.ajax({
 			dataType: (format === 'csv'? "text" : format),
 			url: url,//prefix + url + suffix,
 			success: function(res) {
-					var response = [
-						{
-							"data": []
-						}
-					];
-					for(var i = 0; i < res.Date.length; i++)
-						response[0].data.push([(new Date(res.Date[i] + " " + res.Time[i])).valueOf(), res.Data[i]]);
+				var response = [
+					{
+						"data": []
+					}
+				];
+				for(var i = 0; i < res.Date.length; i++)
+					response[0].data.push([(new Date(res.Date[i] + " " + res.Time[i])).valueOf(), res.Data[i]]);
+				numData--;
 				func(response);
 			},
 			error: function(res) {
-				//do something fancy
+				numData--;
 			}
 		});
 	}
 }
-/*function loadFromSql(tsId, tsName, start, end, format, func) {
-	if(start == null)
-		return loadFromSql(tsId, tsName, first, end, format, func);//Call loadFromKiWIS with default start and end dates if not provided
-	if(end == null)
-		return loadFromSql(tsId, tsName, start, today, format, func);
-	if(end < start)
-		return loadFromSql(tsId, tsName, end, start, format, func);
-}*/
 
 
 function makeSeries(res, tsId, tsName='Looks like SOMEone forgot to label this series!', n=undefined) {
@@ -334,11 +328,12 @@ function updateData(tsId, start, end) {
 					return;
 				if(series === null)
 					return chart.hideLoading();
-				series.setData(data);
+				series.setData(data, false);
 
 				if(numData !== 0)
 					return;
 				chart.hideLoading();
+				chart.redraw();
 			}, loadFromSql(tsId, tsName, start, end, 'json'));
 		})(params[i])
 	}

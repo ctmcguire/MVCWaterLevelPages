@@ -1,6 +1,13 @@
-html *
+.content-part-wrapper.slider-off .container .content-wrapper .page-wrapper .gdl-page-float-left .gdl-page-item div .gdl-page-content,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input[type="date"]
 {
-	font-family: arial !important;
+	font-family: arial;
 }
 #footer.footer-wrapper, #dummy-footer
 {

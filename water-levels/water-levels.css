@@ -12,6 +12,16 @@
 	font-family: arial
 }
 
+.contacts
+{
+	margin-left: 20px;
+}
+.button-center
+{
+	width: 100%;
+	text-align: center;
+}
+
 .water-levels
 {
 	font-size: 13px;

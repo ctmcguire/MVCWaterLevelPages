@@ -34,11 +34,15 @@ small
 	height:175px;
 
 	transition: top 0.1s;
-	top: 864px;
+	top: 859px;
 }
 #map-legend.up
 {
-	top: 674px;
+	top: 700px;
+}
+#map-legend.up.small
+{
+	top: 750.68125px;
 }
 
 #legend-img
@@ -50,25 +54,31 @@ small
 .legend-window
 {
 	width: 1280px;
-	height: 190px;
+	height: 159px;
 	position:relative;
-	background-color: #000;
-	background-color: rgba(0,0,0,0.6);
+	background-color: #ccc;
+	background-color: rgba(0,0,0,0.2);
 	transition: top 0.1s;
 }
 .legend-window.legend-img
 {
-	background-image: url("../images/Water Gauges.jpg");
+	background-image: url("../images/map_legend.gif");
 	background-size: 100% 100%;
 	background-position: center center;
 	background-repeat: no-repeat;
+}
+#map-legend.small .legend-window
+{
+	width: 876px;
+	height: 108.31875;
+	left: 204px;
 }
 
 .show-legend
 {
 	padding: 2px;
 	width: 872px;
-	height: 15px;
+	height: 20px;
 	background-color: #ccc;
 	background-color: rgba(0,0,0,0.2);
 	-webkit-user-select: none;
@@ -82,7 +92,8 @@ small
 	border-radius: 5px;
 
 	color: #fff;
-	font-size: 15px;
+	font-size: 16px;
+	font-family: verdana;
 	font-weight: bold;
 
 	transition: top 0.1s;
