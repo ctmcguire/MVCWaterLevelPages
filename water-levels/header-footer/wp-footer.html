@@ -30,7 +30,7 @@
 		var scroll = document.body.scrollHeight;
 		var classes = document.getElementById('footer').className;
 
-		if(client !== scroll && 0 <= classes.indexOf(' bottom'))
+		if(client > scroll && 0 <= classes.indexOf(' bottom'))
 			document.getElementById('footer').className = classes.substr(0, classes.indexOf(' bottom'));
 		if(scroll === client && classes.indexOf(' bottom') < 0)
 			document.getElementById('footer').className += " bottom"
