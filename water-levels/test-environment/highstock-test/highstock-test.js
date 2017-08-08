@@ -107,7 +107,9 @@ function makeChart(tsId, gauge="Mississippi River at Appleton") {
 		rangeSelector: {
 			//selected: 1
 		},
-		title: {text: gauge},
+		title: {
+			text: $('#table-title')[0].innerHTML,
+		},
 		series: [],
 		xAxis: {
 			events: {
@@ -129,22 +131,6 @@ function makeChart(tsId, gauge="Mississippi River at Appleton") {
 					text: getTsInfo(tsId, 'primary') + " (" + getTsInfo(tsId, 'Ids')[getTsInfo(tsId, 'primary')].units + ")",
 					style: {
 						color: Highcharts.getOptions().colors[0]
-					}
-				},
-				opposite: false
-			},
-			{ // Former secondary yAxis
-				gridLineWidth: 0,
-				title: {
-					text: "Historical Flow Rate (cms)",
-					style: {
-						color: Highcharts.getOptions().colors[1]
-					}
-				},
-				labels: {
-					format: "{value} cms",
-					style: {
-						color: Highcharts.getOptions().colors[1]
 					}
 				},
 				opposite: false
@@ -191,6 +177,8 @@ function loadFromKiWIS(url, start, end, format, func, err=function(){}) {
 		success: function(res) {
 			numData--;
 			func(res);
+			if(footerPos !== undefined)
+				footerPos();
 		},
 		error: function(res) {
 			//This should attempt to load the sql one instead
@@ -211,6 +199,8 @@ function loadFromSql(tsId, tsName, start, end, format) {
 	return function(err, func) {
 		var url = "sql-data/?ts_id=" + tsId + "&col=" + tsName + "&from=" + start + "&to=" + end;
 
+		$('#alert-msg').removeClass('disabled');
+
 		numData++;
 		$.ajax({
 			dataType: (format === 'csv'? "text" : format),
@@ -225,6 +215,8 @@ function loadFromSql(tsId, tsName, start, end, format) {
 					response[0].data.push([(new Date(res.Date[i] + " " + res.Time[i])).valueOf(), res.Data[i]]);
 				numData--;
 				func(response);
+				if(footerPos !== undefined)
+					footerPos();
 			},
 			error: function(res) {
 				numData--;
@@ -300,6 +292,7 @@ function makeData(tsId, start=first, end=today) {
 				chart.xAxis[0].setExtremes((new Date(start)).valueOf(), (new Date(end)).valueOf(), false);
 				chart.hideLoading();
 				chart.redraw();
+				$('#chart-info').removeClass('disabled');
 			}, loadFromSql(tsId, tsName, first, today, 'json'));
 		})(params[i], i);
 	}
@@ -356,8 +349,11 @@ function loadTable(tsId, start, end) {
 		(function(tsName) {
 			loadFromKiWIS(getTsInfo(tsId, 'Ids')[tsName].daily, start, end, 'json', function(response) {
 				addRows(response[0].data, tsId, tsName)
-				if(numData === 0)
-					document.getElementById('data-content').innerHTML = makeTable(tsId)
+				if(0 < numData)
+					return;
+				document.getElementById('data-content').innerHTML = makeTable(tsId);
+				setupHandlers();
+				$('#table-title').removeClass('disabled');
 			}, loadFromSql(tsId, tsName, start, end, 'json'));
 		})(params[i])
 	}
@@ -372,9 +368,7 @@ function addRows(data, tsId, tsName) {
 		var row = table[data[i][0]];
 
 		if(row['Date'] === null)
-			row['Date'] = timestamp.getFullYear() + "-" + (8 < timestamp.getMonth()? "" : "0") + (timestamp.getMonth()+1) + "-" + (9 < timestamp.getDate()? "" : "0") + timestamp.getDate()
-		if(row['Time'] === null)
-			row['Time'] = (timestamp.getHours() % 12) + ":" + (9 < timestamp.getMinutes()? "" : "0") + timestamp.getMinutes() + " " + (timestamp.getHours() < 12? "AM" : "PM")
+			row['Date'] = timestamp.getFullYear() + "-" + (8 < timestamp.getMonth()? "" : "0") + (timestamp.getMonth()+1) + "-" + (9 < timestamp.getDate()? "" : "0") + timestamp.getDate();
 		if(row[tsName] === undefined)
 			continue;
 		if(row[tsName] !== null)
@@ -389,7 +383,6 @@ function getTemplate(tsId) {
 	var cols = getOrderedCols(tsId);
 	var template = {
 		'Date': null,
-		'Time': null,
 	}
 
 	for(var i = 0; i < cols.length; i++)
@@ -433,10 +426,43 @@ function getOrderedCols(tsId) {
 	});
 }
 
+function getTooltip(units) {
+	switch(units) {
+		case 'cms':
+			return "cubic meters per second";
+		case 'MASL':
+			return "Meters Above Sea Level";
+		case 'mm':
+			return "millimeters";
+		default:
+			return "1.5 metric units of 'someone screwed this up'"//This should not ever be returned; if it is returned, someone used an invalid unit
+	}
+}
+
+function showToolTip(e) {
+	var target = $(e.target);
+	if(target.hasClass('show'))
+		return;
+	target.addClass('show');
+}
+function hideToolTip(e) {
+	var target = $(e.target);
+	if(!target.hasClass('show'))
+		return;
+	target.removeClass('show');
+}
+
+function setupHandlers() {
+	if(!window.$)
+		return false;
+	$("p.tooltip").on('click', showToolTip);
+	$("p.tooltip").on('mouseout', hideToolTip);
+	return true;
+}
 
 function makeTable(tsId) {
 	var html = '<table>';
-	var cols = []
+	var cols = [];
 
 	if(tsId === undefined)
 		return;
@@ -445,13 +471,20 @@ function makeTable(tsId) {
 			continue;
 		var row = table[r];
 		if(cols.length === 0) {
-			cols = ["Date","Time"].concat(getOrderedCols(tsId));
+			cols = ["Date"].concat(getOrderedCols(tsId));
 
 			html += '<tr>';
 			for(var i = 0; i < cols.length; i++) {
 				html += '<th>' + cols[i];
 				if(getTsInfo(tsId, 'Ids')[cols[i]] !== undefined)
-					html += ' (' + getTsInfo(tsId, 'Ids')[cols[i]].units + ')';
+					html += (' ('
+						+ '<p class="tooltip" title="' + getTooltip(getTsInfo(tsId, 'Ids')[cols[i]].units) + '">'
+						+ getTsInfo(tsId, 'Ids')[cols[i]].units
+						+ '<span class="tooltip-text">'
+						+ getTooltip(getTsInfo(tsId, 'Ids')[cols[i]].units)
+						+ '</span>'
+						+ '</p>'
+						+ ')');
 				html += '</th>';
 			}
 			html += '</tr>';

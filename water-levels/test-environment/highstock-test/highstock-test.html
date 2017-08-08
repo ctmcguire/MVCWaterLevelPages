@@ -2,22 +2,46 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
-		<title>Buckshot Creek at Plevna</title>
+		<title>MVCA Water Levels</title>
 		<!--Loading JavaScript files:-->
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script type="text/javascript" src="https://code.highcharts.com/stock/5.0.12/highstock.js"></script>
 		<script type="text/javascript" src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 		<script type="text/javascript" src="highstock-test.js"></script>
+		<link rel="stylesheet" type="text/css" href="highstock-test.css"/>
 		<$wp-themes/>
 	</head>
 	<body>
 		<$wp-header/>
 		<$wp-content>
+			<h6 id="alert-msg" class="disabled">
+				* There was an error connecting to the near real-time database.  
+				As a result, some or all of the following data has been loaded from the backup database and may not be complete.  
+			</h6>
+			<h4 id="table-title" class="disabled">
+				<$gauge/>
+			</h4>
 			<div id="data-content">
 				<h3>
 					<!--This text will be displayed until the highchart or table appears-->
 					Now Loading...
 				</h3>
+			</div>
+			<div id="chart-info" class="disabled">
+				<h5>
+					Note:
+				</h5>
+				<ul>
+					<li>
+						Flow Rate is measured in cubic meters per second (cms)
+					</li>
+					<li>
+						Level is measured in mMeters Above Sea Level (MASL)
+					</li>
+					<li>
+						Precipitation is measured in millimeters (mm)
+					</li>
+				</ul>
 			</div>
 			<script>
 				/*
