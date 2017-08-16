@@ -1,0 +1,74 @@
+textarea
+{
+	vertical-align: top;
+}
+
+#image-select
+{
+	width: 510px;
+}
+#preview-img,
+#drought-img,
+#flood-img
+{
+	background-repeat: round;
+	background-size: contain;
+	width: 510px;
+	height: 95px;
+}
+
+#preview-img.bg
+{
+	background-image: url('/current-conditions/images/Bar.jpg');
+}
+
+#drought-img.i4
+{
+	background-image: url('/current-conditions/images/Level-III.png');
+}
+#drought-img.i3
+{
+	background-image: url('/current-conditions/images/Level-II.png');
+}
+#drought-img.i2
+{
+	background-image: url('/current-conditions/images/Level-I.png');
+}
+
+#drought-img.i1 #flood-img.i1
+{
+	background-image: url('/current-conditions/images/Normal.png');
+}
+
+#flood-img.i2
+{
+	background-image: url('/current-conditions/images/Water-Safety.png');
+}
+#flood-img.i3
+{
+	background-image: url('/current-conditions/images/Flood-Outlook-Statement.png');
+}
+#flood-img.i4
+{
+	background-image: url('/current-conditions/images/Flood-Watch.png');
+}
+#flood-img.i5
+{
+	background-image: url('/current-conditions/images/Flood-Warning.png');
+}
+
+.bar
+{
+	width: 70px;
+	display: inline-block;
+	margin-left: -4px;
+	text-align: center;
+}
+.bar.first
+{
+	margin-left: 11px;
+}
+.bar.center
+{
+	width: 68px;
+}
