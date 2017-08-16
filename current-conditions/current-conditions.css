@@ -1,0 +1,15 @@
+#bg-img,
+#drought-img
+{
+	background-repeat: round;
+	background-size: contain;
+}
+#bg-img
+{
+	background-image: url('/current-conditions/images/Bar.jpg');
+	margin-bottom: 25px;
+}
+#flood-img
+{
+	width: 100%;
+}
