@@ -1,7 +1,7 @@
 <?php
 	include '../../db.php';
-	include '../classes/HTMLReader.php';
-	include '../header-footer/header-footer.php';
+	include $_SERVER['DOCUMENT_ROOT'].'/classes/HTMLReader.php';//include the HTMLReader class
+	include $_SERVER['DOCUMENT_ROOT'].'/header-footer/header-footer.php';
 	$reader = new HTMLReader('highstock-test.html');
 
 	//set the values to be called in sql query, taken from the form on the previous page 

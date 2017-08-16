@@ -1,8 +1,8 @@
 <?php
 	include '../db.php';
-	include '../classes/HTMLReader.php';//include the HTMLReader class
-	include '../classes/TableLoader.php';//include the TableLoader class
-	include '../header-footer/header-footer.php';
+	include $_SERVER['DOCUMENT_ROOT'].'/classes/HTMLReader.php';//include the HTMLReader class
+	include $_SERVER['DOCUMENT_ROOT'].'/classes/TableLoader.php';//include the TableLoader class
+	include $_SERVER['DOCUMENT_ROOT'].'/header-footer/header-footer.php';
 
 	mysql_connect("localhost",$uN,$pW);
 	mysql_select_db($db);
