@@ -40,7 +40,7 @@
 			$tag = substr($html, $k, $j+1 - $k);
 			$attrs = substr($html, $i, $j-$i);
 
-			echo "<script>console.log('$i', '$j', '$tag')</script>";
+			//echo "<script>console.log('$i', '$j', '$tag')</script>";
 			if($j - $i < 3)
 				return array($tag, $tagOpen);
 			$attrs = explode(' ', $attrs);
@@ -61,7 +61,7 @@
 				}
 				$attr = substr($attrs[$n], 0, $e);
 				$val = str_replace('=','',str_replace('"','',substr($attrs[$n], $e)));
-				echo "<script>console.log('$attr', '$val', '$e')</script>";
+				//echo "<script>console.log('$attr', '$val', '$e')</script>";
 				$tagOpen = str_replace('($'.$attr.')', $val, $tagOpen);
 				$tagOpen = str_replace('$'.$attr, $attrs[$n], $tagOpen);
 			}
