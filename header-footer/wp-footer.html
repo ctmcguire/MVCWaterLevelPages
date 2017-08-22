@@ -1,3 +1,4 @@
+<!--Wordpress footer for use by non-wordpress pages; contains script to position it properly if the html page is too small-->
 <div id="dummy-footer">
 	<div id="footer" class="footer-wrapper" hidden>
 		<div class="footer-wrapper-gimmick"></div>
@@ -25,19 +26,23 @@
 	</div>
 </div>
 <script>
+	/**
+	 * This function is the event handler that repositions the footer based on whether or not the page size is
+	 *  less than the window size
+	**/
 	function footerPos() {
-		var client = document[(document.doctype === null? "body" : "documentElement")].clientHeight;
-		var scroll = document.body.scrollHeight;
-		var classes = document.getElementById('footer').className;
+		var client = document[(document.doctype === null? "body" : "documentElement")].clientHeight;//The height of the browser window; location of data is different if doctype is specified
+		var scroll = document.body.scrollHeight;//The actual height of the page
+		var classes = document.getElementById('footer').className;//Get the class string for the footer (may switch to class list, which has add/remove operations)
 
 		if(scroll !== client && 0 <= classes.indexOf(' bottom'))
-			document.getElementById('footer').className = classes.substr(0, classes.indexOf(' bottom'));
+			document.getElementById('footer').className = classes.substr(0, classes.indexOf(' bottom'));//If scroll and client are different, the footer is displayed normally
 		if(scroll === client && classes.indexOf(' bottom') < 0)
-			document.getElementById('footer').className += " bottom";
+			document.getElementById('footer').className += " bottom";//If scroll and client are the same, the footer should always be displayed along the bottom of the window
 	}
-	document.body.onresize = footerPos
+	document.body.onresize = footerPos;//Set the event handler
 	document.body.onload = function() {
-		footerPos();
-		document.getElementById('footer').removeAttribute('hidden');
+		footerPos();//run footerPos to set the footer's initial position
+		document.getElementById('footer').removeAttribute('hidden');//hide the footer until it is positioned properly to avoid some potential graphical weirdness
 	}
 </script>

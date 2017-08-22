@@ -1,6 +1,5 @@
 var mydate=new Date();
 
-//var day=mydate.getDay();
 var day=mydate.getDate();
 var month=mydate.getMonth() + 1;//getMonth returns 0-11, and we want 1-12; therefore, we add 1 to the returned value
 var year=mydate.getYear();

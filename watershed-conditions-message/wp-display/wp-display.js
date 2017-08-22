@@ -16,21 +16,16 @@
 		document.getElementById('wp-display-content').innerHTML = res;//add the image display to the page (wordpress likes to mess with it if you put the html code in directly)
 		get(json, function(res){
 			var url = JSON.parse(res).img;//Get the image urls
-			var bgImgs = "";
-			var imgs = document.querySelectorAll('.cond-img');
-			/*if(url.drought !== "/watershed-conditions-message/images/Normal.png" || url.drought === url.flood)
-				document.getElementById('drought-img').style.backgroundImage = "url(" + url.drought + ")";//only set the drought image to normal if both images are normal
-			if(url.flood === "/watershed-conditions-message/images/Normal.png")
-				document.getElementById('flood-img').style.visibility = "hidden";//don't display the flood image if it is normal
-			document.getElementById('flood-img').src = url.flood;*/
+			var bgImgs = "";//string for background images; starts empty because images are rendered from last to first
+			var imgs = document.querySelectorAll('.cond-img');//object (not an array, but behaves similarly) containing all elements to receive the background images
 			if(url.flood !== "/watershed-conditions-message/images/Normal.png" || url.flood === url.drought)
-				bgImgs += "url('" + url.flood + "'),";
+				bgImgs += "url('" + url.flood + "'),";//Add the flood image url to the background images
 			if(url.drought !== "/watershed-conditions-message/images/Normal.png" || url.flood === url.drought)
-				bgImgs += "url('" + url.drought + "'),";
-			bgImgs += "url('" + '/watershed-conditions-message/images/Bar.jpg' + "')";
+				bgImgs += "url('" + url.drought + "'),";//Add the drought image url to the background images
+			bgImgs += "url('" + '/watershed-conditions-message/images/Bar.jpg' + "')";//Add the background image's background image last, since it is behind everything else
 
 			for(var i = 0; i < imgs.length; i++)
-				imgs[i].style.backgroundImage = bgImgs
+				imgs[i].style.backgroundImage = bgImgs;//Set the background image of all elements in imgs
 		})
 	})
 })();

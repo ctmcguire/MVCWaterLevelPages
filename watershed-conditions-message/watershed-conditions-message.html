@@ -8,9 +8,9 @@
 	</head>
 	<body>
 		<$wp-header/>
-		<$wp-content class="sidebar-included right-sidebar"><!--add class="sidebar-included right-sidebar" to display the sidebar-->
-			<div class="cond-img"></div>
-			<div id="content"></div>
+		<$wp-content class="sidebar-included right-sidebar"><!--remove the 'class="sidebar-included right-sidebar"' part to remove the sidebar-->
+			<div class="cond-img"></div><!--div to display the image for the current conditions-->
+			<div id="content"></div><!--div to receive the text body of the message-->
 			<script src="watershed-conditions-message.js"></script>
 		</$wp-content>
 		<$wp-footer/>
