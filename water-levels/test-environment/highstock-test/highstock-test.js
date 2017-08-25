@@ -8,7 +8,7 @@ var today = (function(){//This will return today's date as a string
 	temp = temp.toISOString();
 	return temp.substr(0, temp.indexOf('T'));
 })();//This will set "today" to its string value
-var first = "1900-01-01";//earliest data to load
+var first = "1918-01-01";//earliest data to load
 
 /**
  * This function returns the value of the specified parameter for the specified timeseries id
@@ -183,8 +183,8 @@ function makeChart(tsId, gauge="Mississippi River at Appleton") {
 			events: {
 				afterSetExtremes: selectRange,
 			},//*/
-			max: (new Date()).valueOf(),
-			min: (new Date('1900-01-01')).valueOf(),
+			max: (new Date(today)).valueOf(),
+			//min: (new Date(first)).valueOf(),
 			ordinal: false
 		},
 		yAxis: [
