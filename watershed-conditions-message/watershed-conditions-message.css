@@ -1,0 +1,16 @@
+.cond-desc #Normal,
+.cond-desc #Abnormal,
+.cond-desc div[name="flood"],
+.cond-desc div[name="drought"]
+{
+	display: none;
+}
+.cond-img
+{
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	width: 100%;
+	height: 0;/*using padding-bottom for element height*/
+	padding-bottom: calc(100% * 95 / 510);/*element_height = (element_width)(img_height)/(img_width)*/
+	margin-bottom: 20px;
+}

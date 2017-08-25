@@ -1,0 +1,215 @@
+/**
+ * This function initializes this module's functions and variables
+ * 
+ * @param obj 	- obj to recieve any public scoped variables or functions
+**/
+(function(obj) {
+	var isInitialized = false;//Only let this function get called once
+	var imgHandler;//stores the event handler for the radio buttons
+
+	/**
+	 * This function checks if the title, images, and text values are valid
+	 * 
+	 * @return 	- whether or not the title, images, and text contain valid data
+	**/
+	function validateForm() {
+		/**
+		 * This function returns whether or not the title value is valid
+		 * 
+		 * @return 	- true, if title is not blank
+		 * @return 	- false otherwise
+		**/
+		function validateTitle() {
+			return (document.getElementById('title').value !== "");
+		}
+		/**
+		 * This function returns whether or not the title is valid
+		 * 
+		 * @return 	- true if drought and flood images are valid
+		 * @return 	- false, if one or both images are invalid
+		**/
+		function validateImg() {
+			var drts = document.getElementsByName('drought');
+			var flds = document.getElementsByName('flood');
+			/**
+			 * This function returns whether or not the given list of radio buttons is in a valid state
+			 * 
+			 * @param imgs 	- object containing the radio buttons to be checked
+			 * 
+			 * @return 	- true, if there is a checked radio button
+			 * @return 	- false otherwise
+			**/
+			function isValid(imgs) {
+				for(var i = 0; i < imgs.length; i++) {
+					if(imgs[i].checked)
+						return true;//If the set of radio buttons has a checked button, return true
+				}
+				return false;//If there are no checked radio buttons, return false
+			}
+			return isValid(drts) && isValid(flds);//check image validity for both drought and flood radio buttons
+		}
+		/**
+		 * This function returns whether or not the message body is valid
+		 * 
+		 * @return 	- true, as I was unable to find a way to check the value of the text editor
+		**/
+		function validateStatement() {
+			return true;//as of right now, no way to check this before clicking submit
+		}
+		return validateTitle() && validateImg() && validateStatement();
+	}
+
+	/**
+	 * This function loads the current image data and returns the event handler for the radio buttons, using 
+	 * function closure to keep the current drought or flood image in memory
+	 * 
+	 * @param fld 	- css class for the loaded flood image (determines displayed image)
+	 * @param drt 	- css class for the loaded drought image (determines display image)
+	 * 
+	 * @return 	- the event handler function for the image radio buttons
+	**/
+	function getHandler(fld,drt) {
+		var imgs = {
+			'flood': {
+				value: "",
+				change: function(img) {
+					if(this.value !== "")
+						document.getElementById('flood-img').classList.remove(this.value);//Remove the old class if it isn't blank (which causes an error)
+					if(img !== "")
+						document.getElementById('flood-img').classList.add(img);//Add the new class if it isn't blank (which also causes an error)
+					this.value = img;//Update the value
+				}
+			},
+			'drought': {
+				value: "",
+				change: function(img) {
+					if(this.value !== "")
+						document.getElementById('drought-img').classList.remove(this.value);//Remove the old class if it isn't blank (which causes an error)
+					if(img !== "")
+						document.getElementById('drought-img').classList.add(img);//Add the new class if it isn't blank (which also causes an error)
+					this.value = img;//Update the value
+				}
+			}
+		};
+
+		imgs['flood'].change(fld);//Load the current flood and drought images
+		imgs['drought'].change(drt);
+
+		/* 
+		 * return the event handler function
+		 */
+		/**
+		 * This function updates the currently displayed image using function closure
+		 * 
+		 * @param event 	- the event the triggered this function
+		**/
+		return function(event) {
+			var e = event.target;
+
+			if(e === undefined || e === null)
+				return;
+			imgs[e.name].change('i' + e.id.substr(3));
+		};
+	}
+
+	/**
+	 * This function takes a json string and uses it to load the current data to be displayed in the input 
+	 * fields (title box, radio buttons, text editor)
+	 * 
+	 * @param json 	- json string containing the data; if set to '<$json/>' assigns default values instead; 
+	 * 				defaults to '<$json/>'
+	**/
+	function loadData(json='<$json/>') {
+		/**
+		 * This function sets the initial value of the title input field
+		 * 
+		 * @param title 	- the initial title value
+		**/
+		function setTitle(title) {
+			document.getElementById('title').value = title;
+		}
+		/**
+		 * This function sets the initial value of the image and its radio buttons
+		 * 
+		 * @param img 	- object containing the initial image values
+		**/
+		function setImgs(img) {
+			/**
+			 * This function checks one of the radio buttons with the given name based on img
+			 * 
+			 * @param img 	- image url that should match the value attribute of one of the radio buttons
+			 * @param name 	- name attribute of the group of radio buttons to set
+			 * 
+			 * @return 	- The value of the class that sets the image to the checked button's value attribute
+			 * @return 	- the empty string, if no radio button was checked
+			**/
+			function setImg(img, name) {
+				var imgs = document.getElementsByName(name);
+				for(var i = 0; i < imgs.length; i++) {
+					if(imgs[i].value !== img)
+						continue;
+					imgs[i].checked = true;
+					return "i" + imgs[i].id.substr(3);//class value is i followed by the number part of the button's id
+				}
+				return "";//If we get to this part of the function, no radio button has been checked
+			}
+
+			imgHandler = getHandler(setImg(img.flood, 'flood'), setImg(img.drought, 'drought'));//Set both sets of radio buttons, the image display, and the event handler
+		}
+		/**
+		 * This function sets the initial value of the text editor
+		 * 
+		 * @param message 	- the initial message body value
+		**/
+		function setStatement(message) {
+			document.getElementById('message').innerHTML = message;
+		}
+		/* 
+		 * If not set, asign a default value to the json string
+		 */
+		if(json === '<$json/>')
+			json = '{"title":"<$title/>","img":{"id":"<$id/>","src":"<$src/>"},"message":"<$message/>"}';
+		var dat = JSON.parse(json);//parse the json string
+		//console.log(dat);//print the string for testing purposes
+		setTitle(dat.title);//set initial title value
+		setImgs(dat.img);//set initial image values
+		setStatement(dat.message);//set initial message body values
+	}
+
+	/**
+	 * This function initializes all the data for this page.
+	 * 
+	 * @param json 	- json string data; defaults to '<$json/>'
+	 * 
+	 * @return 	- true upon being run for the first time
+	 * @return 	- undefined otherwise
+	**/
+	function init(json='<$json/>') {
+		if(isInitialized)
+			return console.log('ERROR: Not allowed to call function window.init twice');
+		isInitialized = true;//assign isInitialized to true after executing once
+
+		loadData(json);//load the initial data
+
+		/* 
+		 * set the validation event handlers
+		 */
+		document.getElementById('submit-message').disabled = !validateForm();
+		document.getElementById('condition-message').onchange = function() {
+			document.getElementById('submit-message').disabled = !validateForm();
+		};
+
+		/* 
+		 * set the image change event handlers
+		 */
+		var flds = document.getElementsByName('flood')
+		for(var i = 0; i < flds.length; i++)
+			flds[i].onclick = imgHandler;
+		var drts = document.getElementsByName('drought');
+		for(var i = 0; i < drts.length; i++)
+			drts[i].onclick = imgHandler;
+		return true;
+	}
+
+	obj.init = init;//make the init function "public"
+})(window);

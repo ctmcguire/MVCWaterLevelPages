@@ -1,0 +1,48 @@
+<!--Wordpress footer for use by non-wordpress pages; contains script to position it properly if the html page is too small-->
+<div id="dummy-footer">
+	<div id="footer" class="footer-wrapper" hidden>
+		<div class="footer-wrapper-gimmick"></div>
+		<!-- Get Footer Widget -->
+		<div class="container mt0">
+			<div id="footerDeveloped">
+				<a id="footer-co" href="//www.conservation-ontario.ca/" target="_blank">
+					<!--MVCA is a member of -->Conservation Ontario
+				</a>
+				<a id="footer-accessibility" href="//mvc.on.ca/accessibility-3/" target="_blank">
+					Accessibility
+				</a>
+				<a id="footer-MFIPPA" href="//mvc.on.ca/wp-content/uploads/2014/11/FeesMFIPChart.pdf" target="_blank">
+					MFIPPA Requests
+				</a>
+				<a id="footer-site map" href="//mvc.on.ca/sitemap/" target="_blank">
+					Sitemap
+				</a>
+				<a id="contact" href="//mvc.on.ca/about/contact/" target="_blank">
+					Contact Us
+				</a>
+			</div>
+		</div>
+		<p></p><!-- footer-wrapper -->
+	</div>
+</div>
+<script>
+	/**
+	 * This function is the event handler that repositions the footer based on whether or not the page size is
+	 *  less than the window size
+	**/
+	function footerPos() {
+		var client = document[(document.doctype === null? "body" : "documentElement")].clientHeight;//The height of the browser window; location of data is different if doctype is specified
+		var scroll = document.body.scrollHeight;//The actual height of the page
+		var classes = document.getElementById('footer').className;//Get the class string for the footer (may switch to class list, which has add/remove operations)
+
+		if(scroll !== client && 0 <= classes.indexOf(' bottom'))
+			document.getElementById('footer').className = classes.substr(0, classes.indexOf(' bottom'));//If scroll and client are different, the footer is displayed normally
+		if(scroll === client && classes.indexOf(' bottom') < 0)
+			document.getElementById('footer').className += " bottom";//If scroll and client are the same, the footer should always be displayed along the bottom of the window
+	}
+	document.body.onresize = footerPos;//Set the event handler
+	document.body.onload = function() {
+		footerPos();//run footerPos to set the footer's initial position
+		document.getElementById('footer').removeAttribute('hidden');//hide the footer until it is positioned properly to avoid some potential graphical weirdness
+	}
+</script>

@@ -14,9 +14,6 @@
 		 * 
 		 * @param $file - The name of the file to be opened, including
 		 *             the file extention.
-		 * @param $home - boolean value that idicates that the file starts from www.mvc.on.ca/water-levels, and not the current directory
-		 * 
-		 * @returns - constructors do not return
 		 * 
 		 * Example usage: $htmlReader = new HTMLReader('file.html');
 		 * The above example will create a new HTMLReader Object,
@@ -25,8 +22,6 @@
 		**/
 		function HTMLReader($file)
 		{
-			if($home)
-				$file = "https://www.mvc.on.ca/water-levels/" + $file;
 			$this->html = file_get_contents($file);
 		}
 
@@ -53,6 +48,11 @@
 			$this->html = str_replace('<$'.$placeholder.'/>', $data, $this->html);
 		}
 
+		/**
+		 * This function inserts a CustomTag object into this HTMLReader's html code
+		 * 
+		 * @param $tag 	- the CustomTag to insert
+		**/
 		public function insertTag($tag)
 		{
 			$this->html = $tag->insertHTML($this->html);

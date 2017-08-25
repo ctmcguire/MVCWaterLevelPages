@@ -1,6 +1,6 @@
 <?php
-	include 'classes/HTMLReader.php';//Include the HTMLReader class
-	include 'header-footer/header-footer.php';
+	include $_SERVER['DOCUMENT_ROOT'].'/classes/HTMLReader.php';//Include the HTMLReader class
+	include $_SERVER['DOCUMENT_ROOT'].'/header-footer/header-footer.php';
 
 	$reader = new HTMLReader('water-levels.html');//Get the html file corresponding to this php file
 	$startDate = date("Y-m-d",strtotime('-2 week'));//Get the date value of 2 weeks ago

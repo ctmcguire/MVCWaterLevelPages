@@ -1,0 +1,91 @@
+<html>
+	<head>
+		<title>
+			TEST
+		</title>
+	</head>
+	<body>
+		<div style="width:510px;">
+<style>.flood-msg-container{background: url('/current-conditions/images/Bar.jpg') round;background-size: contain;}</style>
+<style>.flood-msg-container #drought-img{background-repeat: round;background-size: contain;}</style>
+<!-- Flood Messages -->
+<div id="flood-msg-form">
+	<h3 class="custom-sidebar-title sidebar-title-color gdl-title" style="font-family: Merriweather Cufon;">
+		<label for="flood-msg" style="cursor: pointer; margin-bottom: 0;">
+			Watershed Conditions
+			<form method="post" action="" target="_self" class="widget_sp_image-image-link" title="Flood Messages" style="margin-bottom: 0;">
+				<div class="flood-msg-container">
+					<div id="drought-img">
+						<input type="image" id="flood-img" width="100%" alt="Flood Messages" class="attachment-full foreground flood" src="">
+					</div>
+				</div>
+			</form>
+		</label>
+	</h3>
+</div>
+<script>
+	(function(res) {
+		var url = JSON.parse(res).img;
+		//console.log(url);
+		if(url.drought !== "/current-conditions/images/Normal.png" || url.drought === url.flood)
+			document.getElementById('drought-img').style.backgroundImage = "url(" + url.drought + ")";
+		if(url.flood === "/current-conditions/images/Normal.png")
+			document.getElementById('flood-img').style.visibility = "hidden";
+		document.getElementById('flood-img').src = url.flood;
+	})('{"img":{"flood":"/current-conditions/images/Normal.png","drought":"/current-conditions/images/Normal.png"}}');
+</script>
+			<select id="test1" onchange="changed()">
+				<option selected>
+					Normal
+				</option>
+				<option>
+					Water-Safety
+				</option>
+				<option>
+					Flood-Outlook-Statement
+				</option>
+				<option>
+					Flood-Watch
+				</option>
+				<option>
+					Flood-Warning
+				</option>
+			</select>
+			<select id="test2" onchange="changed()">
+				<option>
+					Level-III
+				</option>
+				<option>
+					Level-II
+				</option>
+				<option>
+					Level-I
+				</option>
+				<option selected>
+					Normal
+				</option>
+			</select>
+			<script>
+				function changed() {
+					var val1 = document.getElementById('test1').value;
+					var val2 = document.getElementById('test2').value;
+					(function(res) {
+						var url = JSON.parse(res).img;
+						//console.log(url);
+						if(url.drought === "../images/Normal.png" && url.drought !== url.flood)
+							document.getElementById('drought-img').style.visibility = "hidden";
+						else
+							document.getElementById('drought-img').style.visibility = "visible";
+						document.getElementById('drought-img').style.background = "url(" + url.drought + ") 0/contain round";
+						if(url.flood === "../images/Normal.png")
+							document.getElementById('flood-img').style.visibility = "hidden";
+						else
+							document.getElementById('flood-img').style.visibility = "visible";
+						document.getElementById('flood-img').src = url.flood;
+						document.getElementById('flood-img-2').src = url.flood.substr(0, url.flood.length - 4) + '-1' + url.flood.substr(url.flood.length - 4)
+					})('{"img":{"flood":"../images/' + val1 + '.png","drought":"../images/' + val2 + '.png"}}');
+				}
+			</script>
+		</div>
+	</body>
+</html>

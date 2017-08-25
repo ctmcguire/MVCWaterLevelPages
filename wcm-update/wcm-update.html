@@ -1,0 +1,85 @@
+<html>
+	<head>
+		<title>Current Watershed Conditions Message</title>
+		<!--JavaScript library for text editor-->
+		<script src="/wp-includes/js/tinymce/tinymce.min.js?ver=4603-20170530"></script>
+		<!--JavaScript for this page-->
+		<script src="wcm-update.js"></script>
+		<!--wordpress stylesheets-->
+		<$wp-themes/>
+		<!--This page's stylesheets-->
+		<link rel="stylesheet" type="text/css" href="wcm-update.css"/>
+	</head>
+	<body>
+		<div id="img-preloader"></div>
+		<$wp-header/>
+		<$wp-content>
+			<form id="condition-message" method="post" action="">
+				<table>
+					<tr>
+						<th>
+							<h3 style="text-align: middle;">
+								Title:
+							</h3>
+							<input id="title" name="title" placeholder="(message title)" type="text" style="width:100%;"/>
+						</th>
+					</tr>
+					<tr>
+						<td>
+							<h3>
+								Image:
+							</h3>
+							<div id="image-select">
+								<div id="preview-img" class="bg">
+									<div id="drought-img">
+										<div id="flood-img"></div>
+									</div>
+								</div>
+								<div class="radio-select">
+									<div class="bar first">
+										<input type="radio" id="drt4" name="drought" value="/watershed-conditions-message/images/Level-III.png" />
+									</div>
+									<div class="bar">
+										<input type="radio" id="drt3" name="drought" value="/watershed-conditions-message/images/Level-II.png" />
+									</div>
+									<div class="bar">
+										<input type="radio" id="drt2" name="drought" value="/watershed-conditions-message/images/Level-I.png" />
+									</div>
+									<div class="bar center">
+										<input type="radio" id="drt1" name="drought" value="/watershed-conditions-message/images/Normal.png" />
+										<input type="radio" id="fld1" name="flood" value="/watershed-conditions-message/images/Normal.png" />
+									</div>
+									<div class="bar">
+										<input type="radio" id="fld2" name="flood" value="/watershed-conditions-message/images/Water-Safety.png" />
+										<input type="radio" id="fld3" name="flood" value="/watershed-conditions-message/images/Flood-Outlook-Statement.png" />
+									</div>
+									<div class="bar">
+										<input type="radio" id="fld4" name="flood" value="/watershed-conditions-message/images/Flood-Watch.png" />
+									</div>
+									<div class="bar">
+										<input type="radio" id="fld5" name="flood" value="/watershed-conditions-message/images/Flood-Warning.png" />
+									</div>
+								</div>
+							</div>
+							<h3>
+								Statement:
+							</h3>
+							<div id="message"></div>
+						</td>
+					</tr>
+				</table>
+			</form>
+			<input id="submit-message" value="submit" type="submit" form="condition-message" />
+			<script>
+				tinymce.init({
+					selector: '#message',//element to be replaced by the text editor
+					resize: false,//don't allow resizing because it makes the page behave weirdly
+					height: '599px'//Set height to 599px
+				});
+
+				window.init('<$json/>');//load the values from the json file
+			</script>
+		</$wp-content>
+		<$wp-footer/>
+	</body>
+</html>

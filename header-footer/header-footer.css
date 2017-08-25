@@ -26,3 +26,20 @@ input[type="date"]
 	text-align: center;
 	width: 100%;
 }
+
+input:disabled,
+input:disabled:hover,
+button:disabled,
+button:disabled:hover
+{
+	background-color: #dddddd;
+	background-image: none;
+	color: #808080;
+	cursor: default;
+}
+
+.content-wrapper:not(.sidebar-included) .page-wrapper .gdl-right-sidebar,
+.content-wrapper:not(.right-sidebar) .page-wrapper .gdl-right-sidebar
+{
+	display: none;
+}
