@@ -121,7 +121,7 @@ small
 	margin: 0;
 }
 
-#map-legend.down .down-arrow,
+#map-legend:not(.up) .down-arrow,
 #map-legend.up .up-arrow
 {
 	display: none;
