@@ -55,21 +55,21 @@ function getTsInfo(url, param="primary") {
 		'13790042': {
 			'Ids': {
 				'Flow Rate':{
-					full: "13790042",
-					hourly: "38291042",
-					daily: "3449042",
-					weekly: "5959042",
-					monthly: "38683042",
-					yearly: "38293042",
-					units: "cms",
-				},
-				'Historical Average': {
-					full: "38692042",
+					full: "38819042",
 					hourly: "38692042",
-					daily: "38693042",
+					daily: "3449042",
 					weekly: "38694042",
 					monthly: "38695042",
 					yearly: "38696042",
+					units: "cms",
+				},
+				'Historical Average': {
+					full: "38698042",
+					hourly: "38698042",
+					daily: "38698042",
+					weekly: "5959042",
+					monthly: "38291042",
+					yearly: "38293042",
 					units: "cms",
 				},
 				'Historical Minimum': {
@@ -90,7 +90,15 @@ function getTsInfo(url, param="primary") {
 					yearly: "38691042",
 					units: "cms",
 				},
-				//'Precipitation': {},
+				'Precipitation': {
+					full: "1442042",
+					hourly: "1442042",
+					daily: "1448042",
+					weekly: "38821042",
+					monthly: "8791042",
+					yearly: "35870042",
+					units: "mm"
+				},
 			},
 			'primary': "Flow Rate"
 		},
@@ -653,25 +661,39 @@ function getTooltip(units) {
 	}
 }
 
-function showToolTip(e) {
-	var target = $(e.target);
-	if(target.hasClass('show'))
-		return;
-	target.addClass('show');
-}
-function hideToolTip(e) {
-	var target = $(e.target);
-	if(!target.hasClass('show'))
-		return;
-	target.removeClass('show');
-}
-
+/**
+ * This function sets up the event handlers
+**/
 function setupHandlers() {
-	if(!window.$)
-		return false;
-	$("p.tooltip").on('click', showToolTip);
-	$("p.tooltip").on('mouseout', hideToolTip);
-	return true;
+	var tars = document.querySelectorAll('p.tooltip');
+	for(var i = 0; i < tars.length; i++) {
+		/**
+		 * This function displays the tooltip for the target element
+		 * 
+		 * @param e	- event that triggered this function
+		**/
+		tars[i].onclick = function(e) {
+			if(e.target === undefined)
+				return;//exit if the event had no target
+			var classes = e.target.classList;
+			if(classes.contains('show'))
+				return;//do nothing if the target element already has the show class
+			classes.add('show');//add the show class
+		};
+		/**
+		 * This function hides the tooltip for the target element
+		 * 
+		 * @param e	- event that triggered this function
+		**/
+		tars[i].onmouseout = function(e) {
+			if(e.target === undefined)
+				return;
+			var classes = e.target.classList;
+			if(!classes.contains('show'))
+				return;
+			classes.remove('show');
+		};
+	}
 }
 
 /**

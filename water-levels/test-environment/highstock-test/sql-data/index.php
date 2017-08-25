@@ -1,6 +1,6 @@
 <?php
-	include '../../../db.php';
-	include '../../../classes/HTMLReader.php';
+	include $_SERVER['DOCUMENT_ROOT'].'/water-levels/db.php';
+	include $_SERVER['DOCUMENT_ROOT'].'/classes/HTMLReader.php';//include the HTMLReader class
 
 	//connect to server
 	$con = mysql_connect("localhost",$uN,$pW);

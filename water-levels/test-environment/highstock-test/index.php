@@ -1,5 +1,5 @@
 <?php
-	include '../../db.php';
+	include $_SERVER['DOCUMENT_ROOT'].'/water-levels/db.php';
 	include $_SERVER['DOCUMENT_ROOT'].'/classes/HTMLReader.php';//include the HTMLReader class
 	include $_SERVER['DOCUMENT_ROOT'].'/header-footer/header-footer.php';
 	$reader = new HTMLReader('highstock-test.html');
