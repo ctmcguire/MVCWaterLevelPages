@@ -4,7 +4,8 @@
 	include $_SERVER['DOCUMENT_ROOT'].'/header-footer/header-footer.php';
 	$reader = new HTMLReader('highstock-test.html');
 
-	//set the values to be called in sql query, taken from the form on the previous page 
+	//set the values to be called in sql query, taken from the form on the previous page
+	//Replace $_GET with $_POST when this goes live; $_GET is merely for the purposes of testing
 	$id = $_GET['ts_id'];//$_POST['ts_id'];//(may switch this over to the gauge name)
 	$from = $_GET['from'];//$_POST['from'];
 	$to = $_GET['to'];//$_POST['to'];

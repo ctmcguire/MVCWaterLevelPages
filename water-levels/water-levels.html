@@ -119,6 +119,9 @@
 						<p></p>
 						<form id="form1" name="form1" method="post" action="./gauge-data/" onsubmit="return validateForm()">
 							<!--Dropdown for all of the gauges (there are a lot of them)-->
+							<!--
+								The value attributes for all these options will need to change to the ts_id value in the tsdata table in the SQL database
+							-->
 							<select name="gauge">
 								<!--default option to be displayed initially (can't be reselected)-->
 								<option selected disabled>
