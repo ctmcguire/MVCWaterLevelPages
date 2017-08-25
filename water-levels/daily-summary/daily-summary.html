@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>MVC Watershed - At a Glance</title>
+		<title>Current Conditions</title>
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script type="text/javascript" src="daily-summary.js"></script>
 		<$wp-themes/>
@@ -9,6 +9,14 @@
 	<body>
 		<$wp-header/>
 		<$wp-content>
+			<p>
+				<strong>
+					Our website is evolving as we implement an open data strategy.
+					<a href="mailto:cmcguire@mvc.on.ca">
+						Click here to submit your feedback.
+					</a>
+				</strong>
+			</p>
 			<table class="water-levels" border=1 cellpadding=8>
 				<tr class="title">
 					<th colspan=5>
@@ -29,7 +37,7 @@
 						HISTORICAL AVG. (<p class="tooltip" title="Cubic Meters per Second">cms<span class="tooltip-text">Cubic Meters per Second</span></p>)
 					</th>
 					<th>
-						PRECIPITATION (mm)
+						PRECIPITATION (<p class="tooltip" title="Millimeters">mm<span class="tooltip-text">Millimeters</span></p>)
 					</th>
 				</tr>
 				<$flow-data/><!--Placeholder tag that will be replaced with the flow gauge rows by ataglance.php-->
@@ -54,7 +62,7 @@
 						HISTORICAL AVG. (<p class="tooltip" title="Meters Above Sea Level">MASL<span class="tooltip-text">Meters Above Sea Level</span></p>)
 					</th>
 					<th>
-						PRECIPITATION (mm)
+						PRECIPITATION (<p class="tooltip" title="Millimeters">mm<span class="tooltip-text">Millimeters</span></p>)
 					</th>
 				</tr>
 				<$daily-data/><!--Placeholder tag that will be replaced with the daily lake gauge rows by ataglance.php-->
