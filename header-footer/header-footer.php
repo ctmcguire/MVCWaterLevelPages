@@ -42,5 +42,6 @@
 		$reader->insertTag($content);
 		$reader->insertTag($sideRight);
 		$reader->insert('wp-footer', $footer->read());
+		$reader->insert('page-name', $name);
 	}
 ?>

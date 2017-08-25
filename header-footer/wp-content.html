@@ -1,5 +1,26 @@
 <!--Custom tag for the page content container-->
-<div class="content-part-wrapper slider-off">
+<div class="content-part-wrapper slider-off" side-menu="mobile-menu">
+	<header id="header-title-logo" class="mobile dark">
+		<div id="search-toggle" class="search-toggle tappable search-right" search-bar="search-dropper" role="button">
+			<!--icon-search-->
+		</div>
+		<a href="http://mvc.on.ca" class="header-center tappable">
+			<div class="heading-font site-title">
+				<$page-name/>
+			</div>
+		</a>
+		<div id="menu-toggle" class="menu-btn tappable show-hide-toggle menu-left" side-menu="mobile-menu" role="button">
+			<!--icon-reorder-->
+		</div>
+	</header>
+	<div id="search-dropper" class="mobile mobile-search">
+		<div id="wptouch-search-inner">
+			<form method="get" id="searchform" action="http://mvc.on.ca/">
+				<input type="text" name="s" id="search-text" placeholder="Search this website…" class="body-font" tabindex="1"/>
+				<input name="submit" type="submit" id="search-submit" value="Search" class="button-dark body-font" tabindex="2"/>
+			</form>
+		</div>
+	</div>
 	<div class="container">
 		<div class="content-wrapper ($class)">
 			<div class="page-wrapper">
@@ -19,3 +40,60 @@
 		</div>
 	</div>
 </div>
+<script>
+	(function() {
+		function toggleSearch(e) {
+			if(e.target === undefined)
+				return;
+			if(e.target.getAttribute('search-bar') === null)
+				return;
+			var classes = document.getElementById(e.target.getAttribute('search-bar')).classList;
+
+			if(classes.contains('toggled'))
+				return classes.remove('toggled');
+			return classes.add('toggled');
+		};
+
+		function toggleMenu(e) {
+			e.stopPropagation();
+			if(e.target === undefined)
+				return;
+			if(e.target.getAttribute('side-menu') === null)
+				return;
+			var classes = document.getElementById(e.target.getAttribute('side-menu')).classList;
+
+			console.log('yay!')
+
+			if(classes.contains('toggled'))
+				return classes.remove('toggled');
+			return classes.add('toggled');
+		}
+		function hideMenu(e) {
+			var classes = document.getElementById(document.querySelectorAll('.content-part-wrapper')[0].getAttribute('side-menu')).classList;
+
+			console.log('oh noes!')
+
+			if(!classes.contains('toggled'))
+				return;
+			classes.remove('toggled');
+		}
+
+		function toggleSpan(e) {
+			if(e.target === undefined)
+				return;
+			var classes = e.target.classList;
+
+			if(classes.contains('toggle'))
+				return classes.remove('toggle');
+			return classes.add('toggle');
+		}
+
+		document.getElementById('search-toggle').onclick = toggleSearch;
+		document.getElementById('menu-toggle').onclick = toggleMenu;
+		document.querySelectorAll('.content-part-wrapper')[0].onclick = hideMenu;
+
+		spans = document.querySelectorAll('.menu-tree li span');
+		for(var i = 0; i < spans.length; i++)
+			spans[i].onclick = toggleSpan;
+	})();
+</script>

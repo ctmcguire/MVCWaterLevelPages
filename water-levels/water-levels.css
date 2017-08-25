@@ -1,3 +1,51 @@
+@media only screen and (min-device-width : 740px)
+{
+	td.disclaimer2
+	{
+		display: none;
+	}
+}
+@media only screen and (max-device-width : 740px)
+{
+	.embed-container,
+	td.disclaimer2
+	{
+		display: none;
+	}
+	td.view-data select
+	{
+		text-overflow: ellipsis;
+		width: 100%;
+	}
+}
+@media only screen and (min-device-width : 660px) and (max-device-width : 740px)
+{
+	td.view-data
+	{
+		width: calc(100% * (261/938));
+	}
+	td.disclaimer
+	{
+		width: calc(100% * (677/938));
+	}
+}
+@media only screen and (max-device-width : 660px)
+{
+	td.view-data
+	{
+		width: 100%;
+	}
+	td.disclaimer
+	{
+		display: none;
+	}
+	td.disclaimer2
+	{
+		display: table-cell;
+	}
+}
+
+
 .header
 {
 	padding-bottom: 20px;

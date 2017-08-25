@@ -1,3 +1,10 @@
+@media only screen and (max-device-width : 740px)
+{
+	.scroll-container table
+	{
+		min-width: 548px;
+	}
+}
 table.water-levels:not(:first-of-type)
 {
 	font-size: 13px;
