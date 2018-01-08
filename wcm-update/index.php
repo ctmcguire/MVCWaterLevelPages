@@ -50,7 +50,7 @@
 
 		if(is_null($title) || is_null($fld) || is_null($drt) || is_null($message))
 			return 1;
-		$message = str_replace('"','\\\\\\"',str_replace("\r\n",'',$message));
+		$message = str_replace("'", "\\'", str_replace('"','\\\\\\"',str_replace("\r\n",'',$message)));
 		$json = '{"title": "'.$title.'","img": { "flood":"'.$fld.'", "drought":"'.$drt.'"},"message": "'.$message.'"}';
 
 		$len = file_put_contents($_SERVER['DOCUMENT_ROOT'].'/watershed-conditions-message/watershed-conditions-message.json',$json);
@@ -67,7 +67,7 @@
 		$reader = new HTMLReader('wcm-update.html');
 		$json = new HTMLReader($_SERVER['DOCUMENT_ROOT'].'/watershed-conditions-message/watershed-conditions-message.json');
 		$reader->insert('json', $json->read());
-		addHeaderFooter($reader, 'WIP - Watershed Conditions Message (Editor)');
+		addHeaderFooter($reader, 'Watershed Conditions Message (Editor)');
 		echo $reader->read();
 		return 0;
 	}
