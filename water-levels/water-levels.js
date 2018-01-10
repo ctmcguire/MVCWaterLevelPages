@@ -11,15 +11,6 @@ if (month < 10)
 if (day<10)
 	day = "0" + day;
 
-//////EDIT below three variable to customize the format of the date/////
-
-var displayfirst=year;
-var displaysecond=month;
-var displaythird=day;
-
-////////////////////////////////////
-
-//document.form1.enddate.value=displayfirst+"-"+displaysecond+"-"+displaythird
 document.getElementById('enddate').value = year + "-" + month + "-" + day;//Regardless of the format it displays, date inputs always store their value as yyyy-mm-dd
 
 function validateForm() {
