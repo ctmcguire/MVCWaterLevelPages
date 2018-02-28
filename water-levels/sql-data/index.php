@@ -12,8 +12,8 @@
 	mysql_select_db($db);
 
 	$cols = array(
-		'Flow Rate'=>"datainfo",
-		'Water Level'=>"datainfo",
+		'Flow'=>"datainfo",
+		'Level'=>"datainfo",
 		'Historical Average'=>"historicalaverage",
 		'Historical Minimum'=>null,
 		'Historical Maximum'=>null,
@@ -27,13 +27,19 @@
 
 	$columns = "date,time";
 	$keys = "`tsdata`.`gauge` = `data`.`gauge`";
-	$cond = "`ts_id` = '$tsId' AND '$from' <= `date` AND `date` <= '$to'";
+	$cond = "`gauge` = '$tsId'";
+	if(!empty($from))
+		$cond = $cond . " AND '$from' <= `date`";
+	if(!empty($to))
+		$cond = $cond . " AND `date` <= '$to'";
 	$order = "`date`";
 
 	if($cols[$column] !== null)
 		$columns = $columns.",".$cols[$column];
 
-	$sqlStr = "SELECT $columns FROM `tsdata` INNER JOIN `data` ON $keys WHERE $cond ORDER BY $order";
+	$sqlStr = "SELECT $columns FROM `data` WHERE $cond ORDER BY $order";
+	if(empty($from) && empty($to))
+		$sqlStr = $sqlStr . " DESC LIMIT 1";
 	$query = mysql_query($sqlStr);
 
 	while($row = mysql_fetch_array($query))
