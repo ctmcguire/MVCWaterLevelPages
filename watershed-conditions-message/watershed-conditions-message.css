@@ -1,11 +1,11 @@
-.cond-desc #Normal,
-.cond-desc #Abnormal,
-.cond-desc div[name="flood"],
-.cond-desc div[name="drought"]
+.mvc-cond-desc:not(.mvc-all) #Normal,
+.mvc-cond-desc #Abnormal,
+.mvc-cond-desc:not(.mvc-all) div[name="flood"],
+.mvc-cond-desc:not(.mvc-all) div[name="drought"]
 {
 	display: none;
 }
-.cond-img
+.mvc-cond-img
 {
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
