@@ -1,15 +1,14 @@
 (function(src) {
-	var http = new XMLHttpRequest();
-	http.onreadystatechange = function() {
-		if(http.readyState !== 4)
-			return;//do nothing if the request hasn't finished yet
-		if(http.status !== 200)
-			return console.log([http.responseText]);//log the response text if there is an error code
-		(function(res) {
-			var obj = JSON.parse(res);
+	$.ajax({
+		dataType: "json",
+		url: "./" + src,
+		success: function(res) {
+			//console.log(res);
+			var obj = res//JSON.parse(res);
 			console.log([obj]);
 			document.title = obj.title;//assign page title
-			document.getElementById('content').innerHTML = obj.message;//replace the contents of the content div with the watershed conditions message
+			$('.gdl-page-title.gdl-title')[0].innerHTML = obj.title;
+			document.getElementById('content').innerHTML = obj.message.split('\\"').join('"');//replace the contents of the content div with the watershed conditions message
 
 			/* 
 			 * Get the file names from the file urls for later use
@@ -48,8 +47,9 @@
 			var tags = document.querySelectorAll('.cond-img');
 			for(var i = 0; i < tags.length; i++)
 				tags[i].style.backgroundImage = imgs;
-		})(http.responseText);
-	};
-	http.open('GET', src, true);
-	http.send(null);
+		},
+		error: function(res) {
+			console.error(res);
+		},
+	})
 })('watershed-conditions-message.json');
