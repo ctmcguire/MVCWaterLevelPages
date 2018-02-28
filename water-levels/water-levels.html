@@ -1,409 +1,284 @@
+<!doctype html>
 <html>
 	<head>
-		<title>Level and Flow Data</title>
+		<title>
+			Level and Flow Data
+		</title>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"/>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.2.0/dist/MarkerCluster.css"/>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.2.0/dist/MarkerCluster.Default.css"/>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet.defaultextent@0.0.2/dist/leaflet.defaultextent.css"/>
+		<!--link rel="stylesheet" href="https://unpkg.com/leaflet-html-legend@0.3.0/src/L.Control.HtmlLegend.css"/-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+		<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+		<!-- Load Esri Leaflet from CDN -->
+		<script src="https://unpkg.com/esri-leaflet@2.1.2/dist/esri-leaflet.js"></script>
+		<script src="https://unpkg.com/leaflet.markercluster@1.2.0/dist/leaflet.markercluster.js"></script>
+		<script src="https://unpkg.com/esri-leaflet-cluster@2.0.0/dist/esri-leaflet-cluster.js"></script>
+		<script src="https://unpkg.com/leaflet.defaultextent@0.0.2/dist/leaflet.defaultextent.js"></script>
+		<script src="https://unpkg.com/leaflet-html-legend@0.3.0/dist/L.Control.HtmlLegend.js"></script>
+
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<$wp-themes/><!-- Wordpress Style Sheets -->
-		<link rel="stylesheet" type="text/css" href="water-levels.css"/><!-- Style Sheet for generate.html -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="https://code.highcharts.com/stock/5.0.12/highstock.js"></script>
+		<script type="text/javascript" src="https://code.highcharts.com/stock/5.0.12/highcharts-more.js"></script>
+		<script type="text/javascript" src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+
+		<script type="text/javascript" src="mvc-highstock.js"></script>
+
+		<link rel="stylesheet" href="mvc-highstock.css"/>
+		<link rel="stylesheet" href="../watershed-conditions-message/watershed-conditions-message.css"/>
+		<link rel="stylesheet" href="water-levels.css"/>
 	</head>
-	<body>
+	<body class="hazard-on">
 		<$wp-header/>
 		<$wp-content>
-			<p>
-				<strong>
-					Our website is evolving as we implement an open data strategy.
-					<a href="mailto:cmcguire@mvc.on.ca">
-						Click here to submit your feedback.
-					</a>
-				</strong>
-			</p>
-			<p>
-				The MVCA monitors water levels or flow at 40 sites in the Mississippi and Carp river watersheds.
-				Data from individual locations can be found below the map.
-				Automated gauging sites are updated daily while manual staff gauge readings are taken weekly.
-			</p>
-			<p>
-				As of January 1, 2017, the MVCA is no longer operating or monitoring levels at the <span class="bold">Clayton Lake dam</span>.
-				&nbsp;For information regarding water levels on Clayton Lake or flows on the Indian River, please contact the Ministry
-				of Natural Resources and Forestry, Kemptville office at&nbsp;613-258-8204.
-			</p>
-			<p>
-				<strong>
-					Note that all data is provisional.
-					For more information please read the disclaimer below the map.
-				</strong>
-			</p>
-			<p></p>
-			<p></p>
-			<center>
-				<a class="gdl-button" href="../current-conditions/">
-					<span class="gdl-button">
-						Click to View Current Conditions
-					</span>
-				</a>
-			</center>
-			<p></p>
-			<p></p>
-			<div class="embed-container">
-				<iframe frameborder="0" marginheight="0" marginwidth="0" title="MVCA Water Gauges" src="mvc-maps/mvc-maps.html"></iframe>
+			<div id="mvca-map"></div>
+			<div id="graph-modal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								&times;
+							</button>
+							<h4 class="modal-title">
+								<span id="gauge-name">
+									| Graph Data
+								</span>
+							</h4>
+							<button class="mvc-open-other" data-toggle="modal" data-target="#table-modal" data-dismiss="modal">
+								Table View
+							</button>
+						</div>
+						<div class="modal-body">
+							<div id="chart-content" >
+								<h3>
+									Now Loading...
+								</h3>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="" data-dismiss="modal">
+								Close
+							</button>
+						</div>
+					</div>
+				</div>
 			</div>
-			<br/>
-			<br/>
-			<table class="water-levels" border=1 cellpadding=10 cellspacing=0>
-				<tr>
-					<td class="disclaimer2">
-						<h2>
-							Disclaimer: Provisional Data
-						</h2>
-						<div>
-							<p>
-								<em>
-									The data contained within this database has not been formally reviewed or edited and may be subject to change.
-								</em>
-							</p>
-							<p>
-								<em>
-									Publication or reproduction of the data contained within this website either wholly or in part without the
-									expressed written consent of the Mississippi Valley Conservation is prohibited.
-								</em>
-							</p>
-							<p>
-								<em>
-									Anyone using the data contained within this website is cautioned to carefully consider the provisional nature of
-									this information and should not use it for making decisions that concern personal or public safety or the conduct
-									of business that involves substantial monetary or operational consequences.
-								</em>
-							</p>
-							<p>
-								<em>
-									Mississippi Valley Conservation and its employees, while providing this information in good faith, accepts no
-									responsibility for any loss, damage, injury, or loss in value to any person, property, service or otherwise,
-									resulting from its use.
-								</em>
-							</p>
-							<p>
-								For the official
-								<a href="https://ec.gc.ca/rhc-wsc/default.asp?lang=En&n=9018B5EC-1" target="_blank">
-									HYDAT
-								</a>
-								record of stream flows please contact:
-								<br/>
-								<span class="contacts">
-									Environment Canada - Data Control and Client Services
-								</span>
-								<br/>
-								<span class="contacts">
-									<a href="mailto:EC.RHC-ON-WSC-ON.EC@CANADA.CA">
-										Email
-									</a>
-								</span>
-								<br/>
-								<span class="contacts">
-									905-319-6940
-								</span>
-							</p>
-							<p>
-								Or visit the
-								<a href="https://wateroffice.ec.gc.ca/index_e.html" target="_blank">
-									Water Survey of Canada Level and Flow Data
-								</a>
-								site.
-							</p>
+			<div id="table-modal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								&times;
+							</button>
+							<h4 class="modal-title">
+								<span id="gauge-name"></span>
+								| Table Data
+							</h4>
+							<button class="mvc-open-other" data-toggle="modal" data-target="#graph-modal" data-dismiss="modal">
+								Chart View
+							</button>
 						</div>
-					</td>
-				</tr>
-				<tr>
-					<td class="view-data">
-						<h2>
-							View Station Data:
-						</h2>
-						<p></p>
-						<p></p>
-						<form id="form1" name="form1" method="post" action="./gauge-data/" onsubmit="return validateForm()">
-							<!--Dropdown for all of the gauges (there are a lot of them)-->
-							<!--
-								The value attributes for all these options will need to change to the ts_id value in the tsdata table in the SQL database
-							-->
-							<select name="gauge">
-								<!--default option to be displayed initially (can't be reselected)-->
-								<option selected disabled>
-									Select...
-								</option>
-								<!--Group the stream gauges together-->
-								<optgroup label="Automated Flow Gauges">
-									<option value="Myers Cave Flow">
-										Myers Cave
-									</option>
-									<option value="Buckshot Creek Flow">
-										Buckshot Creek
-									</option>
-									<option value="Ferguson Falls Flow">
-										Ferguson Falls
-									</option>
-									<option value="Appleton Flow">
-										Appleton
-									</option>
-									<option value="Gordon Rapids Flow">
-										Gordon Rapids
-									</option>
-									<option value="Lanark Stream Flow">
-										Lanark
-									</option>
-									<option value="Mill of Kintail Flow">
-										Mill of Kintail
-									</option>
-									<option value="Kinburn Flow">
-										Kinburn
-									</option>
-									<option value="Bennett Lake Outflow">
-										Bennett Lake Outflow
-									</option>
-									<option value="Dalhousie Lake Outflow">
-										Dalhousie Lake Outflow
-									</option>
-									<option value="High Falls Flow">
-										High Falls Flow
-									</option>
-								</optgroup>
-								<!--Group all the daily lake gauges together-->
-								<optgroup label="Automated Level Gauges">
-									<option value="Shabomeka Lake">
-										Shabomeka Lake
-									</option>
-									<option value="Mazinaw Lake">
-										Mazinaw Lake
-									</option>
-									<option value="Kashwakamak Lake">
-										Kashwakamak Lake
-									</option>
-									<option value="Farm Lake">
-										Farm Lake
-									</option>
-									<option value="Mississagagon Lake">
-										Mississagagon Lake
-									</option>
-									<option value="Big Gull Lake">
-										Big Gull Lake
-									</option>
-									<option value="Crotch Lake">
-										Crotch Lake
-									</option>
-									<option value="Palmerston Lake">
-										Palmerston Lake
-									</option>
-									<option value="Canonto Lake">
-										Canonto Lake
-									</option>
-									<option value="Sharbot Lake">
-										Sharbot Lake
-									</option>
-									<option value="Bennett Lake">
-										Bennett Lake
-									</option>
-									<option value="Dalhousie Lake">
-										Dalhousie Lake
-									</option>
-									<option value="Lanark">
-										Lanark
-									</option>
-									<option value="Mississippi Lake">
-										Mississippi Lake
-									</option>
-									<option value="C.P. Dam">
-										C.P. Dam
-									</option>
-									<option value="Carp River at Maple Grove">
-										Carp River at Maple Grove
-									</option>
-									<option value="High Falls">
-										High Falls
-									</option>
-								</optgroup>
-								<!--Group all the weekly lake gauges together-->
-								<optgroup label="Manual (Staff) Level Gauges">
-									<option value="Shabomeka Lake (weekly)">
-										Shabomeka Lake
-									</option>
-									<option value="Mazinaw Lake (weekly)">
-										Mazinaw Lake
-									</option>
-									<option value="Little Marble Lake (weekly)">
-										Little Marble Lake
-									</option>
-									<option value="Mississagagon Lake (weekly)">
-										Mississagagon Lake
-									</option>
-									<option value="Kashwakamak Lake (weekly)">
-										Kashwakamak Lake
-									</option>
-									<option value="Farm Lake (weekly)">
-										Farm Lake
-									</option>
-									<option value="Ardoch Bridge (weekly)">
-										Ardoch Bridge
-									</option>
-									<option value="Buckshot Lake (weekly)">
-										Buckshot Lake
-									</option>
-									<option value="Malcolm Lake (weekly)">
-										Malcolm Lake
-									</option>
-									<option value="Pine Lake (weekly)">
-										Pine Lake Lake
-									</option>
-									<option value="Big Gull Lake (weekly)">
-										Big Gull Lake
-									</option>
-									<option value="Crotch Lake (weekly)">
-										Crotch Lake
-									</option>
-									<option value="High Falls G.S. (weekly)">
-										High Falls G.S.
-									</option>
-									<option value="Mosque Lake (weekly)">
-										Mosque Lake
-									</option>
-									<option value="Palmerston Lake (weekly)">
-										Palmerston Lake
-									</option>
-									<option value="Canonto Lake (weekly)">
-										Canonto Lake
-									</option>
-									<option value="Bennett Lake">
-										Bennett Lake
-									</option>
-									<option value="Dalhousie Lake">
-										Dalhousie Lake
-									</option>
-									<option value="Silver Lake (weekly)">
-										Silver Lake
-									</option>
-									<option value="Widow Lake (weekly)">
-										Widow Lake
-									</option>
-									<option value="Lanark Dam (weekly)">
-										Lanark Dam
-									</option>
-									<option value="C.P. Dam">
-										C.P Dam
-									</option>
-									<option value="Almonte Bridge (weekly)">
-										Almonte Bridge
-									</option>
-									<option value="Clayton Lake (weekly)">
-										Clayton Lake (Ended Dec. 2016)
-									</option>
-								</optgroup>
-							</select>
-							<!--The labelled inputs are aligned to the left-->
-							<div class="date-inputs">
+						<div class="modal-body">
+							<div class="mvc-table-range-container">
+								View Data
+								<div id="mvc-from" class="mvc-range-selector">
+									From 
+								</div>
+								<div class="mvc-range-selector mvc-table">
+									<input type="text" name="min" class="mvc-range-selector mvc-table" value="" data-prev="" pattern="\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])"/>
+									<text class="pseudo-input">
+										<span>
+											
+										</span>
+									</text>
+								</div>
+								<div id="mvc-to" class="mvc-range-selector">
+									To 
+								</div>
+								<div class="mvc-range-selector">
+									<input type="text" name="max" class="mvc-range-selector mvc-table" value="" data-prev="" pattern="\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])"/>
+									<text class="pseudo-input">
+										<span>
+											
+										</span>
+									</text>
+								</div>
+							</div>
+							<div id="table-content">
+								<h3>
+									Now Loading...
+								</h3>
+							</div>
+						</div>
+						<div class="modal-footer">
+							Download Data 
+							<div id="mvc-from" class="mvc-range-selector">
+								From: 
+							</div>
+							<div class="mvc-range-selector">
+								<input type="text" name="min" class="mvc-range-selector" value="" data-prev="" pattern="\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])"/>
+								<text class="pseudo-input">
+									<span>
+										
+									</span>
+								</text>
+							</div>
+							<div id="mvc-to" class="mvc-range-selector">
+								To: 
+							</div>
+							<div class="mvc-range-selector">
+								<input type="text" name="max" class="mvc-range-selector" value="" data-prev="" pattern="\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])"/>
+								<text class="pseudo-input">
+									<span>
+										
+									</span>
+								</text>
+							</div>
+							<button type="button" class="download" data-mvc-target="#table-modal .modal-footer input.mvc-range-selector">
+								&nbsp; Download CSV
+							</button>
+							<button type="button" class="" data-dismiss="modal">
+								Close
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="conditions-modal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								&times;
+							</button>
+							<h4 class="modal-title">
+								<span class="mvc-cond-title"></span>
+							</h4>
+						</div>
+						<div class="modal-body">
+							<div class="mvc-cond-img"></div><!--div to display the image for the current conditions-->
+							<div class="mvc-cond-content"></div><!--div to receive the text body of the message-->
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="" data-dismiss="modal">
+								Close
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="disclaimer-modal" class="modal fade" data-backdrop="static" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">
+								Disclaimer: Provisional Data
+							</h4>
+						</div>
+						<div class="modal-body">
+							<div>
 								<p>
-									<!--<$start-date/> will be replaced with the date 2 weeks ago by generate.php-->
-									Start Date: <input type="date" name="startdate" size="25" value='<$start-date/>'/>
+									<em>
+										The data contained within this database has not been formally reviewed or edited and may be subject to change.
+									</em>
 								</p>
 								<p>
-									End Date: <input type="date" id="enddate" name="enddate" size="25"/>
+									<em>
+										Publication or reproduction of the data contained within this website either wholly or in part without the
+										expressed written consent of the Mississippi Valley Conservation is prohibited.
+									</em>
+								</p>
+								<p>
+									<em>
+										Anyone using the data contained within this website is cautioned to carefully consider the provisional nature of
+										this information and should not use it for making decisions that concern personal or public safety or the conduct
+										of business that involves substantial monetary or operational consequences.
+									</em>
+								</p>
+								<p>
+									<em>
+										Mississippi Valley Conservation and its employees, while providing this information in good faith, accepts no
+										responsibility for any loss, damage, injury, or loss in value to any person, property, service or otherwise,
+										resulting from its use.
+									</em>
+								</p>
+								<p>
+									For the official
+									<a href="https://ec.gc.ca/rhc-wsc/default.asp?lang=En&n=9018B5EC-1" target="_blank">
+										HYDAT
+									</a>
+									record of stream flows please contact:
+									<br/>
+									<span class="contacts">
+										Environment Canada - Data Control and Client Services
+									</span>
+									<br/>
+									<span class="contacts">
+										<a href="mailto:EC.RHC-ON-WSC-ON.EC@CANADA.CA">
+											Email
+										</a>
+									</span>
+									<br/>
+									<span class="contacts">
+										905-319-6940
+									</span>
+								</p>
+								<p>
+									Or visit the
+									<a href="https://wateroffice.ec.gc.ca/index_e.html" target="_blank">
+										Water Survey of Canada Level and Flow Data
+									</a>
+									site.
 								</p>
 							</div>
-								<label for="table-type">
-									<input id="table-type" type="radio" name="type" value="table" checked=""/>
-									Table
-								</label>
-								<!--br/-->
-								<label for="chart-type">
-									<input id="chart-type" type="radio" name="type" value="graph"/>
-									Graph
-								</label>
-							<br/>
-							<p>
-								Level recorded in:
-								<br/>
-								<span class="unit">
-									Meters Above Sea Level (MASL)
-								</span>
-							</p>
-							<p>
-								Flow recorded in:
-								<br/>
-								<span class="unit">
-									cubic meters per second (cms)
-								</span>
-							</p>
-							<p>
-								Precipitation recorded in:
-								<br/>
-								<span class="unit">
-									millimeters (mm)
-								</span>
-							</p>
-							<div class="button-center">
-								<input type="submit" name="submit"/>
-							</div>
-						</form>
-					</td>
-					<td class="disclaimer">
-						<h2>
-							Disclaimer: Provisional Data
-						</h2>
-						<div>
-							<p>
-								<em>
-									The data contained within this database has not been formally reviewed or edited and may be subject to change.
-								</em>
-							</p>
-							<p>
-								<em>
-									Publication or reproduction of the data contained within this website either wholly or in part without the
-									expressed written consent of the Mississippi Valley Conservation is prohibited.
-								</em>
-							</p>
-							<p>
-								<em>
-									Anyone using the data contained within this website is cautioned to carefully consider the provisional nature of
-									this information and should not use it for making decisions that concern personal or public safety or the conduct
-									of business that involves substantial monetary or operational consequences.
-								</em>
-							</p>
-							<p>
-								<em>
-									Mississippi Valley Conservation and its employees, while providing this information in good faith, accepts no
-									responsibility for any loss, damage, injury, or loss in value to any person, property, service or otherwise,
-									resulting from its use.
-								</em>
-							</p>
-							<p>
-								For the official
-								<a href="https://ec.gc.ca/rhc-wsc/default.asp?lang=En&n=9018B5EC-1" target="_blank">
-									HYDAT
-								</a>
-								record of stream flows please contact:
-								<br/>
-								<span class="contacts">
-									Environment Canada - Data Control and Client Services
-								</span>
-								<br/>
-								<span class="contacts">
-									<a href="mailto:EC.RHC-ON-WSC-ON.EC@CANADA.CA">
-										Email
-									</a>
-								</span>
-								<br/>
-								<span class="contacts">
-									905-319-6940
-								</span>
-							</p>
-							<p>
-								Or visit the
-								<a href="https://wateroffice.ec.gc.ca/index_e.html" target="_blank">
-									Water Survey of Canada Level and Flow Data
-								</a>
-								site.
-							</p>
 						</div>
-					</td>
-				</tr>
-			</table>
+						<div class="modal-footer">
+							<button type="button" class="" data-dismiss="modal">
+								Close
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<input type="button" id="disclaimer-button" class="mvc-button-automatic" data-toggle="modal" data-target="#disclaimer-modal" hidden=""/>
+			<div id="range-alert-modal" class="modal fade mvc-notice" data-backdrop="static" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">
+								NOTICE:
+							</h4>
+						</div>
+						<div class="modal-body">
+							<div>
+								<p>
+									In order to conserve webpage performance, the largest range the online table will display is a full year.  
+									To view a larger range of data, please download the data as a csv using the download button at the bottom of the table window.  
+								</p>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="" data-dismiss="modal">
+								Close
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<input type="button" id="range-alert-button" class="mvc-button-automatic" data-toggle="modal" data-target="#range-alert-modal.mvc-notice" hidden=""/>
 		</$wp-content>
 		<$wp-footer/>
-		<!--Load the corresponding JavaScript file-->
+		<script>
+			function loadTable() {};
+			function loadGraph() {};
+			init('table-content', 'chart-content');
+		</script>
 		<script src="water-levels.js"></script>
 	</body>
 </html>
