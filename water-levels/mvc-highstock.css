@@ -9,15 +9,16 @@
 	text-align: center;
 }
 
-.tooltip
+.mvc-tooltip
 {
 	position: relative;
 	display: inline-block;
 	color: #00f;
 	border-bottom: 1px dotted #00f;
+	margin-bottom: 0px;
 }
 
-.tooltip-text
+.mvc-tooltip-text
 {
 width: 120px;
 	background-color: #555;
@@ -37,7 +38,7 @@ width: 120px;
 	transition: opacity 1s;
 }
 
-.tooltip-text:after
+.mvc-tooltip-text:after
 {
 	content: "";
 	position: absolute;
@@ -49,7 +50,7 @@ width: 120px;
 	border-color: #555 transparent transparent transparent;
 }
 
-.tooltip:not(.show) .tooltip-text
+.mvc-tooltip:not(.mvc-show) .mvc-tooltip-text
 {
 	visibility: hidden;
 	opacity: 0;
