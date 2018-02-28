@@ -3,10 +3,12 @@
 		<title>Current Watershed Conditions Message</title>
 		<!--JavaScript library for text editor-->
 		<script src="/wp-includes/js/tinymce/tinymce.min.js?ver=4603-20170530"></script>
-		<!--JavaScript for this page-->
-		<script src="wcm-update.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
 		<!--wordpress stylesheets-->
 		<$wp-themes/>
+		<!--JavaScript for this page-->
+		<script src="wcm-update.js"></script>
 		<!--This page's stylesheets-->
 		<link rel="stylesheet" type="text/css" href="wcm-update.css"/>
 	</head>
@@ -61,6 +63,40 @@
 									</div>
 								</div>
 							</div>
+							<div class="mvc-sub-watersheds">
+								<input type="text" name="sub-watersheds" class="mvc-sub-watersheds mvc-json" value="" hidden=""/>
+								<table class="mvc-affected-areas">
+									<tr>
+										<th>
+											Affected Sub-Watersheds
+										</th>
+										<th class="mvc-affected-areas-header mvc-select-all">
+											Level 3 Low Water
+										</th>
+										<th class="mvc-affected-areas-header mvc-select-all">
+											Level 2 Low Water
+										</th>
+										<th class="mvc-affected-areas-header mvc-select-all">
+											Level 1 Low Water
+										</th>
+										<th class="mvc-affected-areas-header mvc-select-all">
+											Normal
+										</th>
+										<th class="mvc-affected-areas-header mvc-select-all">
+											Water Safety
+										</th>
+										<th class="mvc-affected-areas-header mvc-select-all">
+											Flood Outlook
+										</th>
+										<th class="mvc-affected-areas-header mvc-select-all">
+											Flood Watch
+										</th>
+										<th class="mvc-affected-areas-header mvc-select-all">
+											Flood Warning
+										</th>
+									</tr>
+								</table>
+							</div>
 							<h3>
 								Statement:
 							</h3>
@@ -71,11 +107,15 @@
 			</form>
 			<input id="submit-message" value="submit" type="submit" form="condition-message" />
 			<script>
-				tinymce.init({
-					selector: '#message',//element to be replaced by the text editor
-					resize: false,//don't allow resizing because it makes the page behave weirdly
-					height: '599px'//Set height to 599px
-				});
+				(function() {
+					if(window.tinymce === undefined)
+						return console.error('ERROR: This page requires the tinymce library!');
+					tinymce.init({
+						selector: '#message',//element to be replaced by the text editor
+						resize: false,//don't allow resizing because it makes the page behave weirdly
+						height: '599px'//Set height to 599px
+					});
+				})();
 
 				window.init('<$json/>');//load the values from the json file
 			</script>

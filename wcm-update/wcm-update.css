@@ -86,3 +86,16 @@ textarea
 {
 	width: 68px;
 }
+
+tr.mvc-affected-areas
+{
+	text-align: center;
+}
+input.mvc-sub-watersheds.mvc-json
+{
+	display: none;
+}
+.mvc-select-all
+{
+	cursor: pointer;
+}

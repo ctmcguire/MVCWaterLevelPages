@@ -1,9 +1,4 @@
-/**
- * This function initializes this module's functions and variables
- * 
- * @param obj 	- obj to recieve any public scoped variables or functions
-**/
-(function(obj) {
+(function() {
 	var isInitialized = false;//Only let this function get called once
 	var imgHandler;//stores the event handler for the radio buttons
 
@@ -49,6 +44,35 @@
 			return isValid(drts) && isValid(flds);//check image validity for both drought and flood radio buttons
 		}
 		/**
+		 * 
+		**/
+		function validateAffectedAreas() {
+			var obj = {};
+			var $rows = $('tr.mvc-affected-areas');
+			for(let i = 0; i < $rows.length; i++) {
+				let $row = $($rows[i]);
+				let $btn = (function($list) {
+					for(let i = 0; i < $list.length; i++) {
+						if($list[i].checked)
+							return $($list[i]);
+					}
+					return;
+				})($row.find('input[type="radio"]'));
+
+				if($btn === undefined)
+					return false;
+				obj[$row.data('name')] = $btn.attr('value');
+			}
+			try {
+				$('input.mvc-sub-watersheds.mvc-json').attr('value', JSON.stringify(obj));
+				console.log(obj);
+				return true;
+			} catch(e) {
+				console.error(e);
+				return true;
+			}
+		}
+		/**
 		 * This function returns whether or not the message body is valid
 		 * 
 		 * @return 	- true, as I was unable to find a way to check the value of the text editor
@@ -56,7 +80,7 @@
 		function validateStatement() {
 			return true;//as of right now, no way to check this before clicking submit
 		}
-		return validateTitle() && validateImg() && validateStatement();
+		return validateTitle() && validateImg() && validateAffectedAreas() && validateStatement();
 	}
 
 	/**
@@ -112,6 +136,24 @@
 		};
 	}
 
+	function affectedAreasTable() {
+		var $cols = $('th.mvc-affected-areas-header');
+		var $rows = $('tr.mvc-affected-areas');
+		for(let i = 0; i < $rows.length; i++) {
+			var $row = $($rows[i]);
+			$row.append('<th>'
+						 + $row.data('name')
+					 + '</th>');
+			for(let j = 0; j < $cols.length; j++) {
+				$row.append('<td>'
+							 + '<input type="radio" name="' + $row.data('name') + '-conditions" value="' + $cols[j].innerHTML.trim() + '"/>'
+						 + '</td>');
+			}
+			console.log($row.data('selected'), $row.find('input[type="radio"][value="' + $row.data('selected') + '"]'));
+			$row.find('input[type="radio"][value="' + $row.data('selected') + '"]').attr('checked', '');
+		}
+	}
+
 	/**
 	 * This function takes a json string and uses it to load the current data to be displayed in the input 
 	 * fields (title box, radio buttons, text editor)
@@ -157,6 +199,16 @@
 			imgHandler = getHandler(setImg(img.flood, 'flood'), setImg(img.drought, 'drought'));//Set both sets of radio buttons, the image display, and the event handler
 		}
 		/**
+		 * 
+		**/
+		function setAffectedAreas(dat) {
+			$('input.mvc-sub-watersheds.mvc-json').attr('value', JSON.stringify(dat));
+			for(let key in dat) {
+				$('table.mvc-affected-areas').append('<tr class="mvc-affected-areas" data-name="' + key + '" data-selected="' + dat[key] + '"></tr>');
+			}//*/
+			affectedAreasTable();
+		}
+		/**
 		 * This function sets the initial value of the text editor
 		 * 
 		 * @param message 	- the initial message body value
@@ -168,12 +220,24 @@
 		 * If not set, asign a default value to the json string
 		 */
 		if(json === '<$json/>')
-			json = '{"title":"<$title/>","img":{"id":"<$id/>","src":"<$src/>"},"message":"<$message/>"}';
+			json = '{"title":"<$title/>","img":{"id":"<$id/>","src":"<$src/>"},"sub-watersheds":{},"message":"<$message/>"}';
 		var dat = JSON.parse(json);//parse the json string
-		//console.log(dat);//print the string for testing purposes
 		setTitle(dat.title);//set initial title value
 		setImgs(dat.img);//set initial image values
+		setAffectedAreas(dat['sub-watersheds']);
 		setStatement(dat.message);//set initial message body values
+	}
+
+	function selectAll(event) {
+		var $e = $(event.target);
+		if($e === undefined)
+			return;
+		var col = $e[0].innerHTML.trim();
+		$list = $('.mvc-affected-areas input[type="radio"][value="' + col + '"]');
+		for(let i = 0; i < $list.length; i++) {
+			$list[i].checked = true;
+		}
+		validateForm();
 	}
 
 	/**
@@ -186,7 +250,7 @@
 	**/
 	function init(json='<$json/>') {
 		if(isInitialized)
-			return console.log('ERROR: Not allowed to call function window.init twice');
+			return console.error('ERROR: Not allowed to call function window.init twice');
 		isInitialized = true;//assign isInitialized to true after executing once
 
 		loadData(json);//load the initial data
@@ -198,6 +262,7 @@
 		document.getElementById('condition-message').onchange = function() {
 			document.getElementById('submit-message').disabled = !validateForm();
 		};
+		$('.mvc-select-all').bind('click', null, selectAll);
 
 		/* 
 		 * set the image change event handlers
@@ -211,5 +276,5 @@
 		return true;
 	}
 
-	obj.init = init;//make the init function "public"
-})(window);
+	window.init = init;//make the init function "public"
+})();
