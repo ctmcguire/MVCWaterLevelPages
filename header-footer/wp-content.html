@@ -62,17 +62,12 @@
 				return;
 			var classes = document.getElementById(e.target.getAttribute('side-menu')).classList;
 
-			console.log('yay!')
-
 			if(classes.contains('toggled'))
 				return classes.remove('toggled');
 			return classes.add('toggled');
 		}
 		function hideMenu(e) {
 			var classes = document.getElementById(document.querySelectorAll('.content-part-wrapper')[0].getAttribute('side-menu')).classList;
-
-			console.log('oh noes!')
-
 			if(!classes.contains('toggled'))
 				return;
 			classes.remove('toggled');
