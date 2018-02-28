@@ -1,14 +1,14 @@
 @font-face {
 	font-family: wptouch-icons;
-	src: url(/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.eot?64777116);
-	src: url(/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.eot?64777116#iefix) format('embedded-opentype'),
-		url(/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.woff?64777116) format('woff'),
-		url(/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.ttf?64777116) format('truetype'),
-		url(/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.svg?64777116#wptouch-icons) format('svg');
+	src: url(http://mvc.on.ca/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.eot?64777116);
+	src: url(http://mvc.on.ca/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.eot?64777116#iefix) format('embedded-opentype'),
+		url(http://mvc.on.ca/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.woff?64777116) format('woff'),
+		url(http://mvc.on.ca/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.ttf?64777116) format('truetype'),
+		url(http://mvc.on.ca/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.svg?64777116#wptouch-icons) format('svg');
 	font-weight: 400;
 	font-style: normal
 }
-@media only screen and (max-width : 740px)
+@media only screen and (max-width : 768px)
 {
 	.scroll-container
 	{
@@ -320,15 +320,21 @@
 		width: calc(100% - 20px);
 	}
 }
-@media only screen and (min-width : 740px)
+@media only screen and (min-width : 768px)
 {
-	.mobile
+	body:not(.hazard-on) .mobile
 	{
 		display: none;
 	}
-	.scroll-container
+	.scroll-container:not(.hazard-on)
 	{
 		width: auto;
+	}
+
+	.header-part-wrapper:not(.hazard-on),
+	#dummy-footer:not(.hazard-on)
+	{
+		min-width: 960px;
 	}
 }
 
