@@ -47,6 +47,10 @@
 	left: 9px;
 	top: -3px;
 }
+.conditions-popup
+{
+	cursor: pointer;
+}
 
 .station-popup-icon
 {

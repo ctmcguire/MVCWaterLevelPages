@@ -311,7 +311,7 @@
 		var obj = {
 			'map-items': 
 				"<div id=\"map-items\" class=\"mvc-large-popup\">\
-					<div title=\"{tooltip}\" data-toggle=\"tooltip\" class=\"station-popup {Identifier}\">\
+					<div title=\"{tooltip}\" class=\"station-popup {Identifier}\">\
 						<div class=\"station-popup-icon mvc-primary-data\">\
 							{Recent}\
 						</div>\
@@ -469,7 +469,7 @@
 					return ("<br/>"
 						 + "<br/>"
 						 + "<br/>"
-						 + "<span class=\"station-popup-data\" data-toggle=\"modal\" data-target=\"#conditions-modal\">"
+						 + "<span class=\"station-popup-data\">"
 							 + ((conditions['sub-watersheds'][data.Name] !== "Normal")?
 								conditions['sub-watersheds'][data.Name] + " Statement in Effect":
 								"No Statements in Effect")
@@ -477,9 +477,7 @@
 						 + "</span>");
 				},
 				'Identifier': function(data) {
-					if(/^([a-z]|[A-Z])([a-z]|[A-Z]|[0-9]|-|_)*$/.test(data.Gauge))
-						return "mvc-" + data.Gauge;
-					return "mvc-station-" + data.OBJECTID_1;
+					return "conditions-popup\" data-toggle=\"modal\" data-target=\"#conditions-modal\""
 				},
 				'Gauge': data.Name + " Subwatershed",
 				'tooltip': "Current Subwatershed Conditions",
