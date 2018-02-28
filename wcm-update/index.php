@@ -46,12 +46,21 @@
 		$title = $_POST['title'];
 		$fld = $_POST['flood'];
 		$drt = $_POST['drought'];
+		$sws = $_POST['sub-watersheds'];
 		$message = $_POST['message'];
 
 		if(is_null($title) || is_null($fld) || is_null($drt) || is_null($message))
 			return 1;
-		$message = str_replace("'", "\\'", str_replace('"','\\\\\\"',str_replace("\r\n",'',$message)));
-		$json = '{"title": "'.$title.'","img": { "flood":"'.$fld.'", "drought":"'.$drt.'"},"message": "'.$message.'"}';
+		$message = str_replace('"','\\\\\\"',str_replace("\r\n",'',$message));
+		$json = '{'
+			.'"title": "'.$title.'",'
+			.'"img": {'
+				.'"flood":"'.$fld.'",'
+				.'"drought":"'.$drt.'"'
+			.'},'
+			.'"sub-watersheds": '.$sws.','
+			.'"message": "'.$message.'"'
+		.'}';
 
 		$len = file_put_contents($_SERVER['DOCUMENT_ROOT'].'/watershed-conditions-message/watershed-conditions-message.json',$json);
 		return 0;
@@ -66,7 +75,7 @@
 	{
 		$reader = new HTMLReader('wcm-update.html');
 		$json = new HTMLReader($_SERVER['DOCUMENT_ROOT'].'/watershed-conditions-message/watershed-conditions-message.json');
-		$reader->insert('json', $json->read());
+		$reader->insert('json', str_replace("'", "\\'", $json->read()));
 		addHeaderFooter($reader, 'Watershed Conditions Message (Editor)');
 		echo $reader->read();
 		return 0;
