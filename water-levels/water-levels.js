@@ -195,11 +195,13 @@
 			$modal.find('input.mvc-table[name="max"]').bind('change', dat, table_range_changed);
 			$modal.find('input.mvc-table[name="min"]').bind('change', dat, table_range_changed);
 
+			$('#mvc-tab-graph-tab').tab('show');
+
 			if($table !== undefined) {
-				return loadTable(dat.Gauge, '', '');
+				loadTable(dat.Gauge, '', '');
 			}
 			if($chart !== undefined)
-				return loadGraph(dat.Gauge, '', '');
+				loadGraph(dat.Gauge, '', '');
 		},
 		'mvc-conditions': function($event) {
 			var $e = $($event.target);
@@ -258,8 +260,8 @@
 			return;
 		var classes = $e[0].className;
 
-		var $max = $('#table-modal input.' + classes.replace_(' ', '.') + '[name="max"]');
-		var $min= $('#table-modal input.' + classes.replace_(' ', '.') + '[name="min"]');
+		var $max = $('#mvc-tab-table input.' + classes.replace_(' ', '.') + '[name="max"]');
+		var $min= $('#mvc-tab-table input.' + classes.replace_(' ', '.') + '[name="min"]');
 
 		if($max.length < 1 || $min.length < 1)
 			return;
@@ -639,7 +641,7 @@
 	$('text.pseudo-input').bind('click', null, range_click);
 	$('input.mvc-range-selector').bind('blur', null, range_blur);
 	$('input.mvc-range-selector:not(.mvc-table)').bind('change', null, range_blur);
-	$('#table-modal').bind('click', null, toggle_click);
+	$('#mvc-tab-table').bind('click', null, toggle_click);
 })();
 (function() {
 	$('#disclaimer-button').trigger('click');
