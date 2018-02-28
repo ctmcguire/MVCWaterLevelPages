@@ -150,6 +150,107 @@
 					</div>
 				</div>
 			</div>
+			<div id="help-modal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								&times;
+							</button>
+							<h4 class="modal-title">
+								Help
+							</h4>
+						</div>
+						<div class="modal-body">
+							<!--How to view level/flow data-->
+							<div>
+								<h5>
+									Viewing a Gauge's Most Recent Data
+								</h5>
+								<span>
+									In order to view a gauge's most recent data, you must first locate the marker of the gauge you would like to view on the map.  
+									If the gauge marker is not visible, try zooming in or clicking on nearby clusters; it is possible that the gauge marker was
+									too close to another gauge marker and that it has simply been clustered together with it.  Once you have located the gauge 
+									marker of the desired gauge, click on it to open the gauge's popup screen.  After data has loaded, you will be able to see the 
+									most recent data for the gauge in the white circle to the left of the gauge marker in the popup.  If the border around the 
+									white circle is displayed in red, this means that the most recent data for this gauge is out of date, and that the gauge may be 
+									experiencing technical difficulties.  If the white circle contains a Conservation Ontario logo, this means that the gauge you 
+									are looking at is not currently being measured and has no data associated with it at this point in time.
+								</span>
+							</div>
+							<div>
+								<h5>
+									Viewing all of a Gauge's Data
+								</h5>
+								<span>
+									If you would like to view a gauge's readings from any given date, rather than just its most recent reading, you must again 
+									first locate the marker of the gauge you would like to view on the map and click on the marker to open its popup.  To the right
+									 of the gauge marker, you will see a group of circles with coloured icons in them.  These circles are buttons for different 
+									measurements associated with this gauge.  You may use the map legend for more details on what each button icon means.  Each 
+									button may appear as one of 3 different colours: green, red, or white.  If the button icon and border are green, then the gauge
+									 data for this measurement is up to date and will reflect the current measurements of this gauge.  If the button icon and 
+									border are red, then the gauge data is not up to date and 
+									<span class="mvc-bold">
+										may not
+									</span>
+									accurately represent the current measurements of the area.  If the button icon is white, but the border colour of the button is
+									 red or green, then you are currently hovering over the button with your mouse; the button icon will return to its original 
+									colour once you move your mouse off of the button.  If instead the button icon is white, and the border colour is also white, 
+									then the gauge's most recent data is still loading.  
+									<span class="mvc-bold">
+										The buttons will work regardless of whether or not the most recent data has loaded; the only difference will be the 
+										button's colour.  
+									</span>
+									To view the data for one of the buttons, simply click on the button and a graph window will open.  From here, you can 
+									change the range of data displayed in the graph using the range selector directly beneath the graph, or by directly entering 
+									the date range you would like to view in the date inputs in the upper right corner of the graph.  Please note that the date 
+									inputs may not be displayed if you are viewing the page on a device with a small screen size, such as a mobile phone.  In this
+									 case, you 
+									<span class="mvc-bold">
+										must
+									</span>
+									use the range selector underneath the graph.  
+								</span>
+								<h6>
+									Viewing Data in a Table Instead of a Graph
+								</h6>
+								<span>
+									To view the gauge data in a table instead of a graph, click on the button that says "Table View" in the upper left of the 
+									graph window.  This will display the gauge data using a table.  Please note that, for performance reasons, only a maximum of 1
+									 year's worth of data may be viewed on the webpage.  In order to view data for a larger period, use the range selectors and 
+									download button in the bottom-right corner of the table window.  This will download the table data as a csv file.  If the 
+									download does not show up immediately after pressing the download button, please wait briefly as the csv data may still be 
+									loading.
+								</span>
+							</div>
+							<!--Viewing Subwatershed Conditions & Watershed Conditions Message-->
+							<div>
+								<h5>
+									Viewing Subwatershed Conditions
+								</h5>
+								<span>
+									To view the subwatershed condtions for a specific subwatershed, simply click on the subwatershed in question.  The conditions 
+									will be displayed in the white circle of the popup that will appear.  Please note that this since subwatershed condition 
+									colours all indicate at least 2 different conditions (1 for high and 1 for low), you may wish to check the subwatershed 
+									conditions to make sure which one is in affect in your area.
+								</span>
+								<h6>
+									Viewing the Watershed Conditions Message
+								</h6>
+								<span>
+									You can also view the current watershed conditions message directly from this webpage by clicking on the subwatershed 
+									conditions text in the subwatershed's popup.
+								</span>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="" data-dismiss="modal">
+								Close
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div id="conditions-modal" class="modal fade" role="dialog">
 				<div class="modal-dialog">
 					<div class="modal-content">
