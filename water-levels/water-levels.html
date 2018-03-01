@@ -47,25 +47,34 @@
 							</button>
 							<h4 class="modal-title">
 								<span id="gauge-name"></span>
-								| Gauge Data
+								|
+								<ul class="nav nav-pills" id="mvc-data-tab">
+									<li class="nav-item">
+										<a id="mvc-tab-graph-tab" class="nav-link active" href="#mvc-tab-graph" data-toggle="tab">
+											Graph Data
+										</a>
+									</li>
+									<li class="nav-item">
+										<a id="mvc-tab-table-tab" class="nav-link" href="#mvc-tab-table" data-toggle="tab">
+											Table Data
+										</a>
+									</li>
+								</ul>
 							</h4>
-							<!--button class="mvc-open-other" data-toggle="modal" data-target="#table-modal" data-dismiss="modal">
-								Table View
-							</button-->
 						</div>
 						<div class="modal-body">
-							<ul class="nav nav-tabs" id="mvc-data-tab">
+							<!--ul class="nav nav-pills" id="mvc-data-tab">
 								<li class="nav-item">
 									<a id="mvc-tab-graph-tab" class="nav-link active" href="#mvc-tab-graph" data-toggle="tab">
-										Graph
+										Graph Data
 									</a>
 								</li>
 								<li class="nav-item">
 									<a id="mvc-tab-table-tab" class="nav-link" href="#mvc-tab-table" data-toggle="tab">
-										Table
+										Table Data
 									</a>
 								</li>
-							</ul>
+							</ul-->
 							<div id="mvc-data-tab-content" class="tab-content">
 								<div id="mvc-tab-graph" class="tab-pane fade active">
 									<div id="chart-content" >
@@ -107,13 +116,34 @@
 									</div>
 								</div>
 							</div>
-							<!--div id="chart-content" >
-								<h3>
-									Now Loading...
-								</h3>
-							</div-->
 						</div>
 						<div class="modal-footer">
+							<!--Download Data 
+-							<div id="mvc-from" class="mvc-range-selector">
+-								From: 
+-							</div>
+-							<div class="mvc-range-selector">
+-								<input type="text" name="min" class="mvc-range-selector" value="" data-prev="" pattern="\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])"/>
+-								<text class="pseudo-input">
+-									<span>
+-										
+-									</span>
+-								</text>
+-							</div>
+-							<div id="mvc-to" class="mvc-range-selector">
+-								To: 
+-							</div>
+-							<div class="mvc-range-selector">
+-								<input type="text" name="max" class="mvc-range-selector" value="" data-prev="" pattern="\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])"/>
+-								<text class="pseudo-input">
+-									<span>
+-										
+-									</span>
+-								</text>
+-							</div>
+-							<button type="button" class="download" data-mvc-target="#table-modal .modal-footer input.mvc-range-selector">
+-								&nbsp; Download CSV
+-							</button>-->
 							<button type="button" class="" data-dismiss="modal">
 								Close
 							</button>

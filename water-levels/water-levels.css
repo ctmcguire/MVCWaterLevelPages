@@ -170,6 +170,13 @@
 	max-height: calc(100vh - (128px + 60px + 2px));
 }
 
+#mvc-data-tab
+{
+	font-size: 14px;
+	vertical-align: middle;
+	display: inline-block;
+}
+
 text.pseudo-input
 {
 	-webkit-appearance: textfield;
