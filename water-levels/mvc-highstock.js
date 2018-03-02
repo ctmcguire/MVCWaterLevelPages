@@ -143,7 +143,7 @@ function init(table_id, chart_id) {
 
 			var diff = (new Date(end)) - (new Date(start));//difference b/w 2 dates
 			if(0 <= (diff - year62))
-				return yearly;
+				return monthly;//yearly;
 			if(0 <= (diff - year26))
 				return monthly;
 			if(0 <= (diff - year06))
@@ -836,7 +836,43 @@ function init(table_id, chart_id) {
 				tooltip: {
 					valueSuffix: " " + units,
 				},
-				dataGrouping: {},
+				dataGrouping: {
+					smoothed: true,//put point in the center of a group to avoid shifting data to the left
+					units: [
+						[
+							'millisecond', // unit name
+							[1, 2, 5, 10, 20, 25, 50, 100, 200, 500] // allowed multiples
+						],
+						[
+							'second',
+							[1, 2, 5, 10, 15, 30]
+						],
+						[
+							'minute',
+							[1, 2, 5, 10, 15, 30]
+						],
+						[
+							'hour',
+							[1, 2, 3, 4, 6, 8, 12]
+						],
+						[
+							'day',
+							[1]
+						],
+						[
+							'week',
+							[1]
+						],
+						[
+							'month',
+							[1, 3, 6]
+						],
+						/*[
+							'year',
+							null
+						]*/
+					],
+				},
 			};
 
 			if(tsName === this.gauge.getTimeSeries().getName())
@@ -850,7 +886,8 @@ function init(table_id, chart_id) {
 				singleSeries.dataGrouping.approximation = "low";
 			if(tsName === "Historical Range") {
 				singleSeries.type = "areasplinerange";
-				singleSeries.color = '#D0D0D0'
+				singleSeries.color = '#D0D0D0';
+				singleSeries.lineWidth = 2;
 				singleSeries.zIndex = -2;
 			}
 			if(tsName === "Target Range") {
@@ -865,48 +902,23 @@ function init(table_id, chart_id) {
 			
 			return singleSeries;
 		}
-		function formatRange(low, high, tsName) {
-			if(low === undefined || high === undefined)
-				return;
-			var temp = [];
-			for(let i = 0; i < high.length; i++) {
-				let timestamp = high[i][0];
-				for(let j = 0; j < low.length; j++) {
-					if(low[j][0] < timestamp)
-						continue;
-					if(timestamp < low[j][0])
-						break;
-					temp.push([timestamp, high[i][1], low[j][1]]);
-					break;
-				}
-			}
-			return this.formatData(temp, tsName);
-		}
-		function formatRange_OLD(dat) {
-			if(tempDat === null) {
-				tempDat = dat;
-				return;
-			}
-			var temp = [];
-			for(let i = 0; i < dat.length; i++) {
-				let timestamp = dat[i][0];
-				for(let j = 0; j < tempDat.length; j++) {
-					if(tempDat[j][0] < timestamp)
-						continue;
-					if(timestamp < tempDat[j][0])
-						break;
-					temp.push([timestamp, dat[i][1], tempDat[j][1]]);
-					break;
-				}
-			}
-			return temp;
-		}
 
 		function appendData(dat, i) {
-			this.chart.addSeries(dat, false);
-
 			var rngs = this.gauge.getOrderedRanges();
 			var tsName = i < 0? this.gauge.getOrderedRanges()[-(i+1)] : this.gauge.getOrderedSeries()[i];
+
+			for(let j = 0; j < rngs.length; j++)
+			{
+				if(tsName === this.gauge.getRange(rngs[j]).getLow())
+					break;
+				if(tsName === this.gauge.getRange(rngs[j]).getHigh())
+					break;
+				if(j + 1 < rngs.length)
+					continue;
+				this.chart.addSeries(dat, false);
+				break;
+			}
+			//this.chart.addSeries(dat, false);
 
 			var appendRange = $.proxy(function(dat, rngName) {
 				let temp = this.formatData(dat, rngName);
