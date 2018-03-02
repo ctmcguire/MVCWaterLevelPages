@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.2.0/dist/MarkerCluster.css"/>
 		<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.2.0/dist/MarkerCluster.Default.css"/>
 		<link rel="stylesheet" href="https://unpkg.com/leaflet.defaultextent@0.0.2/dist/leaflet.defaultextent.css"/>
-		<!--link rel="stylesheet" href="https://unpkg.com/leaflet-html-legend@0.3.0/src/L.Control.HtmlLegend.css"/-->
+		<link rel="stylesheet" href="https://unpkg.com/leaflet-easybutton@2.3.0/src/easy-button.css"/>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
@@ -19,6 +19,7 @@
 		<script src="https://unpkg.com/esri-leaflet-cluster@2.0.0/dist/esri-leaflet-cluster.js"></script>
 		<script src="https://unpkg.com/leaflet.defaultextent@0.0.2/dist/leaflet.defaultextent.js"></script>
 		<script src="https://unpkg.com/leaflet-html-legend@0.3.0/dist/L.Control.HtmlLegend.js"></script>
+		<script src="https://unpkg.com/leaflet-easybutton@2.3.0/src/easy-button.js"></script>
 
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<$wp-themes/><!-- Wordpress Style Sheets -->
@@ -29,6 +30,7 @@
 		<script type="text/javascript" src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 
 		<script type="text/javascript" src="mvc-highstock.js"></script>
+		<!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"-->
 
 		<link rel="stylesheet" href="mvc-highstock.css"/>
 		<link rel="stylesheet" href="../watershed-conditions-message/watershed-conditions-message.css"/>
@@ -63,18 +65,6 @@
 							</h4>
 						</div>
 						<div class="modal-body">
-							<!--ul class="nav nav-pills" id="mvc-data-tab">
-								<li class="nav-item">
-									<a id="mvc-tab-graph-tab" class="nav-link active" href="#mvc-tab-graph" data-toggle="tab">
-										Graph Data
-									</a>
-								</li>
-								<li class="nav-item">
-									<a id="mvc-tab-table-tab" class="nav-link" href="#mvc-tab-table" data-toggle="tab">
-										Table Data
-									</a>
-								</li>
-							</ul-->
 							<div id="mvc-data-tab-content" class="tab-content">
 								<div id="mvc-tab-graph" class="tab-pane fade active">
 									<div id="chart-content" >
@@ -240,7 +230,7 @@
 								</h6>
 								<span>
 									You can also view the current watershed conditions message directly from this webpage by clicking on the subwatershed 
-									conditions text in the subwatershed's popup.
+									conditions in the subwatershed's popup.
 								</span>
 							</div>
 						</div>
@@ -374,6 +364,7 @@
 				</div>
 			</div>
 			<input type="button" id="range-alert-button" class="mvc-button-automatic" data-toggle="modal" data-target="#range-alert-modal.mvc-notice" hidden=""/>
+			<input type="button" id="help-button" class="mvc-button-automatic" data-toggle="modal" data-target="#help-modal" hidden=""/>
 		</$wp-content>
 		<$wp-footer/>
 		<script>

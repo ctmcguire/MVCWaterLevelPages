@@ -630,11 +630,16 @@
 		],
 	})
 
+	var btnHelp = L.easyButton('<i class="fa mvc-help-button">&#xf128; </i>', function() {
+		$('#help-button').trigger('click');
+	});
+
 	bounds.addTo(mvca_map);
 	divides.addTo(mvca_map);
 	gauges.addTo(mvca_map);
 	L.control.defaultExtent().addTo(mvca_map);
 	legend.addTo(mvca_map);
+	btnHelp.addTo(mvca_map);
 
 	$('text.pseudo-input').bind('click', null, range_click);
 	$('input.mvc-range-selector').bind('blur', null, range_blur);
