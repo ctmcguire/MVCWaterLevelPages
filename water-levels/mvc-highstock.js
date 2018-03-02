@@ -599,7 +599,7 @@ function init(table_id, chart_id) {
 						for(var j = 0; j < data.length; j++)
 							this.appendData(data[j], j)
 						this.display();
-					}, this), this.loadFromSql(this.gauge.getId(), tsName, start, end, 'json'));
+					}, this), this.loadFromSql(this.gauge.getTimeSeries(tsName, true), tsName, start, end, 'json'));
 				}, this)(params[i], i);
 			}
 		}
