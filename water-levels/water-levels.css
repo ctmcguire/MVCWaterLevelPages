@@ -438,3 +438,16 @@ input[type="button"].mvc-button-automatic
 {
 	background-image: url('images/button-staff-red.png');
 }
+
+.easy-button-button
+{
+	box-shadow: none;
+	margin: 0;
+	padding: 1px 6px;
+	background-image: none;
+}
+i.mvc-help-button
+{
+	font-size: 22px;
+	line-height: 28px;
+}

@@ -6,7 +6,7 @@
 		url(http://mvc.on.ca/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.ttf?64777116) format('truetype'),
 		url(http://mvc.on.ca/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.svg?64777116#wptouch-icons) format('svg');
 	font-weight: 400;
-	font-style: normal
+	font-style: normal;
 }
 @media only screen and (max-width : 768px)
 {
@@ -382,4 +382,9 @@ button:disabled:hover
 .content-wrapper:not(.right-sidebar) .page-wrapper .gdl-right-sidebar
 {
 	display: none;
+}
+
+.mvc-bold
+{
+	font-weight: bold;
 }
