@@ -61,6 +61,11 @@
 											Table Data
 										</a>
 									</li>
+									<li class="nav-item">
+										<a id="mvc-tab-download-tab" class="nav-link" href="#mvc-tab-download" data-toggle="tab">
+											Download Data
+										</a>
+									</li>
 								</ul>
 							</h4>
 						</div>
@@ -105,35 +110,37 @@
 										</h3>
 									</div>
 								</div>
+								<div id="mvc-tab-download" class="tab-pane fade">
+									Download Data
+									<div id="mvc-from" class="mvc-range-selector">
+										From: 
+									</div>
+									<div class="mvc-range-selector">
+										<input type="text" name="min" class="mvc-range-selector" value="" data-prev="" pattern="\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])"/>
+										<text class="pseudo-input">
+											<span>
+												
+											</span>
+										</text>
+									</div>
+									<div id="mvc-to" class="mvc-range-selector">
+										To: 
+									</div>
+									<div class="mvc-range-selector">
+										<input type="text" name="max" class="mvc-range-selector" value="" data-prev="" pattern="\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])"/>
+										<text class="pseudo-input">
+											<span>
+												
+											</span>
+										</text>
+									</div>
+									<button type="button" class="download" data-mvc-target="#graph-modal #mvc-tab-download input.mvc-range-selector">
+										&nbsp; Download CSV
+									</button>
+								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
-							<!--Download Data 
--							<div id="mvc-from" class="mvc-range-selector">
--								From: 
--							</div>
--							<div class="mvc-range-selector">
--								<input type="text" name="min" class="mvc-range-selector" value="" data-prev="" pattern="\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])"/>
--								<text class="pseudo-input">
--									<span>
--										
--									</span>
--								</text>
--							</div>
--							<div id="mvc-to" class="mvc-range-selector">
--								To: 
--							</div>
--							<div class="mvc-range-selector">
--								<input type="text" name="max" class="mvc-range-selector" value="" data-prev="" pattern="\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])"/>
--								<text class="pseudo-input">
--									<span>
--										
--									</span>
--								</text>
--							</div>
--							<button type="button" class="download" data-mvc-target="#table-modal .modal-footer input.mvc-range-selector">
--								&nbsp; Download CSV
--							</button>-->
 							<button type="button" class="" data-dismiss="modal">
 								Close
 							</button>
@@ -149,92 +156,273 @@
 								&times;
 							</button>
 							<h4 class="modal-title">
-								Help
+								Welcome to our Water Levels and Flow Page
 							</h4>
 						</div>
 						<div class="modal-body">
-							<!--How to view level/flow data-->
-							<div>
-								<h5>
-									Viewing a Gauge's Most Recent Data
-								</h5>
-								<span>
-									In order to view a gauge's most recent data, you must first locate the marker of the gauge you would like to view on the map.  
-									If the gauge marker is not visible, try zooming in or clicking on nearby clusters; it is possible that the gauge marker was
-									too close to another gauge marker and that it has simply been clustered together with it.  Once you have located the gauge 
-									marker of the desired gauge, click on it to open the gauge's popup screen.  After data has loaded, you will be able to see the 
-									most recent data for the gauge in the white circle to the left of the gauge marker in the popup.  If the border around the 
-									white circle is displayed in red, this means that the most recent data for this gauge is out of date, and that the gauge may be 
-									experiencing technical difficulties.  If the white circle contains a Conservation Ontario logo, this means that the gauge you 
-									are looking at is not currently being measured and has no data associated with it at this point in time.
-								</span>
-							</div>
-							<div>
-								<h5>
-									Viewing all of a Gauge's Data
-								</h5>
-								<span>
-									If you would like to view a gauge's readings from any given date, rather than just its most recent reading, you must again 
-									first locate the marker of the gauge you would like to view on the map and click on the marker to open its popup.  To the right
-									 of the gauge marker, you will see a group of circles with coloured icons in them.  These circles are buttons for different 
-									measurements associated with this gauge.  You may use the map legend for more details on what each button icon means.  Each 
-									button may appear as one of 3 different colours: green, red, or white.  If the button icon and border are green, then the gauge
-									 data for this measurement is up to date and will reflect the current measurements of this gauge.  If the button icon and 
-									border are red, then the gauge data is not up to date and 
-									<span class="mvc-bold">
-										may not
-									</span>
-									accurately represent the current measurements of the area.  If the button icon is white, but the border colour of the button is
-									 red or green, then you are currently hovering over the button with your mouse; the button icon will return to its original 
-									colour once you move your mouse off of the button.  If instead the button icon is white, and the border colour is also white, 
-									then the gauge's most recent data is still loading.  
-									<span class="mvc-bold">
-										The buttons will work regardless of whether or not the most recent data has loaded; the only difference will be the 
-										button's colour.  
-									</span>
-									To view the data for one of the buttons, simply click on the button and a graph window will open.  From here, you can 
-									change the range of data displayed in the graph using the range selector directly beneath the graph, or by directly entering 
-									the date range you would like to view in the date inputs in the upper right corner of the graph.  Please note that the date 
-									inputs may not be displayed if you are viewing the page on a device with a small screen size, such as a mobile phone.  In this
-									 case, you 
-									<span class="mvc-bold">
-										must
-									</span>
-									use the range selector underneath the graph.  
-								</span>
-								<h6>
-									Viewing Data in a Table Instead of a Graph
-								</h6>
-								<span>
-									To view the gauge data in a table instead of a graph, click on the button that says "Table View" in the upper left of the 
-									graph window.  This will display the gauge data using a table.  Please note that, for performance reasons, only a maximum of 1
-									 year's worth of data may be viewed on the webpage.  In order to view data for a larger period, use the range selectors and 
-									download button in the bottom-right corner of the table window.  This will download the table data as a csv file.  If the 
-									download does not show up immediately after pressing the download button, please wait briefly as the csv data may still be 
-									loading.
-								</span>
-							</div>
-							<!--Viewing Subwatershed Conditions & Watershed Conditions Message-->
-							<div>
-								<h5>
-									Viewing Subwatershed Conditions
-								</h5>
-								<span>
-									To view the subwatershed condtions for a specific subwatershed, simply click on the subwatershed in question.  The conditions 
-									will be displayed in the white circle of the popup that will appear.  Please note that this since subwatershed condition 
-									colours all indicate at least 2 different conditions (1 for high and 1 for low), you may wish to check the subwatershed 
-									conditions to make sure which one is in affect in your area.
-								</span>
-								<h6>
-									Viewing the Watershed Conditions Message
-								</h6>
-								<span>
-									You can also view the current watershed conditions message directly from this webpage by clicking on the subwatershed 
-									conditions in the subwatershed's popup.
-								</span>
-							</div>
+							<table class="mvc-help">
+								<tr>
+									<td>
+										<div class="mvc-marker-icon mvc-legend"></div>
+									</td>
+									<td>
+										This symbol represents the location of a gauge.  Click on this icon to see the most recent data from this location
+										 and what type of data is measured here.  
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="marker-cluster marker-cluster-small mvc-legend">
+											<div>
+												<span>
+													#
+												</span>
+											</div>
+										</div>
+									</td>
+									<td>
+										This symbol represents a cluster of # number of gauges.  Click on the cluster icon to zoom into the gauge cluster.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="station-button-icon mvc-legend mvc-auto"></div>
+									</td>
+									<td>
+										This symbol represents an automated gauge.  These sites can measure the water level, flow, precipitation, water 
+										and air temperature, temperature or soil moisture.  Click on this icon to view a chart of the associated data.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="station-button-icon mvc-legend mvc-stff"></div>
+									</td>
+									<td>
+										This symbol represents staff gauge.  These are the ‘rulers’ attached to bridges and dams throughout the watershed.
+										  It is common for these gauges to give different readings from the automated gauges depending on their location 
+										because of the draw as the water flows downstream.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="station-button-icon mvc-legend mvc-green"></div>
+									</td>
+									<td>
+										If the image in the gauge icon is green it indicates that the data from that station is up to date.  Even though 
+										this data is up to date it is considered provisional because it has not been checked for accuracy and may be 
+										incorrect.  Anyone using the data contained within this website is cautioned to carefully consider the provisional
+										 nature of this information and should not use it for making decisions that concern personal or public safety or 
+										the conduct of business that involves substantial monetary or operational consequences.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="station-button-icon mvc-legend mvc-red"></div>
+									</td>
+									<td>
+										A red image indicates that automated gauge data is over 24 hours old or staff gauge data is over 7 days old.  Our 
+										automated gauges are solar powered and talk to the office with cell phone modems or satellite transmitters.  As a 
+										result, Mother Nature can sometimes block our signal strength or solar panels, stopping data transmission.
+									</td>
+								</tr>
+								<tr class="mvc-multi-row">
+									<td colspan="2" class="mvc-bold">
+										Why are there extra lines on the map?
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										The new black lines on the map represent subwatersheds within the larger Mississippi River watershed.  When a 
+										subwatershed has a transparent colour an active conditions message is in effect.  Click on a subwatershed to see 
+										its name and if there is an active conditions message.
+									</td>
+								</tr>
+								<tr class="mvc-multi-row">
+									<td>
+										<div class="leaflet-control-zoom-in mvc-legend" style="font-size: 22px;">
+											+
+										</div>
+									</td>
+									<td rowspan="2">
+										These buttons are used to control the zoom.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="leaflet-control-zoom-out mvc-legend" style="font-size: 22px;">
+											−
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="leaflet-control-defaultextent-toggle mvc-legend"></div>
+									</td>
+									<td>
+										This button returns the map to its original extent.
+									</td>
+								</tr>
+								<tr>
+									<th colspan="2" class="mvc-center-x mvc-italic">
+										Understand Flood and Drought Status Messages
+									</th>
+								</tr>
+								<tr>
+									<td>
+										<div class="mvc-sub-watershed-colour mvc-sub-watershed-normal mvc-legend"></div>
+									</td>
+									<td>
+										<span class="mvc-bold">
+											Normal:
+										</span>
+										<span>
+											No flood or drought conditions exist.
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="mvc-sub-watershed-colour mvc-sub-watershed-level-i mvc-legend"></div>
+									</td>
+									<td>
+										<span class="mvc-bold">
+											Watershed Conditions Statement - Water Safety:
+										</span>
+										<span>
+											High flows, unsafe banks, melting ice or other factors that could be dangerous for recreational users such as 
+											anglers, canoeists, hikers, children, pets, etc. Flooding is not expected.
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="mvc-sub-watershed-colour mvc-sub-watershed-level-i mvc-legend"></div>
+									</td>
+									<td>
+										<span class="mvc-bold">
+											Watershed Conditions Statement - Flood Outlook:
+										</span>
+										<span>
+											Early notice of the potential for flooding based on weather forecasts calling for heavy rain, snow melt, high 
+											wind or other conditions that could lead to high runoff, cause ice jams, lake shore flooding or erosion.
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="mvc-sub-watershed-colour mvc-sub-watershed-level-ii mvc-legend"></div>
+									</td>
+									<td>
+										<span class="mvc-bold">
+											Flood Watch:
+										</span>
+										<span>
+											Flooding is possible in specific watercourses or municipalities. Municipalities, emergency services and 
+											individual landowners in flood-prone areas should prepare.
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="mvc-sub-watershed-colour mvc-sub-watershed-level-iii mvc-legend"></div>
+									</td>
+									<td>
+										<span class="mvc-bold">
+											Flood Warning:
+										</span>
+										<span>
+											Flooding is imminent or already occurring in specific watercourses or municipalities.
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="mvc-sub-watershed-colour mvc-sub-watershed-level-i mvc-legend"></div>
+									</td>
+									<td>
+										<span class="mvc-bold">
+											Level 1:
+										</span>
+										<span>
+											Flows are less than 70 percent of their normal summer low flow and/or precipitation has been less than 80 per 
+											cent of average. Water users are asked to voluntarily reduce consumption by 10 per cent.
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="mvc-sub-watershed-colour mvc-sub-watershed-level-ii mvc-legend"></div>
+									</td>
+									<td>
+										<span class="mvc-bold">
+											Level 2:
+										</span>
+										<span>
+											Flows are less than 50 percent of their normal summer low flow and/or precipitation has been less than 60 per 
+											cent of average. The Ministry of the Environment and Climate Change will send letters to holders of Permits to
+											 Take Water to as them to voluntarily reduce their consumption by 20 per cent.
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="mvc-sub-watershed-colour mvc-sub-watershed-level-iii mvc-legend"></div>
+									</td>
+									<td>
+										<span class="mvc-bold">
+											Level 3:
+										</span>
+										<span>
+											Flows are less than 30 percent of their normal summer low flow and/or precipitation has been less than 40 per 
+											cent of average. There is also potential for economic harm to water takers and/or significant harm to the 
+											ecosystem. The Water Response Team may ask the province to impose mandatory restrictions on those holding 
+											Permits to Take Water.
+										</span>
+									</td>
+								</tr>
+								<!---->
+							</table>
 						</div>
-						<div class="modal-footer">
+						<div class="modal-footer" style="white-space: nowrap;">
+							<style>
+								.mvc-feedback
+								{
+									display: inline-block;
+									vertical-align: middle;
+								}
+								@media only screen and (min-width : 768px)
+								{
+									.mvc-feedback-small
+									{
+										display: none;
+									}
+								}
+								@media only screen and (max-width : 768px)
+								{
+									.mvc-feedback-large
+									{
+										display: none;
+									}
+								}
+							</style>
+							<div class="mvc-feedback mvc-feedback-large">
+								<span class="mvc-bold">
+									Our website is evolving as we implement an open data strategy.
+									<br/>
+									<a href="mailto:cmcguire@mvc.on.ca">
+										Click here to submit your feedback.
+									</a>
+								</span>
+							</div>
+							<div class="mvc-feedback mvc-feedback-small">
+								<span class="mvc-bold">
+									Our website is evolving.
+									<br/>
+									<a href="mailto:cmcguire@mvc.on.ca">
+										Submit your feedback.
+									</a>
+								</span>
+							</div>
 							<button type="button" class="" data-dismiss="modal">
 								Close
 							</button>
@@ -254,7 +442,9 @@
 							</h4>
 						</div>
 						<div class="modal-body">
-							<div class="mvc-cond-img"></div><!--div to display the image for the current conditions-->
+							<div class="mvc-cond-img-container">
+								<div class="mvc-cond-img"></div><!--div to display the image for the current conditions-->
+							</div>
 							<div class="mvc-cond-content"></div><!--div to receive the text body of the message-->
 						</div>
 						<div class="modal-footer">
@@ -354,8 +544,13 @@
 									To view a larger range of data, please download the data as a csv using the download button at the bottom of the table window.  
 								</p>
 							</div>
+							<input type="text" name="min" class="mvc-range-selector" pattern="\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])" hidden=""/>
+							<input type="text" name="max" class="mvc-range-selector" pattern="\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])" hidden=""/>
 						</div>
 						<div class="modal-footer">
+							<button type="button" class="download" data-mvc-target="#range-alert-modal input.mvc-range-selector">
+								&nbsp; Download
+							</button>
 							<button type="button" class="" data-dismiss="modal">
 								Close
 							</button>
