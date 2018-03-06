@@ -43,16 +43,12 @@
 		return (new Date('1970/01/01 00:00:00')).nDays(n)//new Date((1970+n) + '/01/01 00:00:00');
 	}
 	Date.prototype.nDays = function(n) {
-		//let m = this.getMonth();
-		//let y = this.getFullYear();
-		//console.log(this.getMonth(), n, 31, n-31);
 		if(n === 0)
 			return this;
 		if(n < 0)
 			return this.nMonths(-1).nDays(n + 31);
 		if(31 < n+1)
 			return this.nMonths(1).nDays(n - 31);
-		//console.log(n, dayTotal(this.getMonth(), this.getFullYear()), dayTotal(this.getMonth(), this.getFullYear())+n);
 		return new Date((new Date('1970/01/' + addZero(1 + n))).valueOfGMT() + this.valueOf());
 	}
 
@@ -753,7 +749,7 @@ function init(table_id, chart_id) {
 							}
 						},
 						opposite: false,
-						min: 0,
+						floor: 0,
 					},
 				],
 				tooltip: {valueDecimals: 2,shared: true}
@@ -807,7 +803,6 @@ function init(table_id, chart_id) {
 			}
 		}
 		function selectRange(event) {
-			console.log(event);
 			this.reload(Date.dateStr(event.min)[0], Date.dateStr(event.max)[0]);//update the chart data
 		}
 
@@ -907,6 +902,8 @@ function init(table_id, chart_id) {
 			var rngs = this.gauge.getOrderedRanges();
 			var tsName = i < 0? this.gauge.getOrderedRanges()[-(i+1)] : this.gauge.getOrderedSeries()[i];
 
+			if(rngs.length === 0)
+				return this.chart.addSeries(dat, false);
 			for(let j = 0; j < rngs.length; j++)
 			{
 				if(tsName === this.gauge.getRange(rngs[j]).getLow())
@@ -918,7 +915,6 @@ function init(table_id, chart_id) {
 				this.chart.addSeries(dat, false);
 				break;
 			}
-			//this.chart.addSeries(dat, false);
 
 			var appendRange = $.proxy(function(dat, rngName) {
 				let temp = this.formatData(dat, rngName);
@@ -965,7 +961,6 @@ function init(table_id, chart_id) {
 		}
 
 		function display(is_reload) {
-			console.log(this.start, this.end, (new Date(this.start)).valueOfGMT(), (new Date(this.end)).valueOfGMT());//Update the xAxis's extremes to the start and end dates
 			if(!is_reload)
 				this.chart.xAxis[0].setExtremes((new Date(this.start)).valueOfGMT(), (new Date(this.end)).valueOfGMT(), false);
 			this.chart.hideLoading();//hide the loading display
@@ -1217,8 +1212,9 @@ function init(table_id, chart_id) {
 	 * 
 	**/
 	var CSVDownload = (function() {
-		function CSVDownload(gauge) {
-			TableDisplay.call(this, gauge, undefined);
+		function CSVDownload(gauge, container) {
+			TableDisplay.call(this, gauge, container);
+			$(this.container).attr('disabled', '')
 		}
 
 		function load(start, end) {
@@ -1236,11 +1232,16 @@ function init(table_id, chart_id) {
 		}
 
 		function display() {
+			$(this.container).removeAttr('disabled');
 			var csv = this.makeTable();//create the table
 			var anchor = document.createElement('a');
 			var dat = new Blob(['\ufeff', csv], { type: "text/csv" });
+			var fileName = this.gauge.getId() + " Gauge Data - " + this.start + " to " + this.end + ".csv";
+			if(window.navigator.msSaveBlob) {
+				window.navigator.msSaveBlob(dat, fileName);
+			}
 			anchor.href = URL.createObjectURL(dat);
-			anchor.download = this.gauge.getId() + " Gauge Data - " + this.start + " to " + this.end + ".csv";
+			anchor.download = fileName;
 			anchor.click();
 		}
 
@@ -1306,7 +1307,6 @@ function init(table_id, chart_id) {
 		RecntDisplay.prototype.appendData = function(dat, j) {
 			if(j !== 0)
 				return;
-			console.log(dat[0]);
 			this.date = new Date(dat[0]);//store the most recent day
 		}
 
@@ -1665,8 +1665,8 @@ function init(table_id, chart_id) {
 		var temp = new RecntDisplay(gauges.get(tsId), container, range);
 		temp.load();
 	};
-	window.download  = function(tsId, start, end) {
-		var csv_ = new CSVDownload(gauges.get(tsId));
+	window.download  = function(tsId, container, start, end) {
+		var csv_ = new CSVDownload(gauges.get(tsId), container);
 		csv_.load(start, end);
 	};
 }

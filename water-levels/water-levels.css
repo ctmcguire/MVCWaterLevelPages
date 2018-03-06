@@ -167,7 +167,7 @@
 	overflow-x:auto;
 	overflow-y: auto;
 	max-width: 100%;
-	max-height: calc(100vh - (128px + 60px + 2px));
+	max-height: calc(100vh - (256px + 60px + 2px));
 }
 
 #mvc-data-tab
@@ -197,6 +197,7 @@ input.mvc-range-selector
 }
 div.visible input.mvc-range-selector
 {
+	display: inline-block;
 	display: initial;
 }
 
@@ -341,6 +342,8 @@ input[type="button"].mvc-button-automatic
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-position: center;
+	text-align: center;
+	line-height: 28px;
 }
 
 .mvc-marker-icon.mvc-legend
@@ -378,6 +381,11 @@ input[type="button"].mvc-button-automatic
 	border: 1px solid;
 	border-color: #333;
 	border-radius: 50%;
+}
+.mvc-sub-watershed-colour.mvc-sub-watershed-normal
+{
+	background-color: #333;
+	background-color: rgba(51, 51, 51, 0.1);
 }
 .mvc-sub-watershed-colour.mvc-sub-watershed-level-i
 {
@@ -450,4 +458,38 @@ i.mvc-help-button
 {
 	font-size: 22px;
 	line-height: 28px;
+}
+
+.tab-pane
+{
+	background-color: #fff;
+}
+
+
+.mvc-help td
+{
+	vertical-align: middle;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 20px;
+}
+.mvc-help tr:last-child td,
+.mvc-help .mvc-multi-row td:not([rowspan])
+{
+	padding-bottom: 0;
+}
+.mvc-help th[colspan],
+.mvc-help td[colspan]
+{
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	border-color: inherit;
+}
+
+.mvc-cond-img-container
+{
+	max-width: 640px;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
 }

@@ -1,4 +1,17 @@
 (function() {
+	if(Object.entries)
+		return;
+	Object.entries = function( obj ){
+		var ownProps = Object.keys( obj ),
+			i = ownProps.length,
+			resArray = new Array(i); // preallocate the Array
+		while (i--)
+			resArray[i] = [ownProps[i], obj[ownProps[i]]];
+		return resArray;
+	};
+})();
+
+(function() {
 
 	var Button = (function() {
 		function Button(gauge, label, icon, day_range) {
@@ -107,7 +120,7 @@
 				var phi = Math.asin(radius/min_orbit_r);
 
 				if(orbit_c < (2*phi) * len) {
-					console.log(min_orbit_r, phi, orbit_c, (2*phi) * len);
+					//console.log(min_orbit_r, phi, orbit_c, (2*phi) * len);
 					phi = orbit_c / (2 * len)
 					min_orbit_r = radius / (Math.sin(phi));
 				}
@@ -204,7 +217,7 @@
 				loadGraph(dat.Gauge, '', '');
 		},
 		'mvc-conditions': function($event) {
-			var $e = $($event.target);
+			var $e = $('.station-popup.conditions-popup');
 			var $modal = $($e.data('target'));
 			var dat = $event.data;
 			if(dat === null)
@@ -230,7 +243,6 @@
 				if(fName.drought !== "Normal" || fName.flood === fName.drought)
 					imgs += "url('" + dat.img.drought + "'),";
 				imgs += "url('" + '../watershed-conditions-message/images/Bar.jpg' + "')";
-				//console.log('WHAT IS HAPPENIIIIIIING');
 
 				return "background-image: " + imgs + ";"
 			})())
@@ -252,7 +264,6 @@
 	function table_range_changed($event) {
 		var dat = $event.data;
 		var $e = $($event.target);
-		//var display = $e.data('target');
 		if($e.length < 1)
 			return;
 
@@ -270,7 +281,11 @@
 		min_val = (new Date(Math.max(new Date(min_val + ' 00:00:00'), new Date(max_val + ' 00:00:00').nYears(-1)))).dateStr()[0];
 		if(Date.dateStr(min_val.replace_('-', '/'))[0] !== Date.dateStr($min[0].value.replace_('-', '/'))[0]) {
 			$('#range-alert-button').trigger('click');
-			$('#range-alert-modal').removeClass('mvc-notice');//do not display this notice more than once per session
+			$('#range-alert-modal').find('[name="max"]').val($max.val());
+			$('#range-alert-modal').find('[name="min"]').val($min.val());
+			$min.unbind('change', table_range_changed);
+			$min[0].value = min_val.replace_('/', '-');
+			$min.bind('change', dat, table_range_changed);
 		}
 		range_blur($event);
 		window.loadTable(dat.Gauge, min_val.replace_('/', '-'), max_val.replace_('/', '-'));
@@ -294,7 +309,7 @@
 		var min = $(input + '[name="min"]')[0].value;
 		var max = $(input + '[name="max"]')[0].value;
 
-		return window.download(dat.Gauge, min, max);
+		return window.download(dat.Gauge, '.download', min, max);
 	}
 
 	function toggle_click($event) {
@@ -415,7 +430,6 @@
 	
 	divides['mvc-update-style'] = function() {
 		divides.setStyle(function(feature) {
-			console.log(feature);
 			var options = {
 				weight: 1,
 				color: "#333",
