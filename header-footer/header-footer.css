@@ -388,3 +388,15 @@ button:disabled:hover
 {
 	font-weight: bold;
 }
+.mvc-italic
+{
+	font-style: italic;
+}
+.mvc-center-x
+{
+	text-align: center;
+}
+.mvc-center-y
+{
+	vertical-align: middle;
+}
