@@ -44,7 +44,7 @@
 			/* 
 			 * Add the background images to all the elements with the "cond-img" class
 			 */
-			var tags = document.querySelectorAll('.cond-img');
+			var tags = document.querySelectorAll('.mvc-cond-img');
 			for(var i = 0; i < tags.length; i++)
 				tags[i].style.backgroundImage = imgs;
 		},
