@@ -606,13 +606,15 @@ function init(table_id, chart_id) {
 			displayLoad();
 
 			for(let i = 0; i < params.length; i++) {
-					this.loadFromKiWIS(params[i], start, end, 'json', function(response) {
-						this.refresh(response[0].data, params[i]);
+				$.proxy(function(tsName, i) {
+					this.loadFromKiWIS(tsName, start, end, 'json', function(response) {
+						this.refresh(response[0].data, tsName);
 
 						if(!this.finished())
 							return;//stop here if this is not the last response
 						this.display(true);
-					}, this.loadFromSql(this.gauge.getId(), params[i], start, end, 'json'));
+					}, this.loadFromSql(this.gauge.getId(), tsName, start, end, 'json'));
+				}, this)(params[i], i);
 			}
 		}
 
