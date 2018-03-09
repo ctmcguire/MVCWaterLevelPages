@@ -1237,6 +1237,8 @@ function init(table_id, chart_id) {
 			$(this.container).removeAttr('disabled');
 			var csv = this.makeTable();//create the table
 			var anchor = document.createElement('a');
+			document.body.appendChild(anchor);
+			anchor.style = "display: none;"
 			var dat = new Blob(['\ufeff', csv], { type: "text/csv" });
 			var fileName = this.gauge.getId() + " Gauge Data - " + this.start + " to " + this.end + ".csv";
 			if(window.navigator.msSaveBlob) {
@@ -1245,6 +1247,7 @@ function init(table_id, chart_id) {
 			anchor.href = URL.createObjectURL(dat);
 			anchor.download = fileName;
 			anchor.click();
+			document.body.removeChild(anchor);
 		}
 
 		function setHeaders(cols) {
