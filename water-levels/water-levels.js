@@ -444,7 +444,7 @@
 
 			if(conds === undefined || conds === "Normal")
 				return options;
-			options.fillOpacity = 0.20;
+			options.fillOpacity = 0.45;
 			if(conds === "Water Safety" || conds === "Flood Outlook" || conds === "Level 1 Low Water") {
 				//options.color = "#f3e90b";
 				options.fillColor = "#f3e90b";
