@@ -50,23 +50,32 @@
 							<h4 class="modal-title">
 								<span id="gauge-name"></span>
 								|
-								<ul class="nav nav-pills" id="mvc-data-tab">
-									<li class="nav-item">
-										<a id="mvc-tab-graph-tab" class="nav-link active" href="#mvc-tab-graph" data-toggle="tab">
-											Graph Data
-										</a>
-									</li>
-									<li class="nav-item">
-										<a id="mvc-tab-table-tab" class="nav-link" href="#mvc-tab-table" data-toggle="tab">
-											Table Data
-										</a>
-									</li>
-									<li class="nav-item">
-										<a id="mvc-tab-download-tab" class="nav-link" href="#mvc-tab-download" data-toggle="tab">
-											Download Data
-										</a>
-									</li>
-								</ul>
+								<nav id="mvc-data-nav" class="navbar navbar-expand-sm" role="navigation">
+									<div class="navbar-header">
+										<button type="button" class="navbar-toggle collapsed hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target="#mvc-data-tab">
+											<span class="navbar-toggle-icon glyphicon glyphicon-menu-hamburger"></span>
+										</button>
+									</div>
+									<div class="navbar-collapse collapse" id="mvc-data-tab">
+										<ul class="nav nav-pills navbar-nav">
+											<li class="nav-item">
+												<a id="mvc-tab-graph-tab" class="nav-link active" href="#mvc-tab-graph" data-toggle="tab">
+													Graph Data
+												</a>
+											</li>
+											<li class="nav-item">
+												<a id="mvc-tab-table-tab" class="nav-link" href="#mvc-tab-table" data-toggle="tab">
+													Table Data
+												</a>
+											</li>
+											<li class="nav-item">
+												<a id="mvc-tab-download-tab" class="nav-link" href="#mvc-tab-download" data-toggle="tab">
+													Download Data
+												</a>
+											</li>
+										</ul>
+									</div>
+								</nav>
 							</h4>
 						</div>
 						<div class="modal-body">
@@ -156,7 +165,7 @@
 								&times;
 							</button>
 							<h4 class="modal-title">
-								Welcome to our Water Levels and Flow Page
+								How to use our Page
 							</h4>
 						</div>
 						<div class="modal-body">
@@ -181,7 +190,7 @@
 										</div>
 									</td>
 									<td>
-										This symbol represents a cluster of # number of gauges.  Click on the cluster icon to zoom into the gauge cluster.
+										This symbol represents a cluster of gauges.  Click on the cluster icon to zoom into the gauge cluster.
 									</td>
 								</tr>
 								<tr>
@@ -198,7 +207,7 @@
 										<div class="station-button-icon mvc-legend mvc-stff"></div>
 									</td>
 									<td>
-										This symbol represents staff gauge.  These are the ‘rulers’ attached to bridges and dams throughout the watershed.
+										This symbol represents staff gauges.  These are the ‘rulers’ attached to bridges and dams throughout the watershed.
 										  It is common for these gauges to give different readings from the automated gauges depending on their location 
 										because of the draw as the water flows downstream.
 									</td>
@@ -405,7 +414,7 @@
 									}
 								}
 							</style>
-							<div class="mvc-feedback mvc-feedback-large">
+							<div class="mvc-feedback mvc-feedback-large mvc-scrollable">
 								<span class="mvc-bold">
 									Our website is evolving as we implement an open data strategy.
 									<br/>
@@ -519,10 +528,237 @@
 									site.
 								</p>
 							</div>
+							<div>
+								<h5>
+									How to use our Page
+								</h5>
+								<table class="mvc-help">
+									<tr>
+										<td>
+											<div class="mvc-marker-icon mvc-legend"></div>
+										</td>
+										<td>
+											This symbol represents the location of a gauge.  Click on this icon to see the most recent data from this location
+											 and what type of data is measured here.  
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="marker-cluster marker-cluster-small mvc-legend">
+												<div>
+													<span>
+														#
+													</span>
+												</div>
+											</div>
+										</td>
+										<td>
+											This symbol represents a cluster of gauges.  Click on the cluster icon to zoom into the gauge cluster.
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="station-button-icon mvc-legend mvc-auto"></div>
+										</td>
+										<td>
+											This symbol represents an automated gauge.  These sites can measure the water level, flow, precipitation, water 
+											and air temperature, temperature or soil moisture.  Click on this icon to view a chart of the associated data.
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="station-button-icon mvc-legend mvc-stff"></div>
+										</td>
+										<td>
+											This symbol represents staff gauges.  These are the ‘rulers’ attached to bridges and dams throughout the watershed.
+											  It is common for these gauges to give different readings from the automated gauges depending on their location 
+											because of the draw as the water flows downstream.
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="station-button-icon mvc-legend mvc-green"></div>
+										</td>
+										<td>
+											If the image in the gauge icon is green it indicates that the data from that station is up to date.  Even though 
+											this data is up to date it is considered provisional because it has not been checked for accuracy and may be 
+											incorrect.  Anyone using the data contained within this website is cautioned to carefully consider the provisional
+											 nature of this information and should not use it for making decisions that concern personal or public safety or 
+											the conduct of business that involves substantial monetary or operational consequences.
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="station-button-icon mvc-legend mvc-red"></div>
+										</td>
+										<td>
+											A red image indicates that automated gauge data is over 24 hours old or staff gauge data is over 7 days old.  Our 
+											automated gauges are solar powered and talk to the office with cell phone modems or satellite transmitters.  As a 
+											result, Mother Nature can sometimes block our signal strength or solar panels, stopping data transmission.
+										</td>
+									</tr>
+									<tr class="mvc-multi-row">
+										<td colspan="2" class="mvc-bold">
+											Why are there extra lines on the map?
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											The new black lines on the map represent subwatersheds within the larger Mississippi River watershed.  When a 
+											subwatershed has a transparent colour an active conditions message is in effect.  Click on a subwatershed to see 
+											its name and if there is an active conditions message.
+										</td>
+									</tr>
+									<tr class="mvc-multi-row">
+										<td>
+											<div class="leaflet-control-zoom-in mvc-legend" style="font-size: 22px;">
+												+
+											</div>
+										</td>
+										<td rowspan="2">
+											These buttons are used to control the zoom.
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="leaflet-control-zoom-out mvc-legend" style="font-size: 22px;">
+												−
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="leaflet-control-defaultextent-toggle mvc-legend"></div>
+										</td>
+										<td>
+											This button returns the map to its original extent.
+										</td>
+									</tr>
+									<tr>
+										<th colspan="2" class="mvc-center-x mvc-italic">
+											Understand Flood and Drought Status Messages
+										</th>
+									</tr>
+									<tr>
+										<td>
+											<div class="mvc-sub-watershed-colour mvc-sub-watershed-normal mvc-legend"></div>
+										</td>
+										<td>
+											<span class="mvc-bold">
+												Normal:
+											</span>
+											<span>
+												No flood or drought conditions exist.
+											</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="mvc-sub-watershed-colour mvc-sub-watershed-level-i mvc-legend"></div>
+										</td>
+										<td>
+											<span class="mvc-bold">
+												Watershed Conditions Statement - Water Safety:
+											</span>
+											<span>
+												High flows, unsafe banks, melting ice or other factors that could be dangerous for recreational users such as 
+												anglers, canoeists, hikers, children, pets, etc. Flooding is not expected.
+											</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="mvc-sub-watershed-colour mvc-sub-watershed-level-i mvc-legend"></div>
+										</td>
+										<td>
+											<span class="mvc-bold">
+												Watershed Conditions Statement - Flood Outlook:
+											</span>
+											<span>
+												Early notice of the potential for flooding based on weather forecasts calling for heavy rain, snow melt, high 
+												wind or other conditions that could lead to high runoff, cause ice jams, lake shore flooding or erosion.
+											</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="mvc-sub-watershed-colour mvc-sub-watershed-level-ii mvc-legend"></div>
+										</td>
+										<td>
+											<span class="mvc-bold">
+												Flood Watch:
+											</span>
+											<span>
+												Flooding is possible in specific watercourses or municipalities. Municipalities, emergency services and 
+												individual landowners in flood-prone areas should prepare.
+											</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="mvc-sub-watershed-colour mvc-sub-watershed-level-iii mvc-legend"></div>
+										</td>
+										<td>
+											<span class="mvc-bold">
+												Flood Warning:
+											</span>
+											<span>
+												Flooding is imminent or already occurring in specific watercourses or municipalities.
+											</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="mvc-sub-watershed-colour mvc-sub-watershed-level-i mvc-legend"></div>
+										</td>
+										<td>
+											<span class="mvc-bold">
+												Level 1:
+											</span>
+											<span>
+												Flows are less than 70 percent of their normal summer low flow and/or precipitation has been less than 80 per 
+												cent of average. Water users are asked to voluntarily reduce consumption by 10 per cent.
+											</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="mvc-sub-watershed-colour mvc-sub-watershed-level-ii mvc-legend"></div>
+										</td>
+										<td>
+											<span class="mvc-bold">
+												Level 2:
+											</span>
+											<span>
+												Flows are less than 50 percent of their normal summer low flow and/or precipitation has been less than 60 per 
+												cent of average. The Ministry of the Environment and Climate Change will send letters to holders of Permits to
+												 Take Water to as them to voluntarily reduce their consumption by 20 per cent.
+											</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="mvc-sub-watershed-colour mvc-sub-watershed-level-iii mvc-legend"></div>
+										</td>
+										<td>
+											<span class="mvc-bold">
+												Level 3:
+											</span>
+											<span>
+												Flows are less than 30 percent of their normal summer low flow and/or precipitation has been less than 40 per 
+												cent of average. There is also potential for economic harm to water takers and/or significant harm to the 
+												ecosystem. The Water Response Team may ask the province to impose mandatory restrictions on those holding 
+												Permits to Take Water.
+											</span>
+										</td>
+									</tr>
+									<!---->
+								</table>
+							</div>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="" data-dismiss="modal">
-								Close
+								I Agree
 							</button>
 						</div>
 					</div>

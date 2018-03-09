@@ -161,20 +161,118 @@
 {
 	max-width: 940px;
 	width: calc(100vw - 20px);
+	max-height: calc(100vh - 60px);
+	overflow: hidden;
+}
+.modal-header .mvc-scrollable
+{
+	max-height: 69px;
+	overflow-x: auto;
 }
 .modal-body
 {
 	overflow-x:auto;
 	overflow-y: auto;
 	max-width: 100%;
-	max-height: calc(100vh - (256px + 60px + 2px));
+	max-height: calc(100vh - (60px + 2px + 88px + 71px));
+}
+.modal-footer .mvc-scrollable
+{
+	max-height: 71px;
+	overflow-x: auto;
 }
 
+.navbar-header
+{
+	display: inline-block;
+	vertical-align: middle;
+	float: left;
+	margin-top: 7.5px;
+	margin-bottom: 7.5px;
+}
+.navbar-toggle
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	line-height: 18px;
+	position: relative;
+	display: block;
+	float: left;
+	margin-left: 2px;
+}
+.navbar-toggle:not(.collapsed) .navbar-toggle-icon
+{
+	color: #fff;
+	background-color: #337ab7;
+}
+.navbar-toggle-icon
+{
+	background-color: transparent;
+	vertical-align: baseline;
+	font-size: 100%;
+	border: 0;
+	margin: 0;
+	outline: 0;
+	text-decoration: none;
+	color: #0fa81e;
+	font-weight: inherit;
+	padding: 10px 15px;
+	display: block;
+	position: relative;
+	border-radius: 4px;
+	line-height: 20px;
+}
+.navbar-toggle-icon:focus,
+.navbar-toggle-icon:hover
+{
+	color: #23527c;
+	text-decoration: none;
+	background-color: #eee;
+}
+.navbar-toggle-icon:hover
+{
+	outline: 0;
+	color: #8a8a8a;
+}
+#mvc-data-nav
+{
+	font-size: 14px;
+	vertical-align: middle;
+	display: inline-block;
+	margin-bottom: 0;
+}
 #mvc-data-tab
 {
 	font-size: 14px;
 	vertical-align: middle;
 	display: inline-block;
+	float: left;
+}
+@media only screen and (min-width: 768px)
+{
+	.navbar-toggle-icon
+	{
+		padding-top: 15px;
+		padding-bottom: 15px;
+	}
+}
+@media only screen and (max-width: 768px)
+{
+	#mvc-data-tab.collapse:not(.in)
+	{
+		display: none;
+	}
+	#mvc-data-tab.collapse.in
+	{
+		font-size: 14px;
+		vertical-align: middle;
+		display: inline-block;
+		float: left;
+	}
 }
 
 text.pseudo-input
