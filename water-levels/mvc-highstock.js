@@ -25,35 +25,73 @@
 		return (new Date('1970/01/01 00:00:00')).nYears(n)//new Date((1970+n) + '/01/01 00:00:00');
 	}
 	Date.prototype.nYears = function(n) {
-		return new Date((new Date((1970+n) + '/01/01')).valueOfGMT() + this.valueOf());
+		return new Date(new Date(this.valueOf()).setFullYear(this.getFullYear() + n));
 	}
 
 	Date.nMonths = function(n) {
 		return (new Date('1970/01/01 00:00:00')).nMonths(n)//new Date((1970+n) + '/01/01 00:00:00');
 	}
 	Date.prototype.nMonths = function(n) {
-		if(n === 0)
+		/*if(n === 0)
 			return this;
 		if(n < 0)
 			return this.nYears(-1).nMonths(12+n);
-		return new Date(this.nYears(Math.floor(n/12)).valueOfGMT() + (new Date('1970/' + addZero(1 + (n%12)) + '/01')).valueOf());
+		return new Date(this.nYears(Math.floor(n/12)).valueOfGMT() + (new Date('1970/' + addZero(1 + (n%12)) + '/01')).valueOf());*/
+		return new Date(new Date(this.valueOf()).setMonth(this.getMonth() + n));
 	}
 
 	Date.nDays = function(n) {
-		return (new Date('1970/01/01 00:00:00')).nDays(n)//new Date((1970+n) + '/01/01 00:00:00');
+		return (new Date('1970/01/01 00:00:00')).nDays(n);
 	}
 	Date.prototype.nDays = function(n) {
-		if(n === 0)
+		/*if(n === 0)
 			return this;
 		if(n < 0)
 			return this.nMonths(-1).nDays(n + 31);
 		if(31 < n+1)
 			return this.nMonths(1).nDays(n - 31);
-		return new Date((new Date('1970/01/' + addZero(1 + n))).valueOfGMT() + this.valueOf());
+		return new Date((new Date('1970/01/' + addZero(1 + n))).valueOfGMT() + this.valueOf());*/
+		return new Date(new Date(this.valueOf()).setDate(this.getDate() + n));
 	}
 
+	Date.nHours = function(n) {
+		return (new Date('1970/01/01 00:00:00')).nHours(n);
+	}
+	Date.prototype.nHours = function(n) {
+		//console.log(new Date(new Date(this.valueOfGMT()).setHours(this.getHours() + n)))
+		return new Date(new Date(this.valueOf()).setHours(this.getHours() + n));//console.log()
+		/*if(n < 0)
+			return this.nDays(-1).nHours(n+24)
+		return new Date((this.nDays(Math.floor(n/24))).valueOf() + (new Date('1970/01/01 ' + addZero(n%24) + ':00:00')).valueOfGMT())//*/
+	}
+
+	Date.nMinutes = function(n) {
+		return (new Date('1970/01/01 00:00:00')).nMinutes(n);
+	}
+	Date.prototype.nMinutes = function(n) {
+		/*if(n < 0)
+			return this.nHours(-1).nMinutes(n+60)
+		return new Date((new Date('1970/01/01 00:' + addZero(n%60) + ':00')).valueOfGMT() + (this.nHours(Math.floor(n/60))).valueOf())*/
+		return new Date(new Date(this.valueOf()).setMinutes(this.getMinutes() + n));//console.log()
+	}
+
+	Date.nSeconds = function(n) {
+		return (new Date('1970/01/01 00:00:00')).nSeconds(n);
+	}
+	Date.prototype.nSeconds = function(n) {
+		return new Date(new Date(this.valueOf()).setSeconds(this.getSeconds() + n));//console.log()
+	}
+
+	Date.prototype.nUTC = function(n) {
+		if(!n)
+			return new Date(this.valueOfGMT());
+		return new Date(this.valueOfGMT()).nHours(Math.sign(n) * (((Math.abs(n)+12) % 24)-12));
+	}
+	Date.valueOfGMT = function() {
+		return new Date().valueOfGMT();
+	}
 	Date.prototype.valueOfGMT = function() {
-		return this.valueOf() - (new Date('1970/01/01 00:00:00')).valueOf();
+		return this.valueOf() + (this.getTimezoneOffset() * 60 * 1000);
 	}
 
 	Date.formatStr = function(date) {
@@ -676,7 +714,8 @@ function init(table_id, chart_id) {
 			if(start === "")
 				start = Date.dateStr((new Date(end.replace_('-', '/') + ' 00:00:00')).nMonths(-3)/*.setMonth((new Date(end + ' 00:00:00')).getMonth() - 3)*/)[0];
 			this.start = start.replace_('-', '/');
-			this.end = end.replace_('-', '/');
+			this.end = end.replace_('-', '/') + ' 23:59:59';
+			//console.log(today, new Date(today).nDays(1).dateStr()[0]);
 			DataDisplay.prototype.load.call(this, first, today);
 		}
 		function reload(start, end) {
@@ -698,7 +737,6 @@ function init(table_id, chart_id) {
 			var options = {
 				chart: {
 					renderTo: this.container,
-					//inverted: true,
 				},
 				plotOptions: {
 					showInNavigator: false,
@@ -710,7 +748,19 @@ function init(table_id, chart_id) {
 					liveRedraw: false,
 				},
 				legend: {enabled: true},
-				rangeSelector: {},
+				rangeSelector: {
+					inputDateParser: function(value) {
+						let delta = new Date(value.replace_('-', '/')).nUTC(-5);
+						console.log(value, delta.dateStr()[0], delta.nDays(1).dateStr()[0]);
+						console.log(new Date(value.replace_('-', '/')).valueOf(), delta.valueOf(), delta.nDays(1).valueOf());
+						if(delta.dateStr()[0] !== value)
+							return delta.nDays(1).valueOf();
+						
+						//console.log(new Date(value.replace_('-', '/')).nUTC(-5));
+						
+						return new Date(value.replace_('-', '/')).valueOf();
+					}
+				},
 				title: {
 					text: $('#table-title')[0] !== undefined? $('#table-title')[0].innerHTML : "",
 				},
@@ -732,8 +782,7 @@ function init(table_id, chart_id) {
 					events: {
 						afterSetExtremes: $.proxy(this.selectRange, this),
 					},//*/
-					max: (new Date(today.replace_('-', '/'))).valueOf(),
-					//min: (new Date(first.replace_('-', '/'))).valueOf(),
+					max: new Date(today.replace_('-', '/')).valueOf(),
 					ordinal: false
 				},
 				yAxis: [
@@ -754,7 +803,7 @@ function init(table_id, chart_id) {
 						floor: 0,
 					},
 				],
-				tooltip: {valueDecimals: 2,shared: true}
+				tooltip: {valueDecimals: 2,shared: true},
 			};
 
 			primary_flow = this.gauge.getTimeSeries().getName() === "Flow";
@@ -805,7 +854,10 @@ function init(table_id, chart_id) {
 			}
 		}
 		function selectRange(event) {
-			this.reload(Date.dateStr(event.min)[0], Date.dateStr(event.max)[0]);//update the chart data
+			//console.log(new Date(event.min), new Date(event.max));
+			this.start = event.min;
+			this.end = event.max;
+			this.reload(Date.dateStr(this.start)[0], Date.dateStr(this.end)[0]);//update the chart data
 		}
 
 		/**
@@ -836,17 +888,17 @@ function init(table_id, chart_id) {
 				dataGrouping: {
 					smoothed: true,//put point in the center of a group to avoid shifting data to the left
 					units: [
-						[
+						/*[
 							'millisecond', // unit name
 							[1, 2, 5, 10, 20, 25, 50, 100, 200, 500] // allowed multiples
-						],
-						[
+						],*/
+						/*[
 							'second',
 							[1, 2, 5, 10, 15, 30]
-						],
+						],*/
 						[
 							'minute',
-							[1, 2, 5, 10, 15, 30]
+							[5, 15, 30]
 						],
 						[
 							'hour',
@@ -964,7 +1016,9 @@ function init(table_id, chart_id) {
 
 		function display(is_reload) {
 			if(!is_reload)
-				this.chart.xAxis[0].setExtremes((new Date(this.start)).valueOfGMT(), (new Date(this.end)).valueOfGMT(), false);
+				console.log(this.start, this.end)
+			if(!is_reload)
+				this.chart.xAxis[0].setExtremes((new Date(this.start)).valueOf(), (new Date(this.end)).valueOf(), false);
 			this.chart.hideLoading();//hide the loading display
 			this.chart.redraw();//update the chart's display
 			if(!is_reload)
@@ -976,6 +1030,8 @@ function init(table_id, chart_id) {
 			DataDisplay.call(this, gauge, container);
 			this.chart = null;
 			this.selectRange = selectRange;
+			this.start = undefined;
+			this.end = undefined;
 		}
 
 
@@ -1014,7 +1070,7 @@ function init(table_id, chart_id) {
 			for(var i = 0; i < dat.length; i++) {
 				if(this.data[dat[i][0]] === undefined)
 					this.data[dat[i][0]] = this.getTemplate();//Add this row to the table if no row with this timestamp exists
-				var timestamp = new Date(dat[i][0]);//get the timestamp
+				var timestamp = new Date(dat[i][0]).nUTC(-5);//get the timestamp
 				var row = this.data[dat[i][0]];//get the actual data
 
 				function getTimeVal(val) {
@@ -1025,9 +1081,9 @@ function init(table_id, chart_id) {
 				 * Set the row's timestamp
 				 */
 				if(row['Date'] === null)
-					row['Date'] = timestamp.getFullYear() + "-" + getTimeVal(timestamp.getMonth()+1) + "-" + getTimeVal(timestamp.getDate());
+					row['Date'] = timestamp.dateStr();
 				if(row['Time'] === null)
-					row['Time'] = getTimeVal(timestamp.getHours()) + ":" + getTimeVal(timestamp.getMinutes()) + ":" + getTimeVal(timestamp.getSeconds());
+					row['Time'] = timestamp.dateStr();
 				if(row[tsName] === undefined)
 					continue;//do nothing if this column does not exist
 				if(row[tsName] !== null)
@@ -1291,8 +1347,8 @@ function init(table_id, chart_id) {
 	var RecntDisplay = (function() {
 		function RecntDisplay(gauge, container, max_range) {
 			DataDisplay.call(this, gauge, container);
-			this.date = new Date(0);
-			this.max_range = max_range;
+			this.date = new Date(0).nUTC(-5);
+			this.max_range = max_range.nUTC(-5);
 		}
 
 		RecntDisplay.prototype = Object.create(DataDisplay.prototype);
@@ -1317,7 +1373,7 @@ function init(table_id, chart_id) {
 
 		RecntDisplay.prototype.display = function() {
 			$(this.container).removeClass('mvc-loading');
-			if(((new Date()) - this.date) - this.max_range <= 0)
+			if(((new Date()).nUTC(-5) - this.date) - this.max_range <= 0)
 				return;
 			$(this.container).addClass('mvc-red');
 		}
@@ -1369,7 +1425,7 @@ function init(table_id, chart_id) {
 		}
 
 		RecentData.prototype.display = function() {
-			this.data.push("<br/><span class=\"station-popup-date\">" + this.date.dateStr().join('<br/>') + "</span>");
+			this.data.push("<br/><span class=\"station-popup-date\">" + this.date.nUTC(-5).dateStr().join('<br/>') + "</span>");
 			$(this.container).find('.mvc-primary-data').prepend('<br/>' + this.data.join(''));
 			RecntDisplay.prototype.display.call(this);
 			this.data = [];
@@ -1379,6 +1435,12 @@ function init(table_id, chart_id) {
 
 		return RecentData;
 	})()
+
+	Highcharts.setOptions({
+		global: {
+			timezoneOffset: 5*60,
+		},
+	});
 
 	var today = (new Date()).dateStr()[0];
 	var first = Date.dateStr('1918/01/01 00:00:00')[0];
