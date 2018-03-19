@@ -586,8 +586,19 @@ function init(table_id, chart_id) {
 								"data": []
 							}
 						];
-						for(var i = 0; i < res.Date.length; i++)
+						for(var i = 0; res.Date !== null && i < res.Date.length; i++) {
+							if(0 <= res.Time[i].indexOf('AM') || 0 <= res.Time[i].indexOf('PM')) {
+								if(res.Time[i].indexOf(' AM') < 0 && res.Time[i].indexOf(' PM') < 0) {
+									res.Time[i] = res.Time[i].replace('AM', ' AM')
+									res.Time[i] = res.Time[i].replace('PM', ' PM')
+								}
+								if(parseInt(res.Time[i].substr(0,2)) < 1)
+									res.Time[i] = '12' + res.Time[i].substr(2);
+								if(12 < parseInt(res.Time[i].substr(0,2)))
+									res.Time[i] = (parseInt(res.Time[i].substr(0,2)) - 12) + res.Time[i].substr(2);
+							}
 							response[0].data.push([(new Date(res.Date[i].replace_('-', '/') + " " + res.Time[i])).valueOf(), res.Data[i]]);
+						}
 						this.numData--;
 						$.proxy(func, this)(response);
 						try {
