@@ -1081,9 +1081,9 @@ function init(table_id, chart_id) {
 				 * Set the row's timestamp
 				 */
 				if(row['Date'] === null)
-					row['Date'] = timestamp.dateStr();
+					row['Date'] = timestamp.dateStr()[0];
 				if(row['Time'] === null)
-					row['Time'] = timestamp.dateStr();
+					row['Time'] = timestamp.dateStr()[1];
 				if(row[tsName] === undefined)
 					continue;//do nothing if this column does not exist
 				if(row[tsName] !== null)
