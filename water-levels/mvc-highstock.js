@@ -124,6 +124,17 @@
 	String.prototype.replace_ = function(sub, str) {
 		return this.split(sub).join(str);
 	}
+
+
+	function ie_sign(n) {
+		if(n < 0)
+			return -1;
+		if(0 < n)
+			return 1;
+		return 0;
+	}
+	if(Math.sign === undefined)
+		Math.sign = ie_sign;
 })()
 
 function init(table_id, chart_id) {
