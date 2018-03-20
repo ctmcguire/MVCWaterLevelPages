@@ -68,7 +68,7 @@
 			if(this.gauge === null)
 				return;
 			if(container_2)
-				return loadRecnt(this.gauge, '.' + this.icon, /*'.station-popup'*/container_2, this.range);
+				return loadRecnt(this.gauge, '.' + this.icon, container_2, this.range);
 			return chckRecnt(this.gauge, '.' + this.icon, this.range);
 		}
 
@@ -444,7 +444,7 @@
 
 			if(conds === undefined || conds === "Normal")
 				return options;
-			options.fillOpacity = 0.45;
+			options.fillOpacity = 0.325;
 			if(conds === "Water Safety" || conds === "Flood Outlook" || conds === "Level 1 Low Water") {
 				//options.color = "#f3e90b";
 				options.fillColor = "#f3e90b";
