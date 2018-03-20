@@ -1,18 +1,23 @@
-<!--
-	This html code is not inserted into wordpress directly because wordpress likes to format html code (example: it moves the
-	 form tag to the outside of the h3 tag, even though it was put inside the h3 tag for a reason)
--->
-<!--Stylesheet for the conditions images.-->
-<link rel="stylesheet" type="text/css" href="/watershed-conditions-message/wp-display/wp-display.css">
-<!-- Watershed Condition Messages -->
-<h5 id="flood-msg-form" class="gdl-title" style="text-align: center; margin: 0;">
-	<label for="flood-msg" style="cursor: pointer; margin-bottom: 0;">
-		<strong>
-			Watershed Conditions Message
-		</strong>
-		<form method="post" action="/watershed-conditions-message/" target="_self" class="widget_sp_image-image-link" title="Watershed Conditions Message" style="margin-bottom: 0;">
-			<input type="image" id="flood-msg" hidden /><!--input to trigger when clicking on the image or label-->
-			<div class="cond-img"></div><!--div to contain the image-->
-		</form>
-	</label>
-</h5>
+<!doctype html>
+<html>
+	<head>
+		<!--Stylesheet for the conditions images.-->
+		<link rel="stylesheet" type="text/css" href="./wp-display.css">
+	</head>
+	<body>
+		<!--
+			This html code is not inserted into wordpress directly because wordpress likes to format html code (example: it moves the
+			 form tag to the outside of the h3 tag, even though it was put inside the h3 tag for a reason)
+		-->
+		<!-- Watershed Condition Messages -->
+		<h5 id="flood-msg-form" class="gdl-title" style="text-align: center; margin: 0;">
+			<label for="flood-msg" style="cursor: pointer; margin-bottom: 0;">
+				<form method="post" action="/watershed-conditions-message/" target="_self" class="widget_sp_image-image-link" title="Watershed Conditions Message" style="margin-bottom: 0;">
+					<input type="image" id="flood-msg" hidden /><!--input to trigger when clicking on the image or label-->
+					<div class="cond-img"></div><!--div to contain the image-->
+				</form>
+			</label>
+		</h5>
+		<script src="./wp-display.js"></script>
+	</body>
+</html>

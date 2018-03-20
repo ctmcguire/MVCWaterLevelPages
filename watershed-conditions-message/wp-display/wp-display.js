@@ -1,5 +1,9 @@
-(function(src="/watershed-conditions-message/wp-display/", json="/watershed-conditions-message/watershed-conditions-message.json") {
-	function get(url, pass=function(res){console.log([res])},fail=function(res){console.log([res])}) {
+(function(src, json) {
+	function get(url, pass,fail) {
+		if(pass === undefined)
+			pass=function(res){console.log([res])};
+		if(fail === undefined)
+			fail=function(res){console.log([res])};
 		var http = new XMLHttpRequest();
 		http.onreadystatechange = function() {
 			if(http.readyState !== 4)
@@ -12,9 +16,9 @@
 		http.send(null);
 	}
 
-	return get(src, function(res){
-		document.getElementById('wp-display-content').innerHTML = res;//add the image display to the page (wordpress likes to mess with it if you put the html code in directly)
-		get(json, function(res){
+	/*return get(src, function(res){
+		document.getElementById('wp-display-content').innerHTML = res;//add the image display to the page (wordpress likes to mess with it if you put the html code in directly)*/
+		return get(json, function(res){
 			var url = JSON.parse(res).img;//Get the image urls
 			var bgImgs = "";//string for background images; starts empty because images are rendered from last to first
 			var imgs = document.querySelectorAll('.cond-img');//object (not an array, but behaves similarly) containing all elements to receive the background images
@@ -27,5 +31,5 @@
 			for(var i = 0; i < imgs.length; i++)
 				imgs[i].style.backgroundImage = bgImgs;//Set the background image of all elements in imgs
 		})
-	})
-})();
+	/*})*/
+})("/watershed-conditions-message/wp-display/","/watershed-conditions-message/watershed-conditions-message.json");
