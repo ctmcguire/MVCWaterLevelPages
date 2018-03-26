@@ -598,6 +598,8 @@ function init(table_id, chart_id) {
 							}
 						];
 						for(var i = 0; res.Date !== null && i < res.Date.length; i++) {
+							if(res.Time[i][0] === " ")
+								res.Time[i] = res.Time[i].substr(1)
 							if(0 <= res.Time[i].indexOf('AM') || 0 <= res.Time[i].indexOf('PM')) {
 								if(res.Time[i].indexOf(' AM') < 0 && res.Time[i].indexOf(' PM') < 0) {
 									res.Time[i] = res.Time[i].replace('AM', ' AM')
