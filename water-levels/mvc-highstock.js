@@ -610,7 +610,10 @@ function init(table_id, chart_id) {
 								if(12 < parseInt(res.Time[i].substr(0,2)))
 									res.Time[i] = (parseInt(res.Time[i].substr(0,2)) - 12) + res.Time[i].substr(2);
 							}
-							response[0].data.push([(new Date(res.Date[i].replace_('-', '/') + " " + res.Time[i])).valueOf(), res.Data[i]]);
+							timestamp = new Date(res.Date[i].replace_('-', '/') + " " + res.Time[i]);
+							if(timestamp.getHours() !== timestamp.nUTC(-5).getHours())
+								timestamp = timestamp.nHours(timestamp.getHours() - timestamp.nUTC(-5).getHours())
+							response[0].data.push([timestamp.valueOf(), res.Data[i]]);
 						}
 						this.numData--;
 						$.proxy(func, this)(response);
