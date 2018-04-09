@@ -661,5 +661,15 @@
 	$('#mvc-tab-table').bind('click', null, toggle_click);
 })();
 (function() {
+	function nav_shown(event) {
+		$e = $(event.target)
+		$twin = $('#graph-modal a[data-toggle="tab"][href="' + $e.attr('href') + '"]:not(#' + $e.attr('id') + ')')
+		$twin.tab('show')
+
+		console.log($twin)
+	}
+
+	$('#graph-modal a[data-toggle="tab"]').bind('shown.bs.tab', nav_shown)
+
 	$('#disclaimer-button').trigger('click');
 })();

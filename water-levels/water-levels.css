@@ -176,6 +176,16 @@
 	max-width: 100%;
 	max-height: calc(100vh - (60px + 2px + 88px + 71px));
 }
+#chart-content:not(.mvc-size-fixed)
+{
+	max-height: 400px;
+	height: calc(100vh - (60px + 2px + 88px + 71px));
+}
+#chart-content.mvc-size-fixed
+{
+	max-height: 400px;
+	height: 400px;
+}
 .modal-footer .mvc-scrollable
 {
 	max-height: 71px;
@@ -238,7 +248,8 @@
 	outline: 0;
 	color: #8a8a8a;
 }
-#mvc-data-nav
+#mvc-data-nav,
+#mvc-data-nav-2
 {
 	font-size: 14px;
 	vertical-align: middle;
@@ -246,6 +257,7 @@
 	margin-bottom: 0;
 }
 #mvc-data-tab
+#mvc-data-tab-2
 {
 	font-size: 14px;
 	vertical-align: middle;
@@ -262,11 +274,13 @@
 }
 @media only screen and (max-width: 768px)
 {
-	#mvc-data-tab.collapse:not(.in)
+	#mvc-data-tab.collapse:not(.in),
+	#mvc-data-tab-2.collapse:not(.in)
 	{
 		display: none;
 	}
 	#mvc-data-tab.collapse.in
+	#mvc-data-tab-2.collapse.in
 	{
 		font-size: 14px;
 		vertical-align: middle;
@@ -590,4 +604,32 @@ i.mvc-help-button
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+
+@media only screen and (min-height: 621px)
+{
+	.mvc-mobile-only
+	{
+		display: none !important;
+	}
+}
+
+@media only screen and (max-height: 620px)
+{
+	.modal.mvc-size-fixed .modal-dialog
+	{
+		width: calc(100vw);
+		max-height: calc(100vh);
+		margin: 0;
+	}
+	.modal.mvc-size-fixed .modal-header,
+	.modal.mvc-size-fixed .modal-footer
+	{
+		display: none;
+	}
+	.modal.mvc-size-fixed .modal-body
+	{
+		max-height: calc(100vh - (2px));
+	}
 }
