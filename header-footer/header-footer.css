@@ -338,6 +338,11 @@
 	}
 }
 
+*[hidden]
+{
+	display: none !important;
+}
+
 .content-part-wrapper .container .content-wrapper .page-wrapper .gdl-page-float-left .gdl-page-item div .gdl-page-content,
 h1,
 h2,
