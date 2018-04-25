@@ -487,7 +487,7 @@
 							 + ((conditions['sub-watersheds'][data.Name] !== "Normal")?
 								conditions['sub-watersheds'][data.Name] + " Statement in Effect":
 								"No Statements in Effect")
-							 + " as of " + (new Date()).dateStr()[0]//Need to get date for this...
+							 + " as of " + conditions['timestamp']
 						 + "</span>");
 				},
 				'Identifier': function(data) {
