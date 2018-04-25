@@ -2,6 +2,7 @@
 	<head>
 		<title>Current Watershed Conditions Message</title>
 		<!--JavaScript library for text editor-->
+		<!--script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script-->
 		<script src="/wp-includes/js/tinymce/tinymce.min.js?ver=4603-20170530"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
@@ -9,6 +10,7 @@
 		<$wp-themes/>
 		<!--JavaScript for this page-->
 		<script src="wcm-update.js"></script>
+		<script src="../mvc-scripts/util.js"></script>
 		<!--This page's stylesheets-->
 		<link rel="stylesheet" type="text/css" href="wcm-update.css"/>
 	</head>
@@ -17,6 +19,7 @@
 		<$wp-header/>
 		<$wp-content>
 			<form id="condition-message" method="post" action="">
+				<input type="text" id="timestamp" name="timestamp" hidden="" />
 				<table>
 					<tr>
 						<th>
@@ -113,7 +116,9 @@
 					tinymce.init({
 						selector: '#message',//element to be replaced by the text editor
 						resize: false,//don't allow resizing because it makes the page behave weirdly
-						height: '599px'//Set height to 599px
+						height: '599px',//Set height to 599px
+						plugins: "paste",
+						menubar: "file edit view format",
 					});
 				})();
 

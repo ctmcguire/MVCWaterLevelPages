@@ -216,16 +216,25 @@
 		function setStatement(message) {
 			document.getElementById('message').innerHTML = message;
 		}
+		/**
+		 * 
+		**/
+		function setTimestamp(date) {
+			if(date === "<$timestamp/>")
+				date = Date.dateStr()[0];
+			$('#timestamp')[0].value = date;
+		}
 		/* 
 		 * If not set, asign a default value to the json string
 		 */
 		if(json === '<$json/>')
-			json = '{"title":"<$title/>","img":{"id":"<$id/>","src":"<$src/>"},"sub-watersheds":{},"message":"<$message/>"}';
+			json = '{"title":"<$title/>","img":{"id":"<$id/>","src":"<$src/>"},"sub-watersheds":{},"message":"<$message/>","timestamp":"<$timestamp/>"}';
 		var dat = JSON.parse(json);//parse the json string
 		setTitle(dat.title);//set initial title value
 		setImgs(dat.img);//set initial image values
 		setAffectedAreas(dat['sub-watersheds']);
 		setStatement(dat.message);//set initial message body values
+		setTimestamp(dat.timestamp)
 	}
 
 	function selectAll(event) {
@@ -261,6 +270,7 @@
 		document.getElementById('submit-message').disabled = !validateForm();
 		document.getElementById('condition-message').onchange = function() {
 			document.getElementById('submit-message').disabled = !validateForm();
+			$('#timestamp')[0].value = Date.dateStr()[0];
 		};
 		$('.mvc-select-all').bind('click', null, selectAll);
 

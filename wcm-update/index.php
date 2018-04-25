@@ -43,6 +43,7 @@
 	**/
 	function saveData()
 	{
+		$timestamp = $_POST['timestamp'];
 		$title = $_POST['title'];
 		$fld = $_POST['flood'];
 		$drt = $_POST['drought'];
@@ -53,6 +54,7 @@
 			return 1;
 		$message = str_replace('"','\\\\\\"',str_replace("\r\n",'',$message));
 		$json = '{'
+			.'"timestamp": "'.$timestamp.'",'
 			.'"title": "'.$title.'",'
 			.'"img": {'
 				.'"flood":"'.$fld.'",'
