@@ -496,36 +496,19 @@ input[type="button"].mvc-button-automatic
 }
 .mvc-sub-watershed-colour.mvc-sub-watershed-normal
 {
-	background-color: #333;
-	background-color: rgba(51, 51, 51, 0.1);
+	background-color: #3333331a;
 }
 .mvc-sub-watershed-colour.mvc-sub-watershed-level-i
 {
-	background-color: #f3e90b;
+	background-color: #f3e90b73;
 }
 .mvc-sub-watershed-colour.mvc-sub-watershed-level-ii
 {
-	background-color: #f7881f;
+	background-color: #f7881f73;
 }
 .mvc-sub-watershed-colour.mvc-sub-watershed-level-iii
 {
-	background-color: #ea2328;
-}
-
-.mvc-sub-watershed-colour.mvc-sub-watershed-level-i:active
-{
-	background-color: #f3e90b;
-	background-color: rgba(243, 233, 11, 0.20);
-}
-.mvc-sub-watershed-colour.mvc-sub-watershed-level-ii:active
-{
-	background-color: #f7881f;
-	background-color: rgba(247, 136, 31, 0.20);
-}
-.mvc-sub-watershed-colour.mvc-sub-watershed-level-iii:active
-{
-	background-color: #ea2328;
-	background-color: rgba(234, 35, 40, 0.20);
+	background-color: #ea232873;
 }
 
 .station-button-icon.mvc-legend
