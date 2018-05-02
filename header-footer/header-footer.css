@@ -1,10 +1,10 @@
 @font-face {
 	font-family: wptouch-icons;
-	src: url(http://mvc.on.ca/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.eot?64777116);
-	src: url(http://mvc.on.ca/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.eot?64777116#iefix) format('embedded-opentype'),
-		url(http://mvc.on.ca/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.woff?64777116) format('woff'),
-		url(http://mvc.on.ca/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.ttf?64777116) format('truetype'),
-		url(http://mvc.on.ca/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.svg?64777116#wptouch-icons) format('svg');
+	src: url(/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.eot?64777116);
+	src: url(/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.eot?64777116#iefix) format('embedded-opentype'),
+		url(/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.woff?64777116) format('woff'),
+		url(/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.ttf?64777116) format('truetype'),
+		url(/wp-content/plugins/wptouch/themes/foundation/modules/wptouch-icons/font/wptouch-icons.svg?64777116#wptouch-icons) format('svg');
 	font-weight: 400;
 	font-style: normal;
 }

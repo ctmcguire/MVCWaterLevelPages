@@ -503,7 +503,7 @@
 
 	$.ajax({
 		dataType: "json",
-		url: "http://mvc.on.ca/watershed-conditions-message/watershed-conditions-message.json",
+		url: "/watershed-conditions-message/watershed-conditions-message.json",
 		success: function(res) {
 			conditions = res;
 			divides['mvc-update-style']();
