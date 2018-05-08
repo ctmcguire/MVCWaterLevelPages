@@ -501,14 +501,17 @@ input[type="button"].mvc-button-automatic
 .mvc-sub-watershed-colour.mvc-sub-watershed-level-i
 {
 	background-color: #f3e90b73;
+	border-color: #f3e90b;
 }
 .mvc-sub-watershed-colour.mvc-sub-watershed-level-ii
 {
 	background-color: #f7881f73;
+	border-color: #f7881f;
 }
 .mvc-sub-watershed-colour.mvc-sub-watershed-level-iii
 {
 	background-color: #ea232873;
+	border-color: #ea2328;
 }
 
 .station-button-icon.mvc-legend
