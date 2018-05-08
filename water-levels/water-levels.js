@@ -383,10 +383,18 @@
 
 	var conditions = null;
 
-	var mvca_map = L.map('mvca-map').setView([45.114, -76.5915], 10);
+	var mvca_map = L.map('mvca-map', {
+		minZoom: 10,
+		maxZoom:17,
+	}).setView([45.114, -76.5915], 10);
 	mvca_map.attributionControl.addAttribution("Automated gauge icon &copy; <a href=\"www.simpleicon.com\">SimpleIcon</a> from <a href=\"www.flaticon.com\">FlatIcon.com</a>, " + 
 				"Staff gauge icon &copy; <a href=\"www.freepik.com\">Freepik</a> from <a href=\"www.flaticon.com\">FlatIcon.com</a>");
 	L.esri.basemapLayer('Topographic').addTo(mvca_map);
+
+	mvca_map.createPane('normal-levels');
+	mvca_map.createPane('yellow-levels');
+	mvca_map.createPane('orange-levels');
+	mvca_map.createPane('red-levels');
 
 	var icon_ = function(data) {
 		return (function(w, h) {
@@ -433,10 +441,10 @@
 			var options = {
 				weight: 1,
 				color: "#333",
+				fillColor: "#333",
 				fillOpacity: 0.10,
+				pane: "normal-levels"
 			}
-			options.color = "#333";
-			options.fillColor = "#333";
 
 			if(conditions === null)
 				return options;
@@ -445,17 +453,21 @@
 			if(conds === undefined || conds === "Normal")
 				return options;
 			options.fillOpacity = 0.325;
+			options.weight = 3;
 			if(conds === "Water Safety" || conds === "Flood Outlook" || conds === "Level 1 Low Water") {
-				//options.color = "#f3e90b";
 				options.fillColor = "#f3e90b";
+				options.color = "#f3e90b";
+				options.pane = "yellow-levels";
 			}
 			if(conds === "Flood Watch" || conds === "Level 2 Low Water") {
-				//options.color = "#f7881f";
+				options.color = "#f7881f";
 				options.fillColor = "#f7881f";
+				options.pane = "orange-levels";
 			}
 			if(conds === "Flood Warning" || conds === "Level 3 Low Water") {
-				//options.color = "#ea2328";
+				options.color = "#ea2328";
 				options.fillColor = "#ea2328";
+				options.pane = "red-levels";
 			}
 
 			return options;
