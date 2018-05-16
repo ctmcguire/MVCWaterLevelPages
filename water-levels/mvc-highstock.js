@@ -686,7 +686,11 @@ function init(table_id, chart_id) {
 						floor: 0,
 					},
 				],
-				tooltip: {valueDecimals: 2,shared: true},
+				tooltip: {
+					valueDecimals: 2,
+					shared: true, 
+					split: false,
+				},
 			};
 
 			primary_flow = this.gauge.getTimeSeries().getName() === "Flow";
