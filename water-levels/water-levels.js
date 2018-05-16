@@ -120,7 +120,6 @@
 				var phi = Math.asin(radius/min_orbit_r);
 
 				if(orbit_c < (2*phi) * len) {
-					//console.log(min_orbit_r, phi, orbit_c, (2*phi) * len);
 					phi = orbit_c / (2 * len)
 					min_orbit_r = radius / (Math.sin(phi));
 				}
@@ -678,8 +677,6 @@
 		$e = $(event.target)
 		$twin = $('#graph-modal a[data-toggle="tab"][href="' + $e.attr('href') + '"]:not(#' + $e.attr('id') + ')')
 		$twin.tab('show')
-
-		console.log($twin)
 	}
 
 	$('#graph-modal a[data-toggle="tab"]').bind('shown.bs.tab', nav_shown)
