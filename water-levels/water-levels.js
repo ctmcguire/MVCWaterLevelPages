@@ -172,7 +172,7 @@
 	function getFeature(feature, i) {
 		if(i === undefined)
 			return getFeature(feature, 0);
-		return "http://services1.arcgis.com/d0ZCwU7eGKVeNiEE/ArcGIS/rest/services/" + feature + "/FeatureServer/" + i;
+		return "https://services1.arcgis.com/d0ZCwU7eGKVeNiEE/ArcGIS/rest/services/" + feature + "/FeatureServer/" + i;
 	}
 
 	var menu_click = {
