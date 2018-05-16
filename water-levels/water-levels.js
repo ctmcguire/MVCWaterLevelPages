@@ -516,6 +516,7 @@
 	$.ajax({
 		dataType: "json",
 		url: "/watershed-conditions-message/watershed-conditions-message.json",
+		cache: false,
 		success: function(res) {
 			conditions = res;
 			divides['mvc-update-style']();
