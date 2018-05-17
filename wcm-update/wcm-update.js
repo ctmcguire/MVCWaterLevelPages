@@ -2,6 +2,56 @@
 	var isInitialized = false;//Only let this function get called once
 	var imgHandler;//stores the event handler for the radio buttons
 
+	function getCondRange() {
+		var min = null;
+		var max = null;
+
+		function func_helper($list) {
+			for(let i = 0; i < $list.length; i++) {
+				//console.log([$list[i]]);
+				if($list[i].checked)
+					return i;
+			}
+			return null;
+		}
+
+		var $list = {
+			'drought': $('input[name="drought"]'),
+			'flood': $('input[name="flood"]')
+		}
+		min = func_helper($list['drought']);
+		max = func_helper($list['flood']);
+		if(max === null)
+			return [min, max]
+		return [min,$list['drought'].length + max]
+	}
+	function updateCondRange() {
+		var $rows = $('tr.mvc-affected-areas');
+		var rng = getCondRange();
+		if(rng[0] === null || rng[1] === null) {
+			rng[1] = $('input[name="drought"]').length + $('input[name="flood"]').length - 1;
+			rng[0] = rng[1];
+		}
+		function disable_helper($list) {
+			for(let i = 0; i < rng[0]; i++) {
+				if($list[i].checked)
+					$list[rng[0]].checked = true;
+				$list[i].disabled = true;
+			}
+			for(let i = rng[0]; i < rng[1]; i++)
+				$list[i].disabled = false;
+			for(let i = rng[1]; i < $list.length; i++) {
+				if($list[i].checked)
+					$list[rng[1]-1].checked = true;
+				$list[i].disabled = true;
+			}
+		}
+		for(let i = 0; i < $rows.length; i++) {
+			let $row = $($rows[i]);
+			disable_helper($row.find('input[type="radio"]'));
+		}
+	}
+
 	/**
 	 * This function checks if the title, images, and text values are valid
 	 * 
@@ -49,6 +99,7 @@
 		function validateAffectedAreas() {
 			var obj = {};
 			var $rows = $('tr.mvc-affected-areas');
+
 			for(let i = 0; i < $rows.length; i++) {
 				let $row = $($rows[i]);
 				let $btn = (function($list) {
@@ -65,7 +116,6 @@
 			}
 			try {
 				$('input.mvc-sub-watersheds.mvc-json').attr('value', JSON.stringify(obj));
-				console.log(obj);
 				return true;
 			} catch(e) {
 				console.error(e);
@@ -235,6 +285,8 @@
 		setAffectedAreas(dat['sub-watersheds']);
 		setStatement(dat.message);//set initial message body values
 		setTimestamp(dat.timestamp)
+		$('#image-select input[type="radio"]').bind('change', updateCondRange);
+		updateCondRange();
 	}
 
 	function selectAll(event) {
