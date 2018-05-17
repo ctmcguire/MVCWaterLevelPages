@@ -296,6 +296,8 @@
 		var col = $e[0].innerHTML.trim();
 		$list = $('.mvc-affected-areas input[type="radio"][value="' + col + '"]');
 		for(let i = 0; i < $list.length; i++) {
+			if($list[i].disabled)
+				continue;
 			$list[i].checked = true;
 		}
 		validateForm();
