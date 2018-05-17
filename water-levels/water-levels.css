@@ -264,12 +264,21 @@
 	display: inline-block;
 	float: left;
 }
+.mvc-feedback
+{
+	display: inline-block;
+	vertical-align: middle;
+}
 @media only screen and (min-width: 768px)
 {
 	.navbar-toggle-icon
 	{
 		padding-top: 15px;
 		padding-bottom: 15px;
+	}
+	.mvc-feedback-small
+	{
+		display: none;
 	}
 }
 @media only screen and (max-width: 768px)
@@ -286,6 +295,10 @@
 		vertical-align: middle;
 		display: inline-block;
 		float: left;
+	}
+	.mvc-feedback-large
+	{
+		display: none;
 	}
 }
 
