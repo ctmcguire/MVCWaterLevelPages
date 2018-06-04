@@ -1,0 +1,11 @@
+.provisional-data-content span,
+.provisional-data-content li
+{
+	font-size: 17px;
+}
+
+.provisional-data-content ul
+{
+	margin: 0px 0px 30px 30px;
+	padding: 0;
+}
