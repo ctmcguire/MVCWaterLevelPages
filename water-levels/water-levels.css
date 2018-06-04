@@ -564,7 +564,7 @@ input[type="button"].mvc-button-automatic
 }
 .station-button-icon.mvc-legend.mvc-green
 {
-	background-image: url('images/button-staff.png');
+	background-image: url('images/button-staff-green.png');
 	border-color: #6ECC39;
 }
 .station-button-icon.mvc-legend.mvc-red
@@ -645,4 +645,9 @@ i.mvc-help-button
 	{
 		max-height: calc(100vh - (2px));
 	}
+}
+
+.modal-title
+{
+	font-weight: bold;
 }

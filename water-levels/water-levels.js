@@ -27,21 +27,21 @@
 				<style>\
 					.{btn-icon}\
 					{\
-						background-image: url('images/{btn-icon}.png');\
+						background-image: url('images/{btn-icon}-green.png');\
 						border-color: #6ECC39;\
 					}\
 					.{btn-icon}.mvc-red\
 					{\
 						background-image: url('images/{btn-icon}-red.png');\
 					}\
+					.{btn-icon}.mvc-loading\
+					{\
+						background-image: url('images/{btn-icon}.png');\
+						border-color: #00C6FF;\
+					}\
 					.{btn-icon}:hover\
 					{\
 						background-image: url('images/{btn-icon}-hover.png');\
-					}\
-					.{btn-icon}.mvc-loading\
-					{\
-						background-image: url('images/{btn-icon}-hover.png');\
-						border-color: #fff;\
 					}\
 				</style>\
 				<div data-toggle=\"modal\" data-target=\"{btn-modal}\" data-mvc-gauge=\"{btn-gauge}\" class=\"station-button-icon mvc-loading {btn-icon}\" style=\"{btn-icon-style}\"></div>\
@@ -386,8 +386,8 @@
 		minZoom: 10,
 		maxZoom:17,
 	}).setView([45.114, -76.5915], 10);
-	mvca_map.attributionControl.addAttribution("Automated gauge icon &copy; <a href=\"www.simpleicon.com\">SimpleIcon</a> from <a href=\"www.flaticon.com\">FlatIcon.com</a>, " + 
-				"Staff gauge icon &copy; <a href=\"www.freepik.com\">Freepik</a> from <a href=\"www.flaticon.com\">FlatIcon.com</a>");
+	mvca_map.attributionControl.addAttribution("Automated gauge icon &copy; <a href=\"//www.simpleicon.com\">SimpleIcon</a> from <a href=\"//www.flaticon.com\">FlatIcon.com</a>, " + 
+				"Staff gauge icon &copy; <a href=\"//www.freepik.com\">Freepik</a> from <a href=\"//www.flaticon.com\">FlatIcon.com</a>");
 	L.esri.basemapLayer('Topographic').addTo(mvca_map);
 
 	mvca_map.createPane('normal-levels');
