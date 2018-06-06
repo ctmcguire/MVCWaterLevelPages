@@ -1,3 +1,25 @@
+body.max-hazard-on .container,
+body.max-hazard-on .container .page-wrapper,
+body.max-hazard-on .container .gdl-page-float-left,
+body.max-hazard-on .container .gdl-page-item,
+body.max-hazard-on .container .sixteen.columns.mt0,
+body.max-hazard-on .container .gdl-page-content
+{
+	margin: 0;
+	padding: 0;
+}
+body.max-hazard-on .container,
+body.max-hazard-on .sixteen.columns.mt0,
+body.hazard-on.max-hazard-on .container,
+body.hazard-on.max-hazard-on .sixteen.columns.mt0
+{
+	width: calc(100% - 0px);
+}
+body.max-hazard-on #mvca-map
+{
+	height: calc(100vh - 54px);
+}
+
 #mvca-map
 {
 	width: 100%;
