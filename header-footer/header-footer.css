@@ -336,6 +336,11 @@
 	{
 		min-width: 960px;
 	}
+
+	body:not(.hazard-on) .content-part-wrapper
+	{
+		min-height: calc(100vh - (200px + 6px + 51px + 35px));
+	}
 }
 
 *[hidden]
