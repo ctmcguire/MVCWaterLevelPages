@@ -19,7 +19,7 @@
 			this.label = label;
 			this.icon = icon;
 			this.range = new Date((24*60*60*1000) * day_range);//#days * 24h * 60min * 60s * 1000ms = day range in UNIX time
-			this.modal = "#graph-modal";
+			this.modal = "#data-modal";
 		}
 
 		var button_html = 
@@ -675,11 +675,11 @@
 (function() {
 	function nav_shown(event) {
 		$e = $(event.target)
-		$twin = $('#graph-modal a[data-toggle="tab"][href="' + $e.attr('href') + '"]:not(#' + $e.attr('id') + ')')
+		$twin = $('#data-modal a[data-toggle="tab"][href="' + $e.attr('href') + '"]:not(#' + $e.attr('id') + ')')
 		$twin.tab('show')
 	}
 
-	$('#graph-modal a[data-toggle="tab"]').bind('shown.bs.tab', nav_shown)
+	$('#data-modal a[data-toggle="tab"]').bind('shown.bs.tab', nav_shown)
 
 	$('#disclaimer-button').trigger('click');
 })();

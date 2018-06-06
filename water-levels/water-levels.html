@@ -37,11 +37,11 @@
 		<link rel="stylesheet" href="../watershed-conditions-message/watershed-conditions-message.css"/>
 		<link rel="stylesheet" href="water-levels.css"/>
 	</head>
-	<body class="hazard-on">
+	<body class="hazard-on max-hazard-on">
 		<$wp-header/>
 		<$wp-content>
 			<div id="mvca-map"></div>
-			<div id="graph-modal" class="modal fade mvc-size-fixed" role="dialog">
+			<div id="data-modal" class="modal fade mvc-size-fixed" role="dialog">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -150,32 +150,58 @@
 									</div>
 								</div>
 								<div id="mvc-tab-download" class="tab-pane fade">
-									Download Data
-									<div id="mvc-from" class="mvc-range-selector">
-										From: 
-									</div>
-									<div class="mvc-range-selector">
-										<input type="text" name="min" class="mvc-range-selector" value="" data-prev="" pattern="\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])"/>
-										<text class="pseudo-input">
+									<div>
+										<p>
 											<span>
-												
+												Mississippi Valley Conservation Authority monitors stream flow, water quality, meteorological conditions, and operational 
+												conditions at MVCA dams. The information is collected and transmitted from each station to MVCA's Operations Centre in 
+												Carleton Place, Ontario once an hour.
 											</span>
-										</text>
-									</div>
-									<div id="mvc-to" class="mvc-range-selector">
-										To: 
-									</div>
-									<div class="mvc-range-selector">
-										<input type="text" name="max" class="mvc-range-selector" value="" data-prev="" pattern="\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])"/>
-										<text class="pseudo-input">
+										</p>
+										<p>
 											<span>
-												
+												Users of MVCA's near real-time data are cautioned to consider the 
+												<a href="/legal/provisional-data/">provisional</a>
+												nature of the information before using it for 
+												decisions that concern personal or public safety or the conduct of business. These data are not citable until reviewed and 
+												approved by MVCA.
 											</span>
-										</text>
+										</p>
+										<p>
+											<span>
+												All MVCA Monitoring Data is made available under the 
+												<a href="/legal/pdf/2018.06.01 MVCA Open Data Licence v1.pdf">MVCA Open Data Licence</a>.
+											</span>
+										</p>
 									</div>
-									<button type="button" class="download" data-mvc-target="#graph-modal #mvc-tab-download input.mvc-range-selector">
-										&nbsp; Download CSV
-									</button>
+									<div>
+										Download Data
+										<div id="mvc-from" class="mvc-range-selector">
+											From: 
+										</div>
+										<div class="mvc-range-selector">
+											<input type="text" name="min" class="mvc-range-selector" value="" data-prev="" pattern="\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])"/>
+											<text class="pseudo-input">
+												<span>
+													
+												</span>
+											</text>
+										</div>
+										<div id="mvc-to" class="mvc-range-selector">
+											To: 
+										</div>
+										<div class="mvc-range-selector">
+											<input type="text" name="max" class="mvc-range-selector" value="" data-prev="" pattern="\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])"/>
+											<text class="pseudo-input">
+												<span>
+													
+												</span>
+											</text>
+										</div>
+										<button type="button" class="download" data-mvc-target="#data-modal #mvc-tab-download input.mvc-range-selector">
+											&nbsp; Download CSV
+										</button>
+									</div>
 								</div>
 							</div>
 						</div>
