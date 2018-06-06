@@ -768,20 +768,13 @@ function init(table_id, chart_id) {
 				data: dat,
 				type: "spline",//Both flow rate and water level use line charts
 				yAxis: 0,
+				zIndex: -cols.indexOf(tsName),
 				tooltip: {
 					valueSuffix: " " + units,
 				},
 				dataGrouping: {
 					smoothed: true,//put point in the center of a group to avoid shifting data to the left
 					units: [
-						/*[
-							'millisecond', // unit name
-							[1, 2, 5, 10, 20, 25, 50, 100, 200, 500] // allowed multiples
-						],*/
-						/*[
-							'second',
-							[1, 2, 5, 10, 15, 30]
-						],*/
 						[
 							'minute',
 							[5, 15, 30]
@@ -802,10 +795,6 @@ function init(table_id, chart_id) {
 							'month',
 							[1, 3, 6]
 						],
-						/*[
-							'year',
-							null
-						]*/
 					],
 				},
 			};
@@ -823,12 +812,12 @@ function init(table_id, chart_id) {
 				singleSeries.type = "areasplinerange";
 				singleSeries.color = '#D0D0D0';
 				singleSeries.lineWidth = 2;
-				singleSeries.zIndex = -2;
+				singleSeries.zIndex = -(cols.length + 2);
 			}
 			if(tsName === "Target Range") {
 				singleSeries.type = "areasplinerange";
-				singleSeries.color = '#B0B0B0'
-				singleSeries.zIndex = -1
+				singleSeries.color = '#B0B0B0';
+				singleSeries.zIndex = -(cols.length + 1);
 			}
 			if(tsName === "Precipitation") {
 				singleSeries.type = "column";//Precipitation uses a bar chart, instead of a line chart
