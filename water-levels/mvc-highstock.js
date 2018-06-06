@@ -1313,10 +1313,16 @@ function init(table_id, chart_id) {
 		RecentData.prototype.display = function() {
 			this.data.push("<br/><span class=\"station-popup-date\">" + this.date.nUTC(-5).dateStr().join('<br/>') + "</span>");
 			$(this.container).find('.mvc-primary-data').prepend('<br/>' + this.data.join(''));
+			console.log($(this.container.split(',')[0]).data('target'));
+			$(this.container.split(',')[1]).data('target', $(this.container.split(',')[0]).data('target'));
+			$(this.container.split(',')[1]).data('mvc-gauge', $(this.container.split(',')[0]).data('mvc-gauge'));
+			$(this.container.split(',')[1]).data('toggle', $(this.container.split(',')[0]).data('toggle'));
+			$(this.container.split(',')[1])[0].dataset['toggle'] = $(this.container.split(',')[1]).data('toggle');
+			$(this.container.split(',')[1])[0].dataset['target'] = $(this.container.split(',')[1]).data('target');
 			RecntDisplay.prototype.display.call(this);
 			this.data = [];
-			$('.mvc-tooltip').bind('click', tooltip_show);
-			$('.mvc-tooltip').bind('mouseout', tooltip_hide);
+			//$('.mvc-tooltip').bind('click', tooltip_show);
+			//$('.mvc-tooltip').bind('mouseout', tooltip_hide);
 		}
 
 		return RecentData;
