@@ -340,19 +340,21 @@ text.pseudo-input
 input.mvc-range-selector
 {
 	position: absolute;
-	display: none;
-}
-div.visible input.mvc-range-selector
-{
 	display: inline-block;
 	display: initial;
+}
+div.mvc-range-selector:not(.visible) input.mvc-range-selector
+{
+	width: 0px;
+	height: 0px;
+	top: -30px;
 }
 
 div.mvc-range-selector
 {
 	display: inline-block;
 }
-div.mvc-range-selector input.mvc-table-range-selector,
+div.mvc-range-selector input.mvc-range-selector,
 div.mvc-range-selector text.pseudo-input
 {
 	width: 100px;
@@ -672,4 +674,9 @@ i.mvc-help-button
 .modal-title
 {
 	font-weight: bold;
+}
+
+div#ui-datepicker-div
+{
+	z-index: 9001 !important;
 }

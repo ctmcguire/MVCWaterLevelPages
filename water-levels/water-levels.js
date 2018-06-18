@@ -253,12 +253,9 @@
 		if(/\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])/.exec($e[0].value) === null)
 			return;
 		var $div = $e.parents('div.mvc-range-selector');
-		$div.removeClass('visible');
+		if(!$e.hasClass('hasDatepicker'))
+			$div.removeClass('visible');
 		$div.find('text.pseudo-input span')[0].innerHTML = (new Date($e[0].value.replace_('-', '/') + ' 00:00:00')).formatStr();
-
-		/*if($e[0].value === Date.dateStr($e[0].value.replace_('-', '/') + ' 00:00:00'))
-			return;
-		$e[0].value = val*/
 	}
 	function table_range_changed($event) {
 		var dat = $event.data;
@@ -668,7 +665,16 @@
 	btnHelp.addTo(mvca_map);
 
 	$('text.pseudo-input').bind('click', null, range_click);
+	/*$('input.mvc-range-selector').bind('blur', null, function(e) {
+		console.log(new Date(), 'blur!', e.originalEvent);
+		range_blur(e);
+	});
+	$('input.mvc-range-selector').bind('mvc-show', null, function(e) {
+		console.log(new Date(), 'focus!');
+		range_click(e);
+	});*/
 	$('input.mvc-range-selector').bind('blur', null, range_blur);
+	//$('input.mvc-range-selector').bind('mvc-show', null, range_click);
 	$('input.mvc-range-selector:not(.mvc-table)').bind('change', null, range_blur);
 	$('#mvc-tab-table').bind('click', null, toggle_click);
 })();
@@ -682,4 +688,19 @@
 	$('#data-modal a[data-toggle="tab"]').bind('shown.bs.tab', nav_shown)
 
 	$('#disclaimer-button').trigger('click');
+
+
+	$.datepicker.setDefaults({
+		dateFormat: 'yy-mm-dd',
+		//onChangeMonthYear: function() {console.log('test')},
+		onClose: function(dateText, inst) {
+			this.blur();
+		}
+	});
+	$('.mvc-range-selector input').datepicker();
+	$('.mvc-range-selector input').datepicker('option', 'onClose', function(dateText) {
+		if(/\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])/.exec(dateText) !== null)
+			$(this).parents('div.mvc-range-selector').removeClass('visible');
+		this.blur();
+	});
 })();

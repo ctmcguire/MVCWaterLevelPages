@@ -3,6 +3,8 @@ function init(table_id, chart_id) {
 	 * 
 	**/
 	function TimeSeries(name, units, full, hourly, daily, weekly, monthly, yearly) {
+		var domain = undefined
+
 		function getName() {
 			return name;
 		};
@@ -22,6 +24,10 @@ function init(table_id, chart_id) {
 				default:
 					return "1.5 metric units of 'someone screwed this up'"//This should not ever be returned; if it is returned, someone used an invalid unit
 			}
+		}
+		function setDomain(id) {
+			domain = id;
+			return this;
 		}
 
 		/**
@@ -44,6 +50,8 @@ function init(table_id, chart_id) {
 			const year26 = new Date('1996/01/01');//UNIX time value for 26 years
 			const year62 = new Date('2032/01/01');//UNIX time value for 62 years
 
+			if(start === "domain" && end === undefined)
+				return domain;
 			if(start === undefined || end === undefined)
 				return full;
 
@@ -79,6 +87,7 @@ function init(table_id, chart_id) {
 				hourly = daily;
 			if(full === null)
 				full = hourly;
+			domain = yearly
 		})();
 
 		/* 
@@ -95,11 +104,13 @@ function init(table_id, chart_id) {
 				monthly = weekly;
 			if(yearly === undefined)
 				yearly = monthly;
+			domain = yearly
 		})();
 
 		this.getName = getName;
 		this.getUnits = getUnits;
 		this.getTooltip = getTooltip;
+		this.setDomain = setDomain;
 		this.getTsId = getTsId;
 		this.toString = toString;
 	};
@@ -597,11 +608,18 @@ function init(table_id, chart_id) {
 	var GraphDisplay = (function() {
 		var tempDat = null;
 
+		function getId(tsName, start, end) {
+			if(this.loaded)
+				return DataDisplay.prototype.getId.call(this, tsName, start, end)
+			return this.gauge.getTimeSeries(tsName).getTsId('domain');
+		}
+
 		function load(start, end) {
 			if(end === "")
 				end = today;
 			if(start === "")
 				start = Date.dateStr((new Date(end.replace_('-', '/') + ' 00:00:00')).nMonths(-3)/*.setMonth((new Date(end + ' 00:00:00')).getMonth() - 3)*/)[0];
+			this.loaded = false;
 			this.start = start.replace_('-', '/');
 			this.end = end.replace_('-', '/') + ' 23:59:59';
 			DataDisplay.prototype.load.call(this, first, today);
@@ -639,8 +657,10 @@ function init(table_id, chart_id) {
 				rangeSelector: {
 					inputDateParser: function(value) {
 						let delta = new Date(value.replace_('-', '/')).nUTC(-5);
+						console.log(delta, value)
 						if(delta.dateStr()[0] !== value)
 							return delta.nDays(1).valueOf();
+						console.log('potato')
 						return new Date(value.replace_('-', '/')).valueOf();
 					}
 				},
@@ -741,8 +761,10 @@ function init(table_id, chart_id) {
 			}
 		}
 		function selectRange(event) {
+			$('input.highcharts-range-selector').datepicker('hide');
 			this.start = event.min;
 			this.end = event.max;
+			console.log(event)
 			this.reload(Date.dateStr(this.start)[0], Date.dateStr(this.end)[0]);//update the chart data
 		}
 
@@ -903,10 +925,20 @@ function init(table_id, chart_id) {
 		function display(is_reload) {
 			if(!is_reload)
 				this.chart.xAxis[0].setExtremes((new Date(this.start)).valueOf(), (new Date(this.end)).valueOf(), false);
+			if(!is_reload)
+				this.loaded = true
 			this.chart.hideLoading();//hide the loading display
 			this.chart.redraw();//update the chart's display
 			if(!is_reload)
 				$('#chart-info').removeClass('disabled');//display the units of measurement legend
+			$('input.highcharts-range-selector').datepicker()
+			let chart = this.chart
+			$('input.highcharts-range-selector').datepicker('option', 'onselect', function(dateText) {
+					chart.xAxis[0].setExtremes(
+						$('input.highcharts-range-selector:eq(0)').datepicker("getDate").nUTC().getTime(), 
+						$('input.highcharts-range-selector:eq(1)').datepicker("getDate").nUTC().getTime()); 
+						this.onchange();
+				});
 			tempDat = null;
 		}
 
@@ -916,6 +948,7 @@ function init(table_id, chart_id) {
 			this.selectRange = selectRange;
 			this.start = undefined;
 			this.end = undefined;
+			this.loaded = false;
 		}
 
 
@@ -924,6 +957,7 @@ function init(table_id, chart_id) {
 
 		GraphDisplay.prototype.load = load;
 		GraphDisplay.prototype.reload = reload;
+		GraphDisplay.prototype.getId = getId;
 
 		GraphDisplay.prototype.createDisplay = createDisplay;
 		GraphDisplay.prototype.formatData = formatData;
@@ -1313,7 +1347,6 @@ function init(table_id, chart_id) {
 		RecentData.prototype.display = function() {
 			this.data.push("<br/><span class=\"station-popup-date\">" + this.date.nUTC(-5).dateStr().join('<br/>') + "</span>");
 			$(this.container).find('.mvc-primary-data').prepend('<br/>' + this.data.join(''));
-			console.log($(this.container.split(',')[0]).data('target'));
 			$(this.container.split(',')[1]).data('target', $(this.container.split(',')[0]).data('target'));
 			$(this.container.split(',')[1]).data('mvc-gauge', $(this.container.split(',')[0]).data('mvc-gauge'));
 			$(this.container.split(',')[1]).data('toggle', $(this.container.split(',')[0]).data('toggle'));
@@ -1343,12 +1376,12 @@ function init(table_id, chart_id) {
 	 */
 	{
 		{(gauges.add(new Station('Appleton Flow'))
-			.addTs(new TimeSeries('Flow', 'm\xB3/s', '38819042', '38692042', '3449042', '38694042', '38695042', '38696042'), true)
+			.addTs(new TimeSeries('Flow', 'm\xB3/s', '38819042', '38692042', '3449042', '38694042', '38695042', '38696042').setDomain('44136042'), true)
 			.addTs(new TimeSeries('Historical Average', 'm\xB3/s', null, null, '38698042', '5959042', '38291042'))
 			.addTs(new TimeSeries('Historical Minimum', 'm\xB3/s', null, null, '38685042', '4581042', '4510042'))
 			.addTs(new TimeSeries('Historical Maximum', 'm\xB3/s', null, null, '38688042', '38689042', '38690042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))
-			.addTs(new TimeSeries('Precipitation', 'mm', null, '1439042', '1448042', '38821042', '8791042', '35870042'))
+			.addTs(new TimeSeries('Precipitation', 'mm', null, '1439042', '1448042', '38821042', '8791042', '44123042'))
 		)};
 		{(gauges.add(new Station('Myers Cave Flow'))
 			.addTs(new TimeSeries('Flow', 'm\xB3/s'), true)
@@ -1366,9 +1399,12 @@ function init(table_id, chart_id) {
 			.addTs(new TimeSeries('Precipitation', 'mm'))
 		)};
 		{(gauges.add(new Station('Gordon Rapids Flow'))
-			.addTs(new TimeSeries('Flow', 'm\xB3/s'), true)
-			.addTs(new TimeSeries('Historical Average', 'm\xB3/s'))
-			.addTs(new TimeSeries('Precipitation', 'mm'))
+			.addTs(new TimeSeries('Flow', 'm\xB3/s', '43812042', '43807042', '43790042', '43808042', '43809042', '43810042').setDomain('44149042'), true)
+			.addTs(new TimeSeries('Historical Average', 'm\xB3/s', null, null, '43811042', '43793042' , '43796042'))
+			.addTs(new TimeSeries('Historical Minimum', 'm\xB3/s', null, null, '43800042', '43792042', '43791042'))
+			.addTs(new TimeSeries('Historical Maximum', 'm\xB3/s', null, null, '43803042', '43804042', '43805042'))
+			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))
+			.addTs(new TimeSeries('Precipitation', 'mm', null, '1443042', '44124042', '44125042', '44126042', '44127042'))
 		)};
 		{(gauges.add(new Station('Lanark Stream Flow'))
 			.addTs(new TimeSeries('Flow', 'm\xB3/s'), true)
