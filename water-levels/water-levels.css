@@ -291,7 +291,7 @@ body.max-hazard-on #mvca-map
 	display: inline-block;
 	vertical-align: middle;
 }
-@media only screen and (min-width: 768px)
+@media only screen and (min-width: 768px) and (min-height: 768px)
 {
 	.navbar-toggle-icon
 	{
@@ -303,7 +303,7 @@ body.max-hazard-on #mvca-map
 		display: none;
 	}
 }
-@media only screen and (max-width: 768px)
+@media only screen and (max-width: 768px), (max-height: 768px)
 {
 	#mvc-data-tab.collapse:not(.in),
 	#mvc-data-tab-2.collapse:not(.in)
@@ -360,7 +360,7 @@ div.mvc-range-selector text.pseudo-input
 	width: 100px;
 }
 
-div.mvc-table-range-container
+div.mvc-range-container
 {
 	text-align: right;
 	display: inline-block;
@@ -644,7 +644,7 @@ i.mvc-help-button
 }
 
 
-@media only screen and (min-height: 621px)
+@media only screen and (min-height: 621px) and (min-width: 621px)
 {
 	.mvc-mobile-only
 	{
@@ -652,7 +652,7 @@ i.mvc-help-button
 	}
 }
 
-@media only screen and (max-height: 620px)
+@media only screen and (max-height: 620px), (max-width: 620px)
 {
 	.modal.mvc-size-fixed .modal-dialog
 	{
@@ -660,6 +660,7 @@ i.mvc-help-button
 		max-height: calc(100vh);
 		margin: 0;
 	}
+	.modal.mvc-size-fixed .mvc-chart-fixed .highcharts-range-selector-group,
 	.modal.mvc-size-fixed .modal-header,
 	.modal.mvc-size-fixed .modal-footer
 	{

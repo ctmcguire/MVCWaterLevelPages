@@ -113,6 +113,31 @@
 							</nav>
 							<div id="mvc-data-tab-content" class="tab-content">
 								<div id="mvc-tab-graph" class="tab-pane fade active">
+									<div class="mvc-range-container mvc-graph mvc-mobile-only">
+										View Data
+										<div id="mvc-from" class="mvc-range-selector">
+											From: 
+										</div>
+										<div class="mvc-range-selector mvc-graph">
+											<input type="text" name="min" class="mvc-range-selector mvc-graph" value="" pattern="\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])"/>
+											<text class="pseudo-input">
+												<span>
+													
+												</span>
+											</text>
+										</div>
+										<div id="mvc-to" class="mvc-range-selector">
+											To: 
+										</div>
+										<div class="mvc-range-selector">
+											<input type="text" name="max" class="mvc-range-selector mvc-graph" value="" pattern="\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])"/>
+											<text class="pseudo-input">
+												<span>
+													
+												</span>
+											</text>
+										</div>
+									</div>
 									<div id="chart-content" class="mvc-size-fixed">
 										<h3>
 											Now Loading...
@@ -120,7 +145,7 @@
 									</div>
 								</div>
 								<div id="mvc-tab-table" class="tab-pane fade">
-									<div class="mvc-table-range-container">
+									<div class="mvc-range-container mvc-table">
 										View Data
 										<div id="mvc-from" class="mvc-range-selector">
 											From: 

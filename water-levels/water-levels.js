@@ -697,8 +697,8 @@
 			this.blur();
 		}
 	});
-	$('.mvc-range-selector input').datepicker();
-	$('.mvc-range-selector input').datepicker('option', 'onClose', function(dateText) {
+	$('input.mvc-range-selector').datepicker();
+	$('input.mvc-range-selector').datepicker('option', 'onClose', function(dateText) {
 		if(/\d{3}\d+-(0[1-9]|1[0-2])-([0][1-9]|[1-2][0-9]|3[0-1])/.exec(dateText) !== null)
 			$(this).parents('div.mvc-range-selector').removeClass('visible');
 		this.blur();

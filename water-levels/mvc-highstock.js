@@ -643,6 +643,7 @@ function init(table_id, chart_id) {
 			var options = {
 				chart: {
 					renderTo: this.container,
+					className: 'mvc-chart-fixed'
 				},
 				plotOptions: {
 					showInNavigator: false,
@@ -657,10 +658,8 @@ function init(table_id, chart_id) {
 				rangeSelector: {
 					inputDateParser: function(value) {
 						let delta = new Date(value.replace_('-', '/')).nUTC(-5);
-						console.log(delta, value)
 						if(delta.dateStr()[0] !== value)
 							return delta.nDays(1).valueOf();
-						console.log('potato')
 						return new Date(value.replace_('-', '/')).valueOf();
 					}
 				},
@@ -669,17 +668,7 @@ function init(table_id, chart_id) {
 				},
 				series: [],
 				responsive: {
-					rules: [{
-						condition: {
-							maxWidth: 425,
-							maxHeight: 425,
-						},
-						chartOptions: {
-							rangeSelector: {
-								enabled: false,
-							},
-						},
-					}],
+					rules: [],
 				},
 				xAxis: {
 					events: {
@@ -931,14 +920,23 @@ function init(table_id, chart_id) {
 			this.chart.redraw();//update the chart's display
 			if(!is_reload)
 				$('#chart-info').removeClass('disabled');//display the units of measurement legend
-			$('input.highcharts-range-selector').datepicker()
+			$('input.highcharts-range-selector').datepicker();
+			//$('input.mvc-range-selector.mvc-graph').datepicker();
 			let chart = this.chart
 			$('input.highcharts-range-selector').datepicker('option', 'onselect', function(dateText) {
 					chart.xAxis[0].setExtremes(
 						$('input.highcharts-range-selector:eq(0)').datepicker("getDate").nUTC().getTime(), 
 						$('input.highcharts-range-selector:eq(1)').datepicker("getDate").nUTC().getTime()); 
-						this.onchange();
+					this.onchange();
 				});
+			$('input.mvc-range-selector.mvc-graph').datepicker('option', 'onSelect', function(dateText) {
+				chart.xAxis[0].setExtremes(
+					$('input.mvc-range-selector.mvc-graph:eq(0)').datepicker("getDate").nUTC().getTime(), 
+					$('input.mvc-range-selector.mvc-graph:eq(1)').datepicker("getDate").nUTC().getTime()
+				);
+				this.value = dateText;
+				$(this).trigger('blur');
+			});
 			tempDat = null;
 		}
 
