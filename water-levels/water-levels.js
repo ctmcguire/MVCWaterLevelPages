@@ -72,6 +72,10 @@
 			return chckRecnt(this.gauge, '.' + this.icon, this.range);
 		}
 
+		Button.prototype.getStation = function() {
+			return this.gauge
+		}
+
 		Button['Automated Gauge Data'] = function(gauge) {
 			return new Button(gauge, 'Automated Gauge Data', 'button-automated', 1);
 		}
@@ -156,6 +160,11 @@
 			return "<div class=\"mvc-no-data-icon\" title=\"No Data Available\"></div>";
 		}
 
+		ButtonList.prototype.getStation = function() {
+			for(let i = 0; i < this.buttons.length; i++) {
+				return this.buttons[i].getStation()
+			}
+		}
 		ButtonList.prototype.toString = function() {
 			var out = "Button List:\n";
 			for(let i = 0; i < this.buttons.length; i++) {
@@ -182,10 +191,15 @@
 			};
 			var $e = $($event.target);
 			var $modal = $($e.data('target'));
+			if($modal.length < 1) {
+				$e = $e.parents('.station-popup')
+				$modal = $($e.data('target'))
+			}
 			dat.Gauge = $event.data !== null? $event.data.Gauge : $e.data('mvc-gauge');
 
 			if($modal.length < 1 || dat.Gauge === undefined)
 				return;
+
 			$('.download').unbind('click', download_click);//unbind previous handler
 			$('.download').bind('click', dat, download_click);
 
@@ -322,7 +336,7 @@
 		var obj = {
 			'map-items': 
 				"<div id=\"map-items\" class=\"mvc-large-popup\">\
-					<div title=\"{tooltip}\" class=\"station-popup {Identifier}\">\
+					<div title=\"{tooltip}\" class=\"station-popup {Identifier}\" data-toggle=\"modal\" data-target=\"#data-modal\" data-mvc-gauge=\"{TsId}\">\
 						<div class=\"station-popup-icon mvc-primary-data\">\
 							{Recent}\
 						</div>\
@@ -346,6 +360,7 @@
 
 			'Gauge': "{Gauge}",
 			'Recent': "{Recent}",
+			'TsId': "{TsId}",
 			'Identifier': "{Identifier}",
 			'button-label': "{button-label}",
 			'button-style': "{button-style}",
@@ -363,6 +378,7 @@
 		$pane.bind('click', null, menu_click['mvc-gauge']);//rebind with new gauge data
 
 		var buttons = new ButtonList(data['Buttons']);
+		//
 
 		return L.Util.template(getPopup(buttons), $.extend({}, data, {
 				'Recent': function(data) {
@@ -374,6 +390,7 @@
 					return "mvc-station-" + data.OBJECTID_1;
 				},
 				'tooltip': "Most Recent Data",
+				'TsId': buttons.getStation(),
 			}));
 	}
 

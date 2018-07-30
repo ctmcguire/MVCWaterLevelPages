@@ -51,6 +51,7 @@ body.max-hazard-on #mvca-map
 
 .station-popup
 {
+	cursor: pointer;
 	position: absolute;
 	background-color: white;
 	-ms-border-radius: 50%;
