@@ -520,6 +520,7 @@
 				},
 				'Gauge': data.Name + " Subwatershed",
 				'tooltip': "Current Subwatershed Conditions",
+				'TsId': "",
 			}));
 		});
 		divides.bindPopup(popup);
