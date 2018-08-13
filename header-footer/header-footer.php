@@ -13,14 +13,6 @@
 	$sideRight = new CustomTag('wp-sidebar-right', $_SERVER['DOCUMENT_ROOT'].'/header-footer/wp-sidebar-right.html');
 	$footer = new HTMLReader($_SERVER['DOCUMENT_ROOT'].'/header-footer/wp-footer.html');
 
-	/* 
-	 * Insert all the really long urls back into wp-themes (removed to make the file thinner)
-	 */
-	$themes->insert('greenearth', '/wp-content/themes/greenearth-v1-06/');
-	$themes->insert('plugins', '/wp-content/plugins/');
-	$themes->insert('shortcode', '/include/otw_components/otw_shortcode/css/');
-	$themes->insert('google-font', '//fonts.googleapis.com/css?family=Droid+Sans%3Asubset%3Dlatin%3An%2Ci%2Cb%2Cbi%7CDroid+Serif%3Asubset%3Dlatin%3An%2Ci%2Cb%2Cbi%7C&amp;ver=4.7.5');
-
 	/**
 	 * This function adds the header, footer, wordpress themes, and page-container tags to the given HTMLReader
 	 * 
