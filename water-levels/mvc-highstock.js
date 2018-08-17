@@ -1368,12 +1368,12 @@ function init(table_id, chart_id) {
 	var today = (new Date()).dateStr()[0];
 	var first = Date.dateStr('1918/01/01 00:00:00')[0];
 
-	var gauges = new StationList();
+	var stations = new StationList();
 	/* 
-	 * Flow gauges
+	 * Flow stations
 	 */
 	{
-		{(gauges.add(new Station('Appleton Flow'))
+		{(stations.add(new Station('Appleton Flow'))
 			.addTs(new TimeSeries('Flow', 'm\xB3/s', '38819042', '38692042', '3449042', '38694042', '38695042', '38696042').setDomain('44136042'), true)
 			.addTs(new TimeSeries('Historical Average', 'm\xB3/s', null, null, '38698042', '5959042', '38291042'))
 			.addTs(new TimeSeries('Historical Minimum', 'm\xB3/s', null, null, '38685042', '4581042', '4510042'))
@@ -1381,22 +1381,22 @@ function init(table_id, chart_id) {
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))
 			.addTs(new TimeSeries('Precipitation', 'mm', null, '1439042', '1448042', '38821042', '8791042', '44123042'))
 		)};
-		{(gauges.add(new Station('Myers Cave Flow'))
+		{(stations.add(new Station('Myers Cave Flow'))
 			.addTs(new TimeSeries('Flow', 'm\xB3/s'), true)
 			.addTs(new TimeSeries('Historical Average', 'm\xB3/s'))
 			.addTs(new TimeSeries('Precipitation', 'mm'))
 		)};
-		{(gauges.add(new Station('Buckshot Creek Flow'))
+		{(stations.add(new Station('Buckshot Creek Flow'))
 			.addTs(new TimeSeries('Flow', 'm\xB3/s'), true)
 			.addTs(new TimeSeries('Historical Average', 'm\xB3/s'))
 			.addTs(new TimeSeries('Precipitation', 'mm'))
 		)};
-		{(gauges.add(new Station('Ferguson Falls Flow'))
+		{(stations.add(new Station('Ferguson Falls Flow'))
 			.addTs(new TimeSeries('Flow', 'm\xB3/s'), true)
 			.addTs(new TimeSeries('Historical Average', 'm\xB3/s'))
 			.addTs(new TimeSeries('Precipitation', 'mm'))
 		)};
-		{(gauges.add(new Station('Gordon Rapids Flow'))
+		{(stations.add(new Station('Gordon Rapids Flow'))
 			.addTs(new TimeSeries('Flow', 'm\xB3/s', '43812042', '43807042', '43790042', '43808042', '43809042', '43810042').setDomain('44149042'), true)
 			.addTs(new TimeSeries('Historical Average', 'm\xB3/s', null, null, '43811042', '43793042' , '43796042'))
 			.addTs(new TimeSeries('Historical Minimum', 'm\xB3/s', null, null, '43800042', '43792042', '43791042'))
@@ -1404,308 +1404,308 @@ function init(table_id, chart_id) {
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))
 			.addTs(new TimeSeries('Precipitation', 'mm', null, '1443042', '44124042', '44125042', '44126042', '44127042'))
 		)};
-		{(gauges.add(new Station('Lanark Stream Flow'))
+		{(stations.add(new Station('Lanark Stream Flow'))
 			.addTs(new TimeSeries('Flow', 'm\xB3/s'), true)
 			.addTs(new TimeSeries('Historical Average', 'm\xB3/s'))
 			.addTs(new TimeSeries('Precipitation', 'mm'))
 		)};
-		{(gauges.add(new Station('Mill of Kintail Flow'))
+		{(stations.add(new Station('Mill of Kintail Flow'))
 			.addTs(new TimeSeries('Flow', 'm\xB3/s'), true)
 			.addTs(new TimeSeries('Historical Average', 'm\xB3/s'))
 			.addTs(new TimeSeries('Precipitation', 'mm'))
 		)};
-		{(gauges.add(new Station('Kinburn Flow'))
+		{(stations.add(new Station('Kinburn Flow'))
 			.addTs(new TimeSeries('Flow', 'm\xB3/s'), true)
 			.addTs(new TimeSeries('Historical Average', 'm\xB3/s'))
 			.addTs(new TimeSeries('Precipitation', 'mm'))
 		)};
-		{(gauges.add(new Station('Bennett Lake Outflow'))
+		{(stations.add(new Station('Bennett Lake Outflow'))
 			.addTs(new TimeSeries('Flow', 'm\xB3/s'), true)
 			.addTs(new TimeSeries('Precipitation', 'mm'))
 		)};
-		{(gauges.add(new Station('Dalhousie Lk Outflow'))
+		{(stations.add(new Station('Dalhousie Lk Outflow'))
 			.addTs(new TimeSeries('Flow', 'm\xB3/s'), true)
 			.addTs(new TimeSeries('Precipitation', 'mm'))
 		)};
-		{(gauges.add(new Station('High Falls Flow'))
+		{(stations.add(new Station('High Falls Flow'))
 			.addTs(new TimeSeries('Flow', 'm\xB3/s'), true)
 		)};
 	}
 
 	/* 
-	 * Lake gauges
+	 * Lake stations
 	 */
 	{
-		{(gauges.add(new Station('Shabomeka Lake'))
+		{(stations.add(new Station('Shabomeka Lake'))
 			.addTs(new TimeSeries('Level', 'MASL'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL'))
 			.addTs(new TimeSeries('Precipitation', 'mm'))
 		)};
-		{(gauges.add(new Station('Mazinaw Lake'))
+		{(stations.add(new Station('Mazinaw Lake'))
 			.addTs(new TimeSeries('Level', 'MASL'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL'))
 		)};
-		{(gauges.add(new Station('Kashwakamak Lake'))
+		{(stations.add(new Station('Kashwakamak Lake'))
 			.addTs(new TimeSeries('Level', 'MASL'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL'))
 		)};
-		{(gauges.add(new Station('Farm Lake'))
+		{(stations.add(new Station('Farm Lake'))
 			.addTs(new TimeSeries('Level', 'MASL'), true)
 		)};
-		{(gauges.add(new Station('Mississagagon Lake'))
-			.addTs(new TimeSeries('Level', 'MASL'), true)
-			.addTs(new TimeSeries('Historical Average', 'MASL'))
-		)};
-		{(gauges.add(new Station('Big Gull Lake'))
+		{(stations.add(new Station('Mississagagon Lake'))
 			.addTs(new TimeSeries('Level', 'MASL'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL'))
 		)};
-		{(gauges.add(new Station('Crotch Lake'))
+		{(stations.add(new Station('Big Gull Lake'))
 			.addTs(new TimeSeries('Level', 'MASL'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL'))
-			.addTs(new TimeSeries('Precipitation', 'mm'))
 		)};
-		{(gauges.add(new Station('Palmerston Lake'))
+		{(stations.add(new Station('Crotch Lake'))
 			.addTs(new TimeSeries('Level', 'MASL'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL'))
 			.addTs(new TimeSeries('Precipitation', 'mm'))
 		)};
-		{(gauges.add(new Station('Canonto Lake'))
-			.addTs(new TimeSeries('Level', 'MASL'), true)
-			.addTs(new TimeSeries('Historical Average', 'MASL'))
-		)};
-		{(gauges.add(new Station('Sharbot Lake'))
+		{(stations.add(new Station('Palmerston Lake'))
 			.addTs(new TimeSeries('Level', 'MASL'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL'))
 			.addTs(new TimeSeries('Precipitation', 'mm'))
 		)};
-		{(gauges.add(new Station('Bennett Lake'))
-			.link(gauges.get('Bennett Lake Outflow'), 'Flow')
-			.addTs(new TimeSeries('Level', 'MASL'), true)
-			.addTs(new TimeSeries('Historical Average', 'MASL'))
-			.link(gauges.get('Bennett Lake Outflow'), 'Precipitation')
-		)};
-		{(gauges.add(new Station('Dalhousie Lake'))
-			.link(gauges.get('Dalhousie Lk Outflow'), 'Flow')
-			.addTs(new TimeSeries('Level', 'MASL'), true)
-			.addTs(new TimeSeries('Historical Average', 'MASL'))
-			.link(gauges.get('Dalhousie Lk Outflow'), 'Precipitation')
-		)};
-		{(gauges.add(new Station('Lanark'))
+		{(stations.add(new Station('Canonto Lake'))
 			.addTs(new TimeSeries('Level', 'MASL'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL'))
 		)};
-		{(gauges.add(new Station('Mississippi Lake'))
+		{(stations.add(new Station('Sharbot Lake'))
+			.addTs(new TimeSeries('Level', 'MASL'), true)
+			.addTs(new TimeSeries('Historical Average', 'MASL'))
+			.addTs(new TimeSeries('Precipitation', 'mm'))
+		)};
+		{(stations.add(new Station('Bennett Lake'))
+			.link(stations.get('Bennett Lake Outflow'), 'Flow')
+			.addTs(new TimeSeries('Level', 'MASL'), true)
+			.addTs(new TimeSeries('Historical Average', 'MASL'))
+			.link(stations.get('Bennett Lake Outflow'), 'Precipitation')
+		)};
+		{(stations.add(new Station('Dalhousie Lake'))
+			.link(stations.get('Dalhousie Lk Outflow'), 'Flow')
+			.addTs(new TimeSeries('Level', 'MASL'), true)
+			.addTs(new TimeSeries('Historical Average', 'MASL'))
+			.link(stations.get('Dalhousie Lk Outflow'), 'Precipitation')
+		)};
+		{(stations.add(new Station('Lanark'))
 			.addTs(new TimeSeries('Level', 'MASL'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL'))
 		)};
-		{(gauges.add(new Station('C.P. Dam'))
+		{(stations.add(new Station('Mississippi Lake'))
 			.addTs(new TimeSeries('Level', 'MASL'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL'))
 		)};
-		{(gauges.add(new Station('Carp River at Maple Grove'))
+		{(stations.add(new Station('C.P. Dam'))
+			.addTs(new TimeSeries('Level', 'MASL'), true)
+			.addTs(new TimeSeries('Historical Average', 'MASL'))
+		)};
+		{(stations.add(new Station('Carp River at Maple Grove'))
 			.addTs(new TimeSeries('Level', 'MASL'), true)
 			.addTs(new TimeSeries('Precipitation', 'mm'))
 		)};
-		{(gauges.add(new Station('High Falls'))
-			.link(gauges.get('High Falls Flow'), 'Flow')
+		{(stations.add(new Station('High Falls'))
+			.link(stations.get('High Falls Flow'), 'Flow')
 			.addTs(new TimeSeries('Level', 'MASL'), true)
 		)};
-		{(gauges.add(new Station('Carp River at Richardson')))};
-		{(gauges.add(new Station('Poole Creek at Maple Grove')))};
-		{(gauges.add(new Station('Widow Lake'))
+		{(stations.add(new Station('Carp River at Richardson')))};
+		{(stations.add(new Station('Poole Creek at Maple Grove')))};
+		{(stations.add(new Station('Widow Lake'))
 			.addTs(new TimeSeries('Level', 'MASL'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL'))
 		)};
 	}
 
 	/* 
-	 * Staff gauges
+	 * Staff stations
 	 */
 	{
-		{(gauges.add(new Station('Big Gull Lake (weekly)'))
+		{(stations.add(new Station('Big Gull Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39429042', null, '39627042', '39628042', '39629042', '39630042').setDomain('44154042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39631042', '39632042', '39633042', '39634042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, null, '39636042', '39637042', '39638042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, null, '39640042', '39641042', '39642042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Buckshot Lake (weekly)'))
+		{(stations.add(new Station('Buckshot Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39474042', null, '39643042', '39644042', '39645042', '39646042').setDomain('44158042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39647042', '39648042', '39649042', '39650042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, '39651042', '39652042', '39653042', '39654042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, '39655042', '39656042', '39657042', '39658042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Canonto Lake (weekly)'))
+		{(stations.add(new Station('Canonto Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39431042', null, '39659042', '39660042', '39661042', '39662042').setDomain('44162042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39663042', '39664042', '39665042', '39666042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, '39667042', '39668042', '39669042', '39670042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, '39671042', '39672042', '39673042', '39674042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('C.P. Dam (weekly)'))
+		{(stations.add(new Station('C.P. Dam (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39433042', null, '39675042', '39676042', '39677042', '39678042').setDomain('44166042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39679042', '41663042', '39681042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, null, '39684042', '39685042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, null, '39688042', '39689042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Clayton Lake (weekly)'))
+		{(stations.add(new Station('Clayton Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39508042', null, '39691042', '39692042', '39693042', '39694042').setDomain('44170042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39695042', '39696042', '39697042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, '39699042', '39700042', '39701042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, '39703042', '39704042', '39705042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Crotch Lake (weekly)'))
+		{(stations.add(new Station('Crotch Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39435042', null, '39707042', '39708042', '39709042', '39710042').setDomain('44174042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39711042', '39712042', '39713042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, null, '39716042', '39717042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, null, '39720042', '39721042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Bennett Lake (weekly)'))
+		{(stations.add(new Station('Bennett Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39486042', null, '39727042', '39728042', '39729042', '39730042').setDomain('44178042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39731042', '39732042', '39733042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, null, '39736042', '39737042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, null, '39740042', '39741042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Sharbot Lake (weekly)'))
+		{(stations.add(new Station('Sharbot Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39487042', null, '39743042', '39744042', '39745042', '39746042').setDomain('44182042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39747042', '39748042', '39749042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, null, '39752042', '39753042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, null, '39756042', '39757042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Kashwakamak Lake (weekly)'))
+		{(stations.add(new Station('Kashwakamak Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39488042', null, '39759042', '39760042', '39761042', '39762042').setDomain('44186042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39763042', '39764042', '39765042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, null, '39768042', '39769042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, null, '39772042', '39773042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Lanark Dam (weekly)'))
+		{(stations.add(new Station('Lanark Dam (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39503042', null, '39775042', '39776042', '39777042', '39778042').setDomain('44190042'), true)
 			/*.addTs(new TimeSeries('Historical Average', 'MASL', null, null, null, '39780042', '39781042'))
 			.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, null, '39784042', '39785042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, null, '39788042', '39789042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Lanark Bridge (weekly)'))
+		{(stations.add(new Station('Lanark Bridge (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39439042', null, '39791042', '39792042', '39793042', '39794042').setDomain('44194042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39795042', '39796042', '39797042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, null, '39800042', '39801042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, null, '39804042', '39805042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Little Marble Lake (weekly)'))
+		{(stations.add(new Station('Little Marble Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39454042', null, '39807042', '39808042', '39809042', '39810042').setDomain('44198042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39811042', '39812042', '39813042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, '39815042', '39816042', '39817042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, '39819042', '39820042', '39821042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Malcolm Lake (weekly)'))
+		{(stations.add(new Station('Malcolm Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39464042', null, '39823042', '39824042', '39825042', '39826042').setDomain('44202042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39827042', '39828042', '39829042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, '39831042', '39832042', '39833042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, '39835042', '39836042', '39837042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Mazinaw Lake (weekly)'))
+		{(stations.add(new Station('Mazinaw Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39425042', null, '39611042', '39612042', '39613042', '39614042').setDomain('44206042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39615042', '39616042', '39617042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, null, '39620042', '39621042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, null, '39624042', '39625042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Mississagagon Lake (weekly)'))
+		{(stations.add(new Station('Mississagagon Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39427042', null, '39839042', '39840042', '39841042', '39842042').setDomain('44210042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39843042', '39844042', '39845042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, '39847042', '39848042', '39849042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, '39851042', '39852042', '39853042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Almonte Bridge (weekly)'))
+		{(stations.add(new Station('Almonte Bridge (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39441042', null, '39855042', '39856042', '39857042', '39858042').setDomain('44214042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39859042', '39860042', '39861042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, '39863042', '39864042', '39865042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, '39867042', '39868042', '39869042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Ardoch Bridge (weekly)'))
+		{(stations.add(new Station('Ardoch Bridge (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39459042', null, '39871042', '39872042', '39873042', '39874042').setDomain('44220042'), true)
 			/*.addTs(new TimeSeries('Historical Average', 'MASL', null, null, null, '39876042', '39877042'))
 			.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, null, '39880042', '39881042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, null, '39884042', '39885042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('High Falls G.S. (weekly)'))
+		{(stations.add(new Station('High Falls G.S. (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39479042', null, '39887042', '39888042', '39889042', '39890042').setDomain('44224042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39891042', '39892042', '39893042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, null, '39896042', '39897042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, null, '39900042', '39901042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Dalhousie Lake (weekly)'))
+		{(stations.add(new Station('Dalhousie Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39443042', null, '39903042', '39904042', '39905042', '39906042').setDomain('44228042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39907042', '39908042', '39909042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, null, '39912042', '39913042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, null, '39916042', '39917042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Farm Lake (weekly)'))
+		{(stations.add(new Station('Farm Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39445042', null, '39919042', '39920042', '39921042', '39922042').setDomain('44232042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39923042', '39924042', '39925042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, null, '39928042', '39929042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, null, '39932042', '39933042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Mosque Lake (weekly)'))
+		{(stations.add(new Station('Mosque Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39484042', null, '39935042', '39936042', '39937042', '39938042').setDomain('44153042'), true)
 			/*.addTs(new TimeSeries('Historical Average', 'MASL', null, null, null, '39940042', '39941042'))
 			.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, null, '39944042', '39945042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, null, '39948042', '39949042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Palmerston Lake (weekly)'))
+		{(stations.add(new Station('Palmerston Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39447042', null, '39951042', '39952042', '39953042', '39954042').setDomain('44236042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39955042', '39956042', '39957042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, null, '39960042', '39961042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, null, '39964042', '39965042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Pine Lake (weekly)'))
+		{(stations.add(new Station('Pine Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39469042', null, '39967042', '39968042', '39969042', '39970042').setDomain('44240042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39971042', '39972042', '39973042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, '39975042', '39976042', '39977042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, '39979042', '39980042', '39981042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Shabomeka Lake (weekly)'))
+		{(stations.add(new Station('Shabomeka Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39509042', null, '39983042', '39984042', '39985042', '39986042').setDomain('44244042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '39987042', '39988042', '39989042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, null, '39992042', '39993042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, null, '39996042', '39997042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Silver Lake (weekly)'))
+		{(stations.add(new Station('Silver Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39498042', null, '39999042', '40000042', '40001042', '40002042').setDomain('44248042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '40003042', '40004042', '40005042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, null, '40008042', '40009042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, null, '40012042', '40013042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Summit Lake (weekly)'))
+		{(stations.add(new Station('Summit Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39493042', null, '40015042', '40016042', '40017042', '40018042').setDomain('44252042'), true)
 			/*.addTs(new TimeSeries('Historical Average', 'MASL', null, null, null, '40020042', '40021042'))
 			.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, null, '40024042', '40025042'))
 			.addTs(new TimeSeries('Historical Maximum', 'MASL', null, null, null, '40028042', '40029042'))
 			.addRng(new Range('Historical Minimum', 'Historical Maximum', 'Historical Range'))*/
 		)};
-		{(gauges.add(new Station('Widow Lake (weekly)'))
+		{(stations.add(new Station('Widow Lake (weekly)'))
 			.addTs(new TimeSeries('Staff Level', 'MASL', '39510042', null, '40031042', '40032042', '40033042', '40034042').setDomain('44256042'), true)
 			.addTs(new TimeSeries('Historical Average', 'MASL', null, null, '40035042', '40036042', '40037042'))
 			/*.addTs(new TimeSeries('Historical Minimum', 'MASL', null, null, '40039042', '40040042', '40041042'))
@@ -1728,23 +1728,23 @@ function init(table_id, chart_id) {
 	}
 
 	window.loadGraph = function(tsId, start, end) {
-		var graph_ = new GraphDisplay(gauges.get(tsId), chart_id);
+		var graph_ = new GraphDisplay(stations.get(tsId), chart_id);
 		graph_.load(start, end);
 	};
 	window.loadTable = function(tsId, start, end) {
-		var table_ = new TableDisplay(gauges.get(tsId), table_id);
+		var table_ = new TableDisplay(stations.get(tsId), table_id);
 		table_.load(start, end);
 	};
 	window.loadRecnt = function(tsId, container_1, container_2, range) {
-		var temp = new RecentData(gauges.get(tsId), container_1, container_2, range);
+		var temp = new RecentData(stations.get(tsId), container_1, container_2, range);
 		temp.load();
 	}
 	window.chckRecnt = function(tsId, container, range) {
-		var temp = new RecntDisplay(gauges.get(tsId), container, range);
+		var temp = new RecntDisplay(stations.get(tsId), container, range);
 		temp.load();
 	};
 	window.download  = function(tsId, container, start, end) {
-		var csv_ = new CSVDownload(gauges.get(tsId), container);
+		var csv_ = new CSVDownload(stations.get(tsId), container);
 		csv_.load(start, end);
 	};
 }
