@@ -16,8 +16,6 @@
 		http.send(null);
 	}
 
-	/*return get(src, function(res){
-		document.getElementById('wp-display-content').innerHTML = res;//add the image display to the page (wordpress likes to mess with it if you put the html code in directly)*/
 		return get(json, function(res){
 			var url = JSON.parse(res).img;//Get the image urls
 			var bgImgs = "";//string for background images; starts empty because images are rendered from last to first
@@ -31,5 +29,4 @@
 			for(var i = 0; i < imgs.length; i++)
 				imgs[i].style.backgroundImage = bgImgs;//Set the background image of all elements in imgs
 		})
-	/*})*/
 })("/watershed-conditions-message/wp-display/","/watershed-conditions-message/watershed-conditions-message.json");
