@@ -397,7 +397,7 @@
 	var conditions = null;
 
 	var mvca_map = L.map('mvca-map', {
-		minZoom: 10,
+		minZoom: 8,
 		maxZoom:17,
 	}).setView([45.114, -76.5915], 10);
 	mvca_map.attributionControl.addAttribution("Automated gauge icon &copy; <a href=\"//www.simpleicon.com\">SimpleIcon</a> from <a href=\"//www.flaticon.com\">FlatIcon.com</a>, " + 
@@ -502,7 +502,7 @@
 			$pane.unbind('click', menu_click['mvc-conditions']);
 			$pane.bind('click', conditions, menu_click['mvc-conditions']);//rebind with new data
 
-			buttons = (new ButtonList());//.add((new Button(null, 'View Current Conditions', 'button-automated', 0)).setModal(''));
+			buttons = (new ButtonList());
 			return L.Util.template(getPopup(buttons), $.extend({}, data, {
 				'Recent': function(data) {
 					return ("<br/>"
@@ -683,16 +683,7 @@
 	btnHelp.addTo(mvca_map);
 
 	$('text.pseudo-input').bind('click', null, range_click);
-	/*$('input.mvc-range-selector').bind('blur', null, function(e) {
-		console.log(new Date(), 'blur!', e.originalEvent);
-		range_blur(e);
-	});
-	$('input.mvc-range-selector').bind('mvc-show', null, function(e) {
-		console.log(new Date(), 'focus!');
-		range_click(e);
-	});*/
 	$('input.mvc-range-selector').bind('blur', null, range_blur);
-	//$('input.mvc-range-selector').bind('mvc-show', null, range_click);
 	$('input.mvc-range-selector:not(.mvc-table)').bind('change', null, range_blur);
 	$('#mvc-tab-table').bind('click', null, toggle_click);
 })();
@@ -710,7 +701,6 @@
 
 	$.datepicker.setDefaults({
 		dateFormat: 'yy-mm-dd',
-		//onChangeMonthYear: function() {console.log('test')},
 		onClose: function(dateText, inst) {
 			this.blur();
 		}
